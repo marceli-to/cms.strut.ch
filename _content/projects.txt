@@ -1,0 +1,41 @@
+Projects:
+Arealüberbauung Sihlpark, Zürich
+Wohnhaus Im Grund, Baden
+Gewerbepark Neuwiesen, Winterthur
+Stadtraum Zentrum Ost, Solothurn
+Wohnsiedlung Lindenhof, Bern
+Arealentwicklung Spinnerei Süd, Uster
+Wohnüberbauung Rosenberg, St. Gallen
+Schulhausanlage Feld, Aarau
+Quartierplatz Bahnhof Nord, Olten
+Wohnhaus am Rebberg, Basel
+Areal Seetalstrasse, Lenzburg
+Stadtbaustein Werkhof West, Chur
+Wohnüberbauung Sonnenrain, Liestal
+Industriebau Westareal, Dietikon
+Stadtraum Dorfkern, Wädenswil
+Wohnhaus am Park, Rapperswil
+Arealüberbauung Glasi, Bülach
+Gewerbe- und Wohnhaus Neumarkt, Brugg
+Quartierentwicklung Hafen Ost, Romanshorn
+Wohnsiedlung Eichrain, Zug
+Bildungszentrum Bahnhof Süd, Bellinzona
+Areal Wohnen und Arbeiten Nord, Thun
+Stadtplatz Postareal, Frauenfeld
+Wohnüberbauung Gartenstadt, Köniz
+Arealentwicklung Fabrikstrasse, Wil
+
+Images:
+dummy-teaser-13.jpg 
+dummy-teaser-1.jpg 
+dummy-teaser-2.jpg 
+dummy-teaser-3.jpg 
+dummy-teaser-4.jpg 
+dummy-teaser-5.jpg 
+dummy-teaser-6.jpg 
+dummy-teaser-7.jpg 
+dummy-teaser-8.jpg 
+dummy-teaser-9.jpg 
+dummy-teaser-10.jpg 
+dummy-teaser-11.jpg 
+dummy-teaser-12.jpg

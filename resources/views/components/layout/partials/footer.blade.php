@@ -1,4 +1,4 @@
-<footer class="border-t py-15 lg:py-25 px-20 lg:px-40 flex lg:text-[14px]">
+<footer class="border-t py-15 lg:py-25 px-20 lg:px-40 flex text-xs md:text-sm lg:text-sm">
   <div class="w-full flex flex-col lg:grid lg:grid-cols-12 gap-y-20 font-semibold">
     <div class="lg:col-span-3 2xl:col-span-2">
       Zürich:<br>

@@ -14,11 +14,16 @@
   class="{{ $class ?? ''}}">
 
   <nav class="h-[inherit] flex flex-col justify-between">
-    
-    <ul>
-      <x-menu.item url="{{ route('page.works') }}" title="Arbeiten" />
-      <x-menu.item url="{{ route('page.about') }}" title="Büro" />
-    </ul>
+    <div class="flex flex-col gap-y-48 md:gap-y-16">
+      <ul class="flex flex-col gap-y-24 md:gap-y-16">
+        <x-menu.item url="{{ route('page.works') }}" title="Arbeiten" />
+        <x-menu.item url="{{ route('page.about') }}" title="Büro" />
+      </ul>
+
+      <ul>
+        <x-menu.item url="{{ route('page.search') }}" title="Suche" />
+      </ul>
+    </div>
 
     <a 
       href="{{ route('page.landing') }}" 

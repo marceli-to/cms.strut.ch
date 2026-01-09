@@ -1,7 +1,4 @@
-@props([
-  'title' => null,
-])
-<x-layout.partials.head :title="$title" />
+<x-layout.partials.head />
 
 <x-layout.partials.body>
 

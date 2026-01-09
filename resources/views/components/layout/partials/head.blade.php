@@ -1,10 +1,6 @@
-@props([
-  'title' => null
-])
-
 @php
 $appName = config('app.name', 'Weberbrunner Architektur');
-$pageTitle = filled($title) ? "{$title} – {$appName}" : $appName;
+$defaultDescription = config('app.description');
 @endphp
 
 <!doctype html>
@@ -12,10 +8,10 @@ $pageTitle = filled($title) ? "{$title} – {$appName}" : $appName;
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ $pageTitle }}</title> 
-<meta name="description" content="{{ config('app.description') }}">
-<meta property="og:title" content="{{ $pageTitle }}"> 
-<meta property="og:description" content="{{ config('app.description') }}">
+<title>@hasSection('meta_title')@yield('meta_title') – {{ $appName }}@else{{ $appName }}@endif</title>
+<meta name="description" content="@yield('meta_description', $defaultDescription)">
+<meta property="og:title" content="@hasSection('meta_title')@yield('meta_title') – {{ $appName }}@else{{ $appName }}@endif">
+<meta property="og:description" content="@yield('meta_description', $defaultDescription)">
 <meta property="og:url" content="{{ url()->current() }}">
 <meta property="og:site_name" content="{{ $appName }}">
 <meta name="msapplication-TileColor" content="#ffffff">

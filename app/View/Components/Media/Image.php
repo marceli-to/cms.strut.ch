@@ -27,7 +27,7 @@ class Image extends Component
         ?int $width = null,
         ?int $height = null,
         string $fit = 'crop',
-        int $quality = 85,
+        int $quality = 90,
         array $formats = ['avif', 'webp', 'jpg'],
         array $breakpoints = [],
         string $class = '',
