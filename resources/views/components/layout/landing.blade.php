@@ -6,8 +6,8 @@
     <div class="flex flex-col md:flex-row justify-between md:items-start py-20 lg:pt-40 md:pb-0 min-h-dvh md:min-h-auto w-full">
       <div class="md:order-2 flex justify-between">
         <div class="flex flex-col md:flex-row md:items-start gap-y-30 md:gap-y-0 md:gap-x-30">
-          <x-icons.logo.wa class="w-full h-auto max-w-200 xs:max-w-248 lg:max-w-280 grow-0" />
-          <x-icons.logo.wpa class="w-full h-auto max-w-200 xs:max-w-248 lg:max-w-280 grow-0" />
+          <x-icons.logo.wa class="w-full h-auto max-w-200 xs:max-w-248 lg:max-w-280" />
+          <x-icons.logo.wpa class="w-full h-auto max-w-200 xs:max-w-248 lg:max-w-280" />
         </div>
         <div class="md:hidden">
           <x-menu.buttons.show class="w-32 h-auto mt-5" />
