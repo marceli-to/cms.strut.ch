@@ -10,6 +10,7 @@
 
 @theme {
   --font-sans: 'Routine', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --breakpoint-xs: 400px;
 }
 
 @layer base {
@@ -28,6 +29,10 @@
   .pl-col-1 {
     padding-left: calc(var(--col-width) + var(--grid-gap));
   }
+}
+
+[x-cloak] {
+  display: none;
 }
 
 strong {
