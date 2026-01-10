@@ -1,4 +1,4 @@
-<footer class="border-t py-15 lg:py-25 px-20 lg:pl-40 lg:pr-0 flex text-xs md:text-sm lg:text-sm">
+<footer class="border-t py-15 lg:py-25 px-20 lg:pl-40 lg:pr-0 flex text-xs md:text-sm lg:text-sm min-h-(--footer-height) md:min-h-(--footer-height-md) lg:min-h-(--footer-height-lg)">
   <div class="w-full flex flex-col lg:grid lg:grid-cols-12 gap-y-20 font-semibold">
     <div class="lg:col-span-3">
       Zürich:<br>

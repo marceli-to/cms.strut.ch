@@ -1,11 +1,14 @@
 @props([
   'title' => null,
+  'containerClass' => null,
+  'headerClass' => null,
+  'mainClass' => null,
 ])
 <x-layout.partials.head />
 
 <x-layout.partials.body>
 
-  <div class="md:grid md:grid-cols-12 w-full flex-1 pl-20 lg:pl-40 lg:pr-0">
+  <div class="md:grid md:grid-cols-12 w-full flex-1 pl-20 lg:pl-40 lg:pr-0 {{ $containerClass ?? ''}}">
 
     <div class="md:col-span-3 ">
       <x-menu.wrapper class="bg-white px-20 py-20 w-full h-full max-h-dvh fixed left-0 top-0 z-30 md:!block md:sticky md:top-40 md:bg-transparent md:h-auto md:w-auto md:mt-20 lg:mt-40 md:px-0 md:py-0" />
@@ -14,16 +17,14 @@
 
     <div class="md:col-span-9">
 
-      <x-layout.partials.header class="min-h-75 md:min-h-140 lg:min-h-250 flex flex-col md:flex-row md:items-start md:justify-end gap-y-30 md:gap-y-0 md:gap-x-30 py-20 lg:pt-40 md:pr-20 lg:pr-40">
-
-        <div class="flex justify-between">
-          @if ($title)
-            <h1 class="md:hidden font-semibold text-3xl">
-              {{ $title }}
-            </h1>
-          @endif
-          <x-menu.buttons.show class="md:hidden w-32 h-auto fixed top-25 right-20 z-50" />
-        </div>
+      <x-layout.partials.header class="min-h-(--header-height) md:min-h-(--header-height-md) lg:min-h-(--header-height-lg) flex flex-col md:flex-row md:items-start md:justify-end gap-y-30 md:gap-y-0 md:gap-x-30 py-20 lg:pt-40 md:pr-20 lg:pr-40 {{ $headerClass ?? '' }}">
+        
+      @if ($title)
+        <h1 class="md:hidden font-semibold text-3xl">
+          {{ $title }}
+        </h1>
+      @endif
+      <x-menu.buttons.show class="md:hidden w-32 h-auto fixed top-25 right-20 z-50" />
 
         <a 
           href="{{ route('page.landing') }}"
@@ -41,7 +42,7 @@
 
       </x-layout.partials.header>
 
-      <x-layout.partials.main class="pb-40 lg:pb-80">
+      <x-layout.partials.main class="pb-40 lg:pb-80 {{ $mainClass ?? '' }}">
         {{ $slot }}
       </x-layout.partials.main>
 
