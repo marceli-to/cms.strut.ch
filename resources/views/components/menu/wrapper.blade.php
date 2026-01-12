@@ -15,7 +15,7 @@
 
   <nav class="h-[inherit] flex flex-col justify-between">
 
-    <div class="flex flex-col gap-y-20 md:gap-y-24">
+    <div x-data="{ submenu: {{ Route::is('page.about*') ? 'true' : 'false' }} }" class="flex flex-col gap-y-20 md:gap-y-24">
 
       <ul class="flex flex-col gap-y-24 md:gap-y-16">
 
@@ -29,67 +29,85 @@
           url="{{ route('page.about') }}"
           title="Büro"
           :level="1"
-          :active="Route::is('page.about*')" />
+          :active="Route::is('page.about*')"
+          class="max-md:hidden" />
+
+        <li class="md:hidden">
+          <button
+            @click="{{ Route::is('page.about*') ? '' : 'submenu = !submenu' }}"
+            type="button"
+            class="cursor-pointer font-semibold text-3xl underline-offset-8 decoration-2 {{ Route::is('page.about*') ? 'underline' : '' }}"
+            :class="{{ Route::is('page.about*') ? '{}' : "submenu ? 'underline' : 'no-underline hover:underline'" }}">
+            <span>Büro</span>
+          </button>
+        </li>
+
       </ul>
 
-      @if (!Route::is('page.landing'))
 
-        <ul class="flex flex-col gap-y-2">
-          <x-menu.item
-            url="{{ route('page.about.team') }}"
-            title="Team"
-            :level="2"
-            :active="Route::is('page.about.team')" />
+      <div 
+        x-show="submenu" 
+        x-cloak 
+        class="flex flex-col gap-y-20 md:gap-y-24 {{ Route::is('page.about*') ? 'md:!flex' : '' }}">
 
-          <x-menu.item
-            url="{{ route('page.about.jobs') }}"
-            title="Jobs"
-            :level="2"
-            :active="Route::is('page.about.jobs')" />
+          <ul class="flex flex-col gap-y-2">
 
-          <x-menu.item
-            url="{{ route('page.about.contact') }}"
-            title="Kontakt"
-            :level="2"
-            :active="Route::is('page.about.contact')" />
-        </ul>
+            <x-menu.item
+              url="{{ route('page.about') }}"
+              title="Profil"
+              :level="2"
+              :active="Route::is('page.about')"
+              class="md:hidden" />
 
-        <ul class="flex flex-col gap-y-2">
-          <x-menu.item
-            url="{{ route('page.about.network') }}"
-            title="Netzwerk"
-            :level="2"
-            :active="Route::is('page.about.network')" />
-        </ul>
+            <x-menu.item
+              url="{{ route('page.about.team') }}"
+              title="Team"
+              :level="2"
+              :active="Route::is('page.about.team')" />
 
-        <ul class="flex flex-col gap-y-2">
-          <x-menu.item
-            url="{{ route('page.about.talks') }}"
-            title="Vorträge"
-            :level="2"
-            :active="Route::is('page.about.talks')" />
+            <x-menu.item
+              url="{{ route('page.about.jobs') }}"
+              title="Jobs"
+              :level="2"
+              :active="Route::is('page.about.jobs')" />
 
-          <x-menu.item
-            url="{{ route('page.about.jury') }}"
-            title="Jury"
-            :level="2"
-            :active="Route::is('page.about.jury')" />
+            <x-menu.item
+              url="{{ route('page.about.contact') }}"
+              title="Kontakt"
+              :level="2"
+              :active="Route::is('page.about.contact')" />
+          </ul>
 
-          <x-menu.item
-            url="{{ route('page.about.awards') }}"
-            title="Auszeichnungen"
-            :level="2"
-            :active="Route::is('page.about.awards')" />
-        </ul>
+          <ul class="flex flex-col gap-y-2">
+            <x-menu.item
+              url="{{ route('page.about.network') }}"
+              title="Netzwerk"
+              :level="2"
+              :active="Route::is('page.about.network')" />
+          </ul>
 
-        <ul>
-          <x-menu.item
-            url="{{ route('page.search') }}"
-            title="Suche"
-            :level="2"
-            :active="Route::is('page.search*')" />
-        </ul>
-      @endif
+          <ul class="flex flex-col gap-y-2">
+            <x-menu.item
+              url="{{ route('page.about.talks') }}"
+              title="Vorträge"
+              :level="2"
+              :active="Route::is('page.about.talks')" />
+
+            <x-menu.item
+              url="{{ route('page.about.jury') }}"
+              title="Jury"
+              :level="2"
+              :active="Route::is('page.about.jury')" />
+
+            <x-menu.item
+              url="{{ route('page.about.awards') }}"
+              title="Auszeichnungen"
+              :level="2"
+              :active="Route::is('page.about.awards')" />
+          </ul>
+
+      </div>
+
       
     </div>
 

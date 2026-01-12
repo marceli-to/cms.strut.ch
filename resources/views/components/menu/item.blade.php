@@ -5,7 +5,7 @@
   'level' => 1,
 ])
 
-<li>
+<li {{ $attributes->merge(['class' => '']) }}>
 
   <a
     href="{{ $url }}"
