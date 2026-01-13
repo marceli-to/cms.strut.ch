@@ -5,7 +5,7 @@ namespace App\Livewire;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 
-class Projects extends Component
+class Works extends Component
 {
     #[Url]
     public array $types = [];
@@ -99,7 +99,7 @@ class Projects extends Component
             $filtered = $filtered->filter(fn($p) => $p['publication'] === true);
         }
 
-        return view('livewire.projects', [
+        return view('livewire.works', [
             'projects' => $filtered->values(),
             'availableTypes' => [
                 'oeffentliche-gebaeude' => 'Öffentliche Gebäude',

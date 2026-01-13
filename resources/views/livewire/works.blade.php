@@ -2,7 +2,7 @@
 
   <div class="md:col-span-3">
     <x-menu.filter.wrapper 
-      class="bg-white px-20 py-20 w-3/4 h-full max-h-dvh fixed left-0 top-0 z-30 md:!block md:sticky md:top-40 md:bg-transparent md:w-auto md:mt-20 lg:mt-40 md:px-0 md:py-0"
+      class="bg-white px-20 py-20 w-3/4 h-full max-h-dvh fixed left-0 top-0 z-30 md:!block md:sticky md:top-40 md:h-auto md:bg-transparent md:w-auto md:mt-20 lg:mt-40 md:px-0 md:py-0"
       :types="$types"
       :status="$status"
       :locations="$locations"

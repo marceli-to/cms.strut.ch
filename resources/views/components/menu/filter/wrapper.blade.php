@@ -20,8 +20,8 @@
   x-transition:leave-end="opacity-0"
   class="{{ $class ?? ''}}">
 
-  <nav class="h-[inherit] flex flex-col justify-between">
-
+  <nav class="min-h-[inherit] flex flex-col justify-between md:gap-y-60">
+    
     <div class="flex flex-col gap-y-20 md:gap-y-24">
 
       <ul class="flex flex-col gap-y-16 md:gap-y-12">
@@ -75,6 +75,13 @@
       </ul>
       
     </div>
+
+    <a 
+      href="{{ route('page.landing') }}" 
+      title="Startseite"
+      class="w-36 h-auto">
+      <x-icons.logo.symbol class="w-full h-auto" />
+    </a>
 
   </nav>
 </div>
