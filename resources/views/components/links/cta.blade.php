@@ -1,14 +1,18 @@
 @props([
   'href' => null,
   'label' => null,
+  'target' => '_self',
 ])
 
 <a
   href="{{ $href }}"
   @if($label) 
   aria-label="{{ $label }}"
+  target="{{ $target }}"
   @endif
-  {{ $attributes->merge(['class' => 'inline-flex items-center gap-x-6 underline underline-offset-4 md:underline-offset-8 decoration-1 hover:no-underline']) }}>
-  <x-icons.arrow-right class="h-auto w-12 md:w-14" />
+  {{ $attributes->merge(['class' => 'inline-flex items-center gap-x-6 group']) }}>
+  →
+  <span class="underline underline-offset-4 md:underline-offset-6 decoration-1 group-hover:no-underline">
   {{ $slot }}
+  </span>
 </a>

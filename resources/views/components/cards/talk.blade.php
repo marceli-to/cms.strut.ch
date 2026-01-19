@@ -14,7 +14,7 @@
 
   @if($link)
     <a href="{{ $link }}" class="group">
-      → <span class="underline underline-offset-4 decoration-1 group-hover:no-underline">{{ $link_text }}</span>
+      → <span class="underline underline-offset-4 md:underline-offset-6 decoration-1 group-hover:no-underline">{{ $link_text }}</span>
     </a>
   @endif
   

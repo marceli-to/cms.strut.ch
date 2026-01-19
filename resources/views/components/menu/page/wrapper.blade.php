@@ -36,7 +36,7 @@
           <button
             @click="{{ Route::is('page.about*') ? '' : 'submenu = !submenu' }}"
             type="button"
-            class="cursor-pointer font-semibold text-3xl underline-offset-8 decoration-2 {{ Route::is('page.about*') ? 'underline' : '' }}"
+            class="cursor-pointer font-semibold text-3xl underline-offset-6 decoration-2 {{ Route::is('page.about*') ? 'underline' : '' }}"
             :class="{{ Route::is('page.about*') ? '{}' : "submenu ? 'underline' : 'no-underline hover:underline'" }}">
             <span>Büro</span>
           </button>

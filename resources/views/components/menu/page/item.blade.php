@@ -12,9 +12,9 @@
     title="{{ $title }}"
     @class([
       'font-semibold group',
-      'text-3xl md:text-4xl underline-offset-8 decoration-2' => $level == 1,
-      'underline' => $active && $level == 1,
-      'no-underline hover:underline' => !$active && $level == 1,
+      'text-3xl md:text-4xl ' => $level == 1,
+      'underline underline-offset-6 decoration-2' => $active && $level == 1,
+      'no-underline hover:underline hover:underline-offset-6 hover:decoration-2' => !$active && $level == 1,
       'text-md md:text-lg lg:text-xl flex items-center' => $level == 2,
     ])>
 

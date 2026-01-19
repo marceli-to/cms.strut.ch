@@ -28,7 +28,7 @@
     @if($email)
       <a 
         href="mailto:{{ $email }}" 
-        class="underline underline-offset-4 decoration-1 hover:no-underline">
+        class="underline underline-offset-4 md:underline-offset-6 decoration-1 hover:no-underline">
         E-Mail
       </a>
     @endif

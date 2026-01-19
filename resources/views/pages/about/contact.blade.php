@@ -25,7 +25,7 @@
           <a 
             href="mailto:info@weberbrunner.ch"
             aria-label="Senden Sie eine E-Mail an info@weberbrunner.ch"
-            class="hover:underline underline-offset-4 lg:underline-offset-8 decoration-1">
+            class="hover:underline underline-offset-4 lg:underline-offset-6 decoration-1">
             info@weberbrunner.ch
           </a>
         </p>
@@ -52,7 +52,7 @@
           <a 
             href="mailto:info@wbp-architektur.de"
             aria-label="Senden Sie eine E-Mail an info@wbp-architektur.de"
-            class="hover:underline underline-offset-4 lg:underline-offset-8 decoration-1">
+            class="hover:underline underline-offset-4 lg:underline-offset-6 decoration-1">
             info@wbp-architektur.de
           </a>
         </p>

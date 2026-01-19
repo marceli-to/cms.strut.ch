@@ -32,7 +32,7 @@
 
   </x-layout.partials.header>
 
-  <x-layout.partials.main>
+  <x-layout.partials.main class="pb-40 lg:pb-80">
     {{ $slot }}
   </x-layout.partials.main>
 

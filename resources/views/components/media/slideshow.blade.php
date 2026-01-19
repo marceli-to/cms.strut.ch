@@ -2,13 +2,13 @@
   'info' => null,
 ])
 
-<div class="md:pl-20 lg:pl-40">
+<div class="_md:pl-20 _lg:pl-40">
 
   <div {{ $attributes->merge(['class' => 'swiper']) }} data-slideshow>
     
     <div class="swiper-wrapper relative">
       
-      <div class="swiper-slide w-col-3-offset justify-center items-center bg-white !hidden lg:!flex">
+      <div class="swiper-slide w-col-3-offset ml-30 pl-10 justify-center items-center bg-white !hidden lg:!flex">
         @if($info)
           {{ $info }}
         @endif

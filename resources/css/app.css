@@ -76,20 +76,11 @@
   padding-left: calc(var(--col-width) + var(--grid-gap));
 }
 
-/* @layer utilities {
-
-  .w-col-3 {
-    width: calc(var(--col-width) * 3 + var(--grid-gap) * 2) !important;
-  }
-
-  .w-col-3-offset {
-    width: calc(var(--col-width-offset) * 3 + var(--grid-gap) * 2) !important;
-  }
-
-  .pl-col-1 {
-    padding-left: calc(var(--col-width) + var(--grid-gap));
-  }
-} */
+@utility underline-offset-6 {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-offset: 6px;
+}
 
 [x-cloak] {
   display: none;
