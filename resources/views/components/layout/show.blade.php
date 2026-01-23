@@ -10,7 +10,7 @@
     
     <div class="lg:col-span-3 lg:pl-40">
 
-      <a href="{{ route('page.works') }}">
+      <a href="{{ route('page.works') }}" class="block mt-7">
         <x-icons.arrow-left size="lg" class="w-20 h-auto md:w-43" />
       </a>
 
@@ -18,7 +18,7 @@
 
     <div class="lg:col-span-9">
 
-      <x-headings.h1 class="font-semibold text-md md:text-2xl lg:text-5xl">
+      <x-headings.h1 class="font-semibold leading-[1.35] text-lg md:text-2xl lg:text-5xl">
 
         {{ $title }}
 
@@ -32,7 +32,7 @@
 
   </x-layout.partials.header>
 
-  <x-layout.partials.main class="pb-40 lg:pb-80">
+  <x-layout.partials.main class="pl-20 md:pl-0 pb-40 lg:pb-80">
     {{ $slot }}
   </x-layout.partials.main>
 

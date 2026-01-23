@@ -16,7 +16,7 @@
 
   </div>
 
-  <button class="swiper-btn-prev cursor-pointer absolute left-0 top-0 z-50 w-20 lg:w-40 h-(--slideshow-item-height) md:h-(--slideshow-item-height-md) lg:h-(--slideshow-item-height-lg)"></button>
-  <button class="swiper-btn-next cursor-pointer absolute right-0 top-0 z-50 w-20 lg:w-40 h-(--slideshow-item-height) md:h-(--slideshow-item-height-md) lg:h-(--slideshow-item-height-lg)"></button>
+  <button class="swiper-btn-prev cursor-pointer absolute left-0 top-0 z-50 w-20 lg:w-120 xl:w-200 h-(--slideshow-item-height) md:h-(--slideshow-item-height-md) xl:h-(--slideshow-item-height-xl)"></button>
+  <button class="swiper-btn-next cursor-pointer absolute right-0 top-0 z-50 w-20 lg:w-120 xl:w-200 h-(--slideshow-item-height) md:h-(--slideshow-item-height-md) xl:h-(--slideshow-item-height-xl)"></button>
 
 </div>

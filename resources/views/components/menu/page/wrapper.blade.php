@@ -13,11 +13,11 @@
   x-transition:leave-end="opacity-0"
   class="{{ $class ?? ''}}">
 
-  <nav class="min-h-[inherit] flex flex-col justify-between">
+  <nav class="flex flex-col justify-between gap-y-60">
 
     <div x-data="{ submenu: {{ Route::is('page.about*') ? 'true' : 'false' }} }" class="flex flex-col gap-y-20 md:gap-y-40">
 
-      <ul class="flex flex-col gap-y-16 md:gap-y-8">
+      <ul class="flex flex-col gap-y-8">
 
         <x-menu.page.item
           url="{{ route('page.works') }}"
@@ -36,14 +36,13 @@
           <button
             @click="{{ Route::is('page.about*') ? '' : 'submenu = !submenu' }}"
             type="button"
-            class="cursor-pointer font-semibold text-3xl underline-offset-6 decoration-2 {{ Route::is('page.about*') ? 'underline' : '' }}"
-            :class="{{ Route::is('page.about*') ? '{}' : "submenu ? 'underline' : 'no-underline hover:underline'" }}">
+            class="cursor-pointer font-semibold text-3xl underline-offset-6 decoration-2 no-underline {{ Route::is('page.about*') ? 'underline' : '' }}"
+            :class="{{ Route::is('page.about*') ? '{}' : "submenu ? 'underline' : '!no-underline hover:!underline'" }}">
             <span>Büro</span>
           </button>
         </li>
 
       </ul>
-
 
       <div 
         x-show="submenu" 
@@ -107,16 +106,16 @@
           </ul>
 
       </div>
-
       
     </div>
 
-    <a 
-      href="{{ route('page.landing') }}" 
-      title="Startseite"
-      class="w-36 h-auto md:hidden">
-      <x-icons.logo.symbol class="w-full h-auto" />
-    </a>
-
+    @if (Route::is('page.landing') == false)
+      <a 
+        href="{{ route('page.landing') }}" 
+        title="Startseite"
+        class="w-36 h-auto">
+        <x-icons.logo.symbol class="w-full h-auto" />
+      </a>
+    @endif
   </nav>
 </div>

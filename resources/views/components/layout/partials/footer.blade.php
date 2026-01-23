@@ -38,10 +38,10 @@
     </div>
     <div class="flex flex-row gap-x-10 md:justify-end md:col-span-1 lg:justify-start lg:col-span-1 lg:col-start-12">
       <a href="https://www.instagram.com/weberbrunnerarchitektur/" target="_blank">
-        <x-icons.instagram size="lg" class="w-30 h-auto" />
+        <x-icons.instagram size="lg" class="w-24 md:w-30 h-auto" />
       </a>
       <a href="https://www.instagram.com/weberbrunnerarchitektur/" target="_blank">
-        <x-icons.linkedin size="lg" class="w-30 h-auto" />
+        <x-icons.linkedin size="lg" class="w-24 md:w-30 h-auto" />
       </a>
     </div>
   </div>

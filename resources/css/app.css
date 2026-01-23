@@ -59,8 +59,8 @@
 
     /* Slideshow items */
     --slideshow-item-height: 220px;
-    --slideshow-item-height-md: 500px;
-    --slideshow-item-height-lg: 700px;
+    --slideshow-item-height-md: 480px;
+    --slideshow-item-height-xl: 640px;
   }
 }
 

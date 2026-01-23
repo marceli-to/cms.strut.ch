@@ -7,8 +7,8 @@
 ])
 @php
   $isSmall = $variant === 'sm' ? true : false;
-  $wrapperClass = $isSmall ? 'p-20 md:pb-15 lg:p-20' : 'p-20 md:p-15 md:pb-20 lg:p-20 lg:pb-30';
-  $titleClass = $isSmall ? 'text-xs md:text-sm' : 'text-md md:text-lg lg:text-xl';
+  $wrapperClass = $isSmall ? 'p-10 md:pb-15 lg:p-20' : 'p-20 md:p-15 md:pb-20 lg:p-20 lg:pb-30';
+  $titleClass = $isSmall ? 'text-sm md:text-md' : 'text-md md:text-lg lg:text-xl';
 @endphp
 <a 
   href="{{ route('page.works.show', $slug) }}" 

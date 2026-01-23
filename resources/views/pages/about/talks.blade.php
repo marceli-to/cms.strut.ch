@@ -2,19 +2,13 @@
 @section('meta_description', '')
 <x-layout.inner title="Vorträge & Impulse">
 
-  <x-headings.section class="mb-6 md:mb-12 lg:mb-18">
-    Vorträge & Impulse
-  </x-headings.section>
+  <x-container.inner class="!pr-0 flex flex-col gap-y-16 md:gap-y-24 lg:gap-y-48">
 
-  <x-container.inner class="flex flex-col gap-y-16 md:gap-y-24 lg:gap-y-48 lg:!pr-0">
-
-    <div class="md:grid md:grid-cols-9">
-
-      <x-headings.h3 variant="normal" class="md:col-span-1">
+    <div>
+      <x-headings.section class="mb-8 md:mb-16 lg:mb-20">
         2025
-      </x-headings.h3>
-
-      <div class="md:col-span-8 flex flex-col gap-y-8 md:gap-y-16">
+      </x-headings.section>
+      <div class="flex flex-col gap-y-8 md:gap-y-16">
         
         <x-cards.talk title="Sind Architekt:innen nur die Petersilie am Fisch der Immobilienwirtschaft?">
           Podcast-Festival Kontxtr, Basel (Elise Pischetsrieder)
@@ -49,13 +43,13 @@
       </div>
     </div>
 
-    <div class="md:grid md:grid-cols-9">
+    <div>
 
-      <x-headings.h3 variant="normal" class="md:col-span-1">
+      <x-headings.section class="mb-8 md:mb-16 lg:mb-20">
         2024
-      </x-headings.h3>
+      </x-headings.section>
 
-      <div class="md:col-span-8 flex flex-col gap-y-8 md:gap-y-16">
+      <div class="flex flex-col gap-y-8 md:gap-y-16">
         <x-cards.talk title="Von der Neustadt aus Holz zum zementfreien Haus – wie die Lebenszyklusanalyse das Planen und Bauen verändert">
           Architect at Work, Frankfurt am Main (Elise Pischetsrieder)
         </x-cards.talk>

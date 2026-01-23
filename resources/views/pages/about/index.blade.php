@@ -1,4 +1,4 @@
-@section('meta_title', 'Büro')
+@section('meta_title', 'Profil – Büro')
 @section('meta_description', 'Weberbrunner Architektur – Architektur und Planung')
 
 <x-layout.inner title="Büro">
@@ -7,8 +7,8 @@
     <x-icons.logo.symbol size="lg" class="w-full h-auto max-w-[60%] md:max-w-none md:col-span-4 rotate-90 mb-30 md:mb-50 lg:mb-70" />
   </div>
   
-  <x-headings.section class="mb-6 md:mb-12 lg:mb-18">
-    Büro
+  <x-headings.section class="mb-8 md:mb-16 lg:mb-20">
+    Profil
   </x-headings.section>
   
   <x-container.inner>

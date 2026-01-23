@@ -21,8 +21,6 @@
         </h1>
       @endif
 
-      <x-menu.buttons.filter class="md:hidden fixed left-1/2 -translate-x-1/2 top-25 z-40" />
-      
       <x-menu.buttons.show class="md:hidden w-32 h-auto fixed top-25 right-20 z-50" />
 
     </x-layout.partials.header>

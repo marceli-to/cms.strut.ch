@@ -29,6 +29,7 @@ $projectInfo = [
       <x-work.info
         :items="$projectInfo"
         header="weberbrunner pischetsrieder architektur, Berlin"
+        :isSlideshow="true"
       />
     </x-slot:info>
 
@@ -37,7 +38,7 @@ $projectInfo = [
         <x-media.image
           :src="$slide['src']"
           alt=""
-          class="h-(--slideshow-item-height) md:h-(--slideshow-item-height-md) lg:h-(--slideshow-item-height-lg) w-auto"
+          class="h-(--slideshow-item-height) md:h-(--slideshow-item-height-md) xl:h-(--slideshow-item-height-xl) w-auto"
         />
       </div>
     @endforeach
@@ -47,6 +48,13 @@ $projectInfo = [
   <x-work.description>
     <p>lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
   </x-work.description>
+
+    <div class="md:hidden mb-40">
+      <x-work.info
+        :items="$projectInfo"
+        header="weberbrunner pischetsrieder architektur, Berlin"
+      />    
+    </div>
 
   <x-work.section title="Grundrisse" />
   <x-media.slideshow class="mb-40 lg:mb-80">
@@ -58,7 +66,7 @@ $projectInfo = [
         <x-media.image
           :src="$slide['src']"
           alt=""
-          class="h-(--slideshow-item-height) md:h-(--slideshow-item-height-md) lg:h-(--slideshow-item-height-lg) w-auto"
+          class="h-(--slideshow-item-height) md:h-(--slideshow-item-height-md) xl:h-(--slideshow-item-height-xl) w-auto"
         />
       </div>
     @endforeach

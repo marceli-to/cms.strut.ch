@@ -111,11 +111,17 @@ class Works extends Component
             $columns4[$index % 4][] = $project;
         }
 
+        $hasActiveFilters = !empty($this->types) 
+            || !empty($this->status) 
+            || !empty($this->locations) 
+            || $this->publications;
+
         return view('livewire.works', [
             'projects' => $items,
             'columns2' => $columns2,
             'columns3' => $columns3,
             'columns4' => $columns4,
+            'hasActiveFilters' => $hasActiveFilters,
             'availableTypes' => [
                 'oeffentliche-gebaeude' => 'Öffentliche Gebäude',
                 'wohnungsbau' => 'Wohnungsbau',

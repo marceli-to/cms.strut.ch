@@ -14,7 +14,7 @@ export default function initSlideshows() {
       centeredSlides: false,
       direction: 'horizontal',
       speed: 800,
-      spaceBetween: 10,
+      spaceBetween: 5,
       navigation: {
         nextEl: '.swiper-btn-next',
         prevEl: '.swiper-btn-prev',
@@ -23,7 +23,12 @@ export default function initSlideshows() {
         slideChange: function() {
 
         }
-      }
+      },
+      breakpoints: {
+        768: {
+          spaceBetween: 10,
+        },
+      },
     });
   });
 }

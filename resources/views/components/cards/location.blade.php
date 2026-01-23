@@ -5,6 +5,7 @@
 ])
 
 <x-container.inner>
+
   <div class="flex flex-col lg:flex-row gap-10 md:gap-20">
 
     <div class="lg:w-1/2">
@@ -24,4 +25,5 @@
     </div>
     
   </div>
+  
 </x-container.inner>
