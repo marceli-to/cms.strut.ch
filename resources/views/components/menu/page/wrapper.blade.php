@@ -13,7 +13,7 @@
   x-transition:leave-end="opacity-0"
   class="{{ $class ?? ''}}">
 
-  <nav class="flex flex-col justify-between gap-y-60">
+  <nav class="min-h-dvh bg-green-100 flex flex-col justify-between gap-y-60">
 
     <div x-data="{ submenu: {{ Route::is('page.about*') ? 'true' : 'false' }} }" class="flex flex-col gap-y-20 md:gap-y-40">
 
