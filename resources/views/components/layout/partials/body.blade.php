@@ -12,6 +12,6 @@
     min-h-screen
     flex 
     flex-col">
-    <x-layout.partials.debug />
+    {{-- <x-layout.partials.debug /> --}}
   {{ $slot }}
 </body>

@@ -4,7 +4,14 @@
       "Bash(for i in 1 2 3 4 5)",
       "Bash(do cp \"dummy-teaser-$i.jpg\" \"dummy-project-$i.jpg\")",
       "Bash(done)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(php artisan migrate:*)",
+      "Bash(tree:*)",
+      "Bash(php artisan app:seed-projects:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd .tasks to gitignore\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(find:*)",
+      "Bash(git commit:*)"
     ]
   }
 }

@@ -62,7 +62,7 @@
               url="{{ route('page.about.team') }}"
               title="Team"
               :level="2"
-              :active="Route::is('page.about.team')" />
+              :active="Route::is('page.about.team*')" />
 
             <x-menu.page.item
               url="{{ route('page.about.jobs') }}"
