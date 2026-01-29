@@ -48,6 +48,7 @@
                         :title="$member['title']"
                         :since="$member['since']"
                         :email="$member['email']"
+                        :slug="$member['slug'] ?? null"
                     />
                 </div>
             @endforeach

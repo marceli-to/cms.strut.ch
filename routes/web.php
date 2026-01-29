@@ -12,6 +12,7 @@ Route::get('/arbeiten/{slug}', [ProjectController::class, 'show'])->name('page.w
 
 Route::view('/buero', 'pages.about.index')->name('page.about');
 Route::view('/buero/team', 'pages.about.team')->name('page.about.team');
+Route::get('/buero/team/{slug}', [App\Http\Controllers\TeamController::class, 'show'])->name('page.about.team.show');
 Route::view('/buero/jobs', 'pages.about.jobs')->name('page.about.jobs');
 Route::view('/buero/kontakt', 'pages.about.contact')->name('page.about.contact');
 Route::view('/buero/netzwerk', 'pages.about.network')->name('page.about.network');

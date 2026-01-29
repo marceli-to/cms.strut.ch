@@ -18,7 +18,7 @@ class Team extends Component
     public function render()
     {
         $team = collect([
-            ['firstname' => 'Anna', 'name' => 'Müller', 'title' => 'M. Sc. Arch ETH', 'since' => '2018', 'email' => 'anna.mueller@weberbrunner.ch', 'location' => 'zuerich', 'image' => 'images/dummy-team-1.jpg'],
+            ['firstname' => 'Anna', 'name' => 'Müller', 'title' => 'M. Sc. Arch ETH', 'since' => '2018', 'email' => 'anna.mueller@weberbrunner.ch', 'location' => 'zuerich', 'image' => 'images/dummy-team-1.jpg', 'slug' => 'anna-mueller'],
             ['firstname' => 'Boris', 'name' => 'Brunner', 'title' => 'dipl. Arch. FH / BSA / SIA', 'since' => '2015', 'email' => 'boris.brunner@weberbrunner.ch', 'location' => 'zuerich', 'image' => 'images/dummy-team-2.jpg'],
             ['firstname' => 'Carla', 'name' => 'Schneider', 'title' => 'M. Sc. Arch TU Zürich', 'since' => '2020', 'email' => 'carla.schneider@weberbrunner.ch', 'location' => 'zuerich', 'image' => 'images/dummy-team-3.jpg'],
             ['firstname' => 'Daniel', 'name' => 'Weber', 'title' => 'B. Sc. Architektur ZHAW', 'since' => '2021', 'email' => 'daniel.weber@weberbrunner.ch', 'location' => 'berlin', 'image' => 'images/dummy-team-4.jpg'],
