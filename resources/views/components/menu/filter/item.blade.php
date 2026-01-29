@@ -9,13 +9,11 @@
     wire:click="{{ $action }}"
     type="button"
     class="font-semibold text-md md:text-lg lg:text-xl flex items-center cursor-pointer group">
-    <span
-      @class([
-        'inline-flex items-center overflow-hidden transition-all ease-in-out w-0 opacity-0 duration-300',
-        'w-20 opacity-100 translate-x-0' => $active,
-      ])>
-      <x-icons.arrow-right size="sm" class="h-auto w-14" />
-    </span>
+    @if($active)
+      <span class="inline-flex items-center w-20">
+        <x-icons.arrow-right size="sm" class="h-auto w-14" />
+      </span>
+    @endif
     <span>{{ $title }}</span>
   </button>
 </li>
