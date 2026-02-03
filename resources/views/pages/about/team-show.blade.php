@@ -3,8 +3,7 @@
 
 <x-layout.inner
   title="{{ $member['firstname'] }} {{ $member['name'] }}"
-  containerClass="!pl-0 md:!pl-20 lg:!pl-0"
-  headerClass="pl-20"
+  containerClass="!pl-0"
   mainClass="!pb-0 relative">
 
   <div class="md:min-h-(--content-height-md) lg:min-h-(--content-height-lg) md:border-l border-black">
