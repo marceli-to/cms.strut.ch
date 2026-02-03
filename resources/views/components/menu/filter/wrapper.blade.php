@@ -33,7 +33,7 @@
           url="{{ route('page.works') }}"
           title="Arbeiten"
           :level="1"
-          :active="Route::is('page.works*')" />
+          :active="true" />
 
         <x-menu.page.item
           url="{{ route('page.about') }}"
