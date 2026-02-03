@@ -14,8 +14,8 @@
 
   /* Font sizes */
   --text-xxs: 0.75rem;   /* 12px - Stammdaten */
-  --text-xs: 0.8125rem;  /* 13px - Project teaser (mobile), Footer (mobile), Body (mobile), Team teaser (mobile), Team bio text (mobile), Team bio info (mobile) */
-  --text-sm: 0.875rem;   /* 14px - Footer (tablet/desktop), Team teaser (desktop), Team bio text (desktop) */
+  --text-xs: 0.8125rem;  /* 13px - Project teaser (mobile), Footer (mobile), Team teaser (mobile), Team bio text (mobile), Team bio info (mobile) */
+  --text-sm: 0.875rem;   /* 14px - Footer (tablet/desktop), Body (mobile), Team teaser (desktop), Team bio text (desktop) */
   --text-md: 1rem;       /* 16px - Menu Level 2 (mobile), Project title (mobile) */
   --text-lg: 1.125rem;   /* 18px - Project teaser (tablet), Menu Level 2 (tablet), Body (tablet), Team bio info (tablet) */
   --text-xl: 1.25rem;    /* 20px - Project teaser (desktop), Menu Level 2 (desktop), Body (desktop), Team bio info (desktop) */

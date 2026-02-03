@@ -4,7 +4,7 @@
     antialiased 
     font-sans
     font-normal
-    text-sm
+    text-md
     md:text-lg
     lg:text-xl
     leading-[1.35]
