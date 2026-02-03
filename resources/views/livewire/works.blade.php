@@ -2,7 +2,7 @@
 
   <x-menu.buttons.filter
     wire:key="filter-btn-{{ $this->hasActiveFilters ? 'active' : 'inactive' }}"
-    class="md:hidden fixed left-1/2 -translate-x-1/2 top-25 z-40"
+    class="md:hidden fixed left-1/2 -translate-x-1/2 top-25 z-60"
     :hasActiveFilters="$this->hasActiveFilters" />
 
   <div class="md:col-span-3 lg:col-span-4">
