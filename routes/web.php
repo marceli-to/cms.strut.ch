@@ -1,11 +1,12 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProjectController;
 
 Route::get('/img/{path}', [ImageController::class, 'show'])->where('path', '.*');
 
-Route::view('/', 'pages.landing')->name('page.landing');
+Route::get('/', LandingController::class)->name('page.landing');
 
 Route::view('/arbeiten', 'pages.works.index')->name('page.works');
 Route::get('/arbeiten/{slug}', [ProjectController::class, 'show'])->name('page.works.show');
