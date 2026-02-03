@@ -4,16 +4,18 @@
   'action' => null,
 ])
 
-<li>
+<li x-data="{ optimisticActive: @js($active) }">
   <button
     wire:click="{{ $action }}"
+    @click="optimisticActive = !optimisticActive"
     type="button"
     class="font-semibold text-md md:text-lg lg:text-xl flex items-center cursor-pointer group">
-    @if($active)
-      <span class="inline-flex items-center w-20">
-        <x-icons.arrow-right size="sm" class="h-auto w-14" />
-      </span>
-    @endif
+    <span
+      x-show="optimisticActive"
+      x-cloak
+      class="inline-flex items-center w-20">
+      <x-icons.arrow-right size="sm" class="h-auto w-14" />
+    </span>
     <span>{{ $title }}</span>
   </button>
 </li>
