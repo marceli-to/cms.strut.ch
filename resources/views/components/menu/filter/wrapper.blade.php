@@ -27,7 +27,7 @@
     
     <div class="flex flex-col gap-y-20 md:gap-y-24">
 
-      <ul class="flex flex-col gap-y-8">
+      <ul class="flex flex-col gap-y-6">
 
         <x-menu.page.item
           url="{{ route('page.works') }}"
@@ -43,7 +43,7 @@
 
       </ul>
 
-      <ul class="flex flex-col gap-y-2">
+      <ul class="flex flex-col gap-y-6">
         @foreach($availableTypes as $key => $label)
           <x-menu.filter.item
             :title="$label"
@@ -52,7 +52,7 @@
         @endforeach
       </ul>
 
-      <ul class="flex flex-col gap-y-2">
+      <ul class="flex flex-col gap-y-6">
         @foreach($availableStatus as $key => $label)
           <x-menu.filter.item
             :title="$label"
@@ -61,14 +61,14 @@
         @endforeach
       </ul>
 
-      <ul class="flex flex-col gap-y-2">
+      <ul class="flex flex-col gap-y-6">
         <x-menu.filter.item
           title="Publikationen"
           :active="$publications"
           action="togglePublications" />
       </ul>
 
-      <ul class="flex flex-col gap-y-2 w-full">
+      <ul class="flex flex-col gap-y-6 w-full">
         @foreach($availableLocations as $key => $label)
           <x-menu.filter.item
             :title="$label"
@@ -78,7 +78,7 @@
       </ul>
 
       {{-- Search input --}}
-      <div class="flex flex-col gap-y-8 lg:pr-40 max-w-400">
+      <div class="flex flex-col gap-y-6 lg:pr-40 max-w-400">
         <div class="relative">
           <input
             type="text"
@@ -110,7 +110,7 @@
       href="{{ route('page.landing') }}" 
       title="Startseite"
       class="w-36 h-auto">
-      <x-icons.logo.symbol class="w-full h-auto" />
+      <x-icons.logo.symbols class="w-full h-auto" />
     </a>
 
   </nav>

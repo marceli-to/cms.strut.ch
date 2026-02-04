@@ -18,7 +18,7 @@
       <a
         href="{{ route('page.works') }}"
         @if($isInternalReferrer) onclick="history.back(); return false;" @endif
-        class="block mt-7">
+        class="block">
         <x-icons.arrow-left size="lg" class="w-20 h-auto md:w-43" />
       </a>
 
@@ -26,7 +26,7 @@
 
     <div class="md:col-span-9 md:col-start-4">
 
-      <x-headings.h1 class="font-semibold leading-[1.15] text-xl md:text-2xl lg:text-5xl">
+      <x-headings.h1 class="font-semibold leading-[1.15] text-xl md:text-2xl lg:text-5xl md:-mt-5 lg:-mt-9">
 
         {{ $title }}
 

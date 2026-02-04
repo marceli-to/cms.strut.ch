@@ -11,7 +11,7 @@
   <div class="w-full flex-1 {{ $containerClass ?? ''}}">
     
     <x-menu.page.wrapper class="bg-white px-20 py-20 w-full h-full max-h-dvh fixed left-0 top-0 z-50 md:!hidden" />
-    <x-menu.buttons.hide class="w-24 h-auto fixed top-25 right-25 z-50 md:hidden" />
+    <x-menu.buttons.hide class="w-24 h-auto fixed top-27 right-25 z-50 md:hidden" />
 
     <x-layout.partials.header class="flex px-20 py-20 md:hidden relative {{ $headerClass ?? '' }}">
 
@@ -21,7 +21,7 @@
         </h1>
       @endif
 
-      <x-menu.buttons.show class="md:hidden w-32 h-auto fixed top-25 right-20 z-50" />
+      <x-menu.buttons.show class="md:hidden w-32 h-auto fixed top-27 right-20 z-50" />
 
     </x-layout.partials.header>
 

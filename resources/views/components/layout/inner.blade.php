@@ -13,7 +13,7 @@
 
     <div class="md:col-span-3 ">
       <x-menu.page.wrapper class="bg-white px-20 py-20 md:pr-0 md:pl-20 md:py-0 lg:pl-40 w-full h-full max-h-dvh fixed left-0 top-0 z-30 md:!block md:sticky md:top-14 lg:top-40 md:bg-transparent md:h-auto md:w-auto" />
-      <x-menu.buttons.hide class="w-24 h-auto fixed top-25 right-25 z-50 md:hidden" />
+      <x-menu.buttons.hide class="w-24 h-auto fixed top-21 right-25 z-50 md:hidden" />
     </div>
 
     <div class="md:col-span-9 {{ $contentClass ?? '' }}">
@@ -26,7 +26,7 @@
           </h1>
         @endif
 
-        <x-menu.buttons.show class="md:hidden w-32 h-auto fixed top-25 right-20 z-50" />
+        <x-menu.buttons.show class="md:hidden w-32 h-auto fixed top-21 right-20 z-50" />
 
         <div class="hidden md:flex md:col-start-3 md:col-span-7 lg:col-start-4 lg:col-span-6">
           <div class="grid grid-cols-6 lg:w-full">

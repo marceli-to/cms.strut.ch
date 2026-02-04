@@ -15,7 +15,7 @@
       'text-3xl md:text-4xl ' => $level == 1,
       'underline underline-offset-6 decoration-2' => $active && $level == 1,
       'no-underline hover:underline hover:underline-offset-6 hover:decoration-2' => !$active && $level == 1,
-      'text-md md:text-lg lg:text-xl flex items-center' => $level == 2,
+      'text-md md:text-lg lg:text-xl leading-[1.25] flex items-center' => $level == 2,
     ])>
 
     @if ($level == 2)

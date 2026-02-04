@@ -114,7 +114,7 @@
         href="{{ route('page.landing') }}" 
         title="Startseite"
         class="w-36 h-auto">
-        <x-icons.logo.symbol class="w-full h-auto" />
+        <x-icons.logo.symbols class="w-full h-auto" />
       </a>
     @endif
   </nav>
