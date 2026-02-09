@@ -1,0 +1,97 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@import "./partials/fonts.css";
+@import "./partials/spacing.css";
+@import "./partials/animation.css";
+
+@theme {
+  /* Font families */
+  --font-sans: 'Routine', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  /* Font sizes */
+  --text-xxs: 0.75rem;   /* 12px - Stammdaten */
+  --text-xs: 0.8125rem;  /* 13px - Project teaser (mobile), Footer (mobile), Team teaser (mobile), Team bio text (mobile), Team bio info (mobile) */
+  --text-sm: 0.875rem;   /* 14px - Footer (tablet/desktop), Body (mobile), Team teaser (desktop), Team bio text (desktop) */
+  --text-md: 1rem;       /* 16px - Menu Level 2 (mobile), Project title (mobile) */
+  --text-lg: 1.125rem;   /* 18px - Project teaser (tablet), Menu Level 2 (tablet), Body (tablet), Team bio info (tablet) */
+  --text-xl: 1.25rem;    /* 20px - Project teaser (desktop), Menu Level 2 (desktop), Body (desktop), Team bio info (desktop) */
+  --text-2xl: 1.5rem;    /* 24px - Project title (tablet) */
+  --text-3xl: 1.75rem;   /* 28px - Menu Level 1 (mobile) */
+  --text-4xl: 2rem;      /* 32px - Menu Level 1 (tablet/desktop) */
+  --text-5xl: 2.625rem;  /* 42px - Project title (desktop) */
+
+  /* Breakpoints */
+  --breakpoint-xs: 400px;
+
+  /* Max widths */
+  --max-width-prose: 85ch;
+}
+
+@layer base {
+  :root {
+    --grid-columns: 12;
+    --grid-gap: 0rem;
+    --col-width: calc((100% - (11 * var(--grid-gap))) / var(--grid-columns));
+    --col-width-offset: calc((100% - 2.5rem - (11 * var(--grid-gap))) / var(--grid-columns));
+
+    /* Header heights */
+    --header-height: 4.6875rem;    /* 75px */
+    --header-height-md: 8.75rem;   /* 140px */
+    --header-height-lg: 15.625rem; /* 250px */
+
+    /* Footer heights */
+    --footer-height: 9.6875rem;    /* 155px */
+    --footer-height-md: 10.625rem; /* 170px */
+    --footer-height-lg: 7rem;  /* 112px */
+
+    /* Content heights */
+    --content-height: calc(100dvh - var(--header-height) - var(--footer-height));
+    --content-height-md: calc(100vh - var(--header-height-md) - var(--footer-height-md));
+    --content-height-lg: calc(100vh - var(--header-height-lg) - var(--footer-height-lg));
+
+    --content-full-height: calc(100dvh - var(--footer-height));
+    --content-full-height-md: calc(100vh - var(--footer-height-md));
+    --content-full-height-lg: calc(100vh - var(--footer-height-lg));
+
+    /* Slideshow items */
+    --slideshow-item-height: 220px;
+    --slideshow-item-height-md: 480px;
+    --slideshow-item-height-xl: 640px;
+  }
+}
+
+@utility w-col-3 {
+  width: calc(var(--col-width) * 3 + var(--grid-gap) * 2) !important;
+}
+
+@utility w-col-3-offset {
+  width: calc(var(--col-width-offset) * 3 + var(--grid-gap) * 2) !important;
+}
+
+@utility pl-col-1 {
+  padding-left: calc(var(--col-width) + var(--grid-gap));
+}
+
+@utility underline-offset-6 {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-offset: 6px;
+}
+
+[x-cloak] {
+  display: none;
+}
+
+strong {
+  @apply font-semibold;
+}
+
+p:not(:last-child),
+ul:not(:last-child):not(nav ul) {
+  @apply mb-16 lg:mb-24;
+}

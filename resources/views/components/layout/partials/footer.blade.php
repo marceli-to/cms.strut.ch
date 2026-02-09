@@ -47,7 +47,7 @@
   </div>
 </footer>
 @livewireScripts
-@vite('resources/js/app.js')
+@vite('resources/js/site.js')
 </body>
 </html>
 <!-- made with ❤ by wbg.ch & marceli.to -->

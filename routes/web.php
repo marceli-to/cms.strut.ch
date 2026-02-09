@@ -24,7 +24,11 @@ Route::view('/buero/auszeichnungen', 'pages.about.awards')->name('page.about.awa
 Route::view('/impressum', 'pages.misc.imprint')->name('page.privacy.imprint');
 Route::view('/datenschutz', 'pages.misc.privacy')->name('page.privacy.privacy');
 
-// Dashboard (Vue SPA)
-Route::get('/dashboard/{any?}', function () {
-    return view('dashboard.layouts.app');
-})->where('any', '.*')->name('dashboard');
+// Dashboard (Vue SPA) — requires authentication
+Route::middleware('auth')->group(function () {
+	Route::get('/dashboard/{any?}', function () {
+		return view('components.layout.app');
+	})->where('any', '.*')->name('dashboard');
+});
+
+require __DIR__.'/auth.php';

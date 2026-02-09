@@ -398,6 +398,10 @@ const spacings = [
                 <!-- // here will be other parts depending on the current route in dashboard -->
               </div>
             </div>
+
+            <div class="col-span-1">
+
+            </div>
           </div>
         </header>
 
@@ -405,8 +409,19 @@ const spacings = [
           <sidebar class="col-span-2 bg-snow pl-20 border-r border-black min-h-[150vh]">
 
           </sidebar>
-          <main class="col-span-10 bg-snow  min-h-[150vh]">
-
+          <main class="col-span-10 bg-snow min-h-[150vh]">
+            <div class="grid grid-cols-10 gap-x-20 debug-grid">
+              <div class="col-span-1 min-h-200"></div>
+              <div class="col-span-1 min-h-200"></div>
+              <div class="col-span-1 min-h-200"></div>
+              <div class="col-span-1 min-h-200"></div>
+              <div class="col-span-1 min-h-200"></div>
+              <div class="col-span-1 min-h-200"></div>
+              <div class="col-span-1 min-h-200"></div>
+              <div class="col-span-1 min-h-200"></div>
+              <div class="col-span-1 min-h-200"></div>
+              <div class="col-span-1 min-h-200"></div>
+            </div>
           </main>
         </div>
       </div>

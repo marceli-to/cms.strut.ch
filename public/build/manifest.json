@@ -1,6 +1,6 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-oN5LsmKo.css",
+    "file": "assets/app-CSqREFt3.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -8,13 +8,13 @@
       "app.css"
     ]
   },
-  "resources/css/dashboard.css": {
-    "file": "assets/dashboard-DT21sopn.css",
-    "src": "resources/css/dashboard.css",
+  "resources/css/site.css": {
+    "file": "assets/site-BgW60KEC.css",
+    "src": "resources/css/site.css",
     "isEntry": true,
-    "name": "dashboard",
+    "name": "site",
     "names": [
-      "dashboard.css"
+      "site.css"
     ]
   },
   "resources/fonts/Routine-Regular.woff": {
@@ -33,19 +33,19 @@
     "file": "assets/Routine-Semibold-CGlOAsHt.woff2",
     "src": "resources/fonts/Routine-Semibold.woff2"
   },
-  "resources/js/app.js": {
-    "file": "assets/app-_KTWVDHH.js",
+  "resources/js/app/app.js": {
+    "file": "assets/app-CLUvg2Gg.js",
     "name": "app",
-    "src": "resources/js/app.js",
+    "src": "resources/js/app/app.js",
+    "isEntry": true
+  },
+  "resources/js/site.js": {
+    "file": "assets/site-C5lzlkuH.js",
+    "name": "site",
+    "src": "resources/js/site.js",
     "isEntry": true,
     "css": [
-      "assets/app-CVuONdbL.css"
+      "assets/site-CVuONdbL.css"
     ]
-  },
-  "resources/js/dashboard/app.js": {
-    "file": "assets/app-CUtycmUl.js",
-    "name": "app",
-    "src": "resources/js/dashboard/app.js",
-    "isEntry": true
   }
 }

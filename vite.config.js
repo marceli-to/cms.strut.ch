@@ -8,10 +8,10 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
+                'resources/css/site.css',
+                'resources/js/site.js',
                 'resources/css/app.css',
-                'resources/js/app.js',
-                'resources/css/dashboard.css',
-                'resources/js/dashboard/app.js',
+                'resources/js/app/app.js',
             ],
             refresh: true,
         }),
@@ -27,7 +27,7 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-            '@': fileURLToPath(new URL('./resources/js/dashboard', import.meta.url)),
+            '@': fileURLToPath(new URL('./resources/js/app', import.meta.url)),
         },
     },
     server: {
