@@ -10,7 +10,7 @@ class Seed extends Command
 {
 	protected $signature = 'app:seed';
 
-	protected $description = 'Nuke all tables, run migrations, create default user and seed projects';
+	protected $description = 'Nuke all tables, run migrations and create default user';
 
 	public function handle(): void
 	{
@@ -28,11 +28,8 @@ class Seed extends Command
 			'password' => Hash::make('7aq31rr23'),
 		]);
 
-		$this->info('Seeding projects...');
-		$this->call('app:seed-projects');
-
-		$this->info('Updating media dimensions...');
-		$this->call('media:update-dimensions', ['--force' => true]);
+		$this->info('Seeding posts...');
+		$this->call('app:posts');
 
 		$this->info('Done!');
 	}

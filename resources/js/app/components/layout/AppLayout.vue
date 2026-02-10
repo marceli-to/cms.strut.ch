@@ -1,15 +1,13 @@
 <script setup>
-import AppHeader from '@/components/layout/AppHeader.vue'
 import AppSidebar from '@/components/layout/AppSidebar.vue'
 import ToastContainer from '@/components/ui/toast/Container.vue'
 </script>
 
 <template>
-	<div class="min-h-screen flex flex-col">
-		<AppHeader />
-		<div class="bg-snow grid grid-cols-12 gap-x-20 flex-1">
-			<AppSidebar />
-			<main class="col-span-10 bg-snow relative pt-40">
+	<div class="min-h-screen bg-neutral-50">
+		<AppSidebar />
+		<div class="ml-240">
+			<main class="pt-24 px-32 pb-32 relative">
 				<ToastContainer />
 				<slot />
 			</main>

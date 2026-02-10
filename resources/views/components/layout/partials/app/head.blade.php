@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DataHub - {{ config('app.name', 'Weberbrunner') }}</title>
+<title>CMS - {{ config('app.name', 'marceli.to') }}</title>
 <meta name="robots" content="noindex, nofollow">
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="theme-color" content="#ffffff">
@@ -12,7 +12,7 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="shortcut icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="DataHub" />
+<meta name="apple-mobile-web-app-title" content="CMS marceli.to" />
 <link rel="manifest" href="/site.webmanifest" />
 @vite(['resources/css/app.css'])
 </head>

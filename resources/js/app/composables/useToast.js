@@ -1,35 +1,29 @@
 import { reactive, readonly } from 'vue'
 
 const state = reactive({
-	current: null,
+	toasts: [],
 })
 
 let nextId = 0
 
 function add(type, message) {
 	const id = nextId++
-	state.current = { id, type, message }
-
-	if (type === 'success') {
-		setTimeout(() => dismiss(id), 2000)
-	}
+	state.toasts.push({ id, type, message })
+	setTimeout(() => dismiss(id), 3000)
 }
 
 function dismiss(id) {
-	if (state.current?.id === id) {
-		state.current = null
-	}
+	const index = state.toasts.findIndex(t => t.id === id)
+	if (index > -1) state.toasts.splice(index, 1)
 }
 
 function clearErrors() {
-	if (state.current?.type === 'error') {
-		state.current = null
-	}
+	state.toasts = state.toasts.filter(t => t.type !== 'error')
 }
 
 export function useToast() {
 	return {
-		current: readonly(state),
+		toasts: readonly(state),
 		success: (message) => add('success', message),
 		error: (message) => add('error', message),
 		dismiss,

@@ -2,26 +2,25 @@
 import { useToast } from '@/composables/useToast'
 import ToastMessage from '@/components/ui/toast/Message.vue'
 
-const { current, dismiss } = useToast()
+const { toasts, dismiss } = useToast()
 </script>
 
 <template>
-	<div class="absolute top-0 left-0 w-full z-50">
-		<Transition
-			enter-active-class="transition-opacity duration-100 ease-out"
-			enter-from-class="opacity-0"
-			enter-to-class="opacity-100"
-			leave-active-class="transition-opacity duration-100 ease-in"
-			leave-from-class="opacity-100"
-			leave-to-class="opacity-0"
-			mode="out-in"
+	<div class="fixed bottom-12 right-12 z-50 w-240 flex flex-col gap-6">
+		<TransitionGroup
+			enter-active-class="transition-all duration-200 ease-out"
+			enter-from-class="opacity-0 translate-y-[-8px]"
+			enter-to-class="opacity-100 translate-y-0"
+			leave-active-class="transition-all duration-150 ease-in"
+			leave-from-class="opacity-100 translate-y-0"
+			leave-to-class="opacity-0 translate-y-[-8px]"
 		>
 			<ToastMessage
-				v-if="current.current"
-				:key="current.current.id"
-				:toast="current.current"
-				@close="dismiss(current.current.id)"
+				v-for="toast in toasts.toasts"
+				:key="toast.id"
+				:toast="toast"
+				@close="dismiss(toast.id)"
 			/>
-		</Transition>
+		</TransitionGroup>
 	</div>
 </template>

@@ -1,5 +1,5 @@
 <script setup>
-import Cross from '@/components/icons/Cross.vue'
+import { PhX, PhCheck, PhWarning } from '@phosphor-icons/vue'
 
 defineProps({
 	toast: {
@@ -10,22 +10,25 @@ defineProps({
 
 defineEmits(['close'])
 
-const colors = {
-	success: 'bg-lime',
-	error: 'bg-red',
+const styles = {
+	success: 'bg-emerald-600 text-white',
+	error: 'bg-red-500 text-white',
+}
+
+const icons = {
+	success: PhCheck,
+	error: PhWarning,
 }
 </script>
 
 <template>
 	<div
-		class="flex items-center justify-between gap-x-15 text-white text-sm py-6 pl-8 pr-20 cursor-pointer"
-		:class="colors[toast.type]"
-    @click="$emit('close')">
-		<span>
-      {{ toast.message }}
-    </span>
-    <span>
-      <Cross class="w-8 h-8" />
-    </span>
+		class="flex items-center gap-10 text-xs py-12 px-16 cursor-pointer shadow-lg"
+		:class="styles[toast.type]"
+		@click="$emit('close')"
+	>
+		<component :is="icons[toast.type]" :size="14" weight="bold" class="shrink-0" />
+		<span class="flex-1">{{ toast.message }}</span>
+		<PhX :size="12" weight="bold" class="shrink-0 opacity-60 hover:opacity-100 transition-opacity" />
 	</div>
 </template>

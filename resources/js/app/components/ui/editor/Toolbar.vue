@@ -1,5 +1,6 @@
 <script setup>
 import { ref, nextTick } from 'vue'
+import { PhTextB, PhListBullets, PhListNumbers, PhLink, PhX } from '@phosphor-icons/vue'
 
 const props = defineProps({
 	editor: { type: Object, required: true },
@@ -38,101 +39,82 @@ function closeLinkInput() {
 </script>
 
 <template>
-	<div class="relative border border-black border-b-0 bg-black">
+	<div class="relative border-b border-neutral-200 bg-neutral-50">
 
-		<div class="flex items-center gap-4">
+		<div class="flex items-center gap-2">
 
 			<button
 				type="button"
-				class="p-6 transition-colors"
-				:class="editor.isActive('bold') ? 'text-white bg-gray-dark' : 'text-silver hover:text-white'"
+				class="p-8 transition-colors"
+				:class="editor.isActive('bold') ? 'text-neutral-900 bg-neutral-200' : 'text-neutral-400 hover:text-neutral-900'"
 				title="Bold"
 				@click="editor.chain().focus().toggleBold().run()">
-				<!-- Bold icon -->
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-20 h-20">
-					<path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z" /><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z" />
-				</svg>
+				<PhTextB :size="16" weight="bold" />
 			</button>
 
 			<button
 				type="button"
-				class="p-6 transition-colors"
-				:class="editor.isActive('bulletList') ? 'text-white bg-gray-dark' : 'text-silver hover:text-white'"
-				title="Bullet list"
+				class="p-8 transition-colors"
+				:class="editor.isActive('bulletList') ? 'text-neutral-900 bg-neutral-200' : 'text-neutral-400 hover:text-neutral-900'"
+				title="Liste"
 				@click="editor.chain().focus().toggleBulletList().run()">
-				<!-- Bullet list icon -->
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-20 h-20">
-					<line x1="8" y1="6" x2="21" y2="6" /><line x1="8" y1="12" x2="21" y2="12" /><line x1="8" y1="18" x2="21" y2="18" />
-					<circle cx="4" cy="6" r="1" fill="currentColor" /><circle cx="4" cy="12" r="1" fill="currentColor" /><circle cx="4" cy="18" r="1" fill="currentColor" />
-				</svg>
+				<PhListBullets :size="16" weight="bold" />
 			</button>
 
 			<button
 				type="button"
-				class="p-6 transition-colors"
-				:class="editor.isActive('orderedList') ? 'text-white bg-gray-dark' : 'text-silver hover:text-white'"
-				title="Ordered list"
+				class="p-8 transition-colors"
+				:class="editor.isActive('orderedList') ? 'text-neutral-900 bg-neutral-200' : 'text-neutral-400 hover:text-neutral-900'"
+				title="Nummerierte Liste"
 				@click="editor.chain().focus().toggleOrderedList().run()">
-				<!-- Ordered list icon -->
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-20 h-20">
-					<line x1="10" y1="6" x2="21" y2="6" /><line x1="10" y1="12" x2="21" y2="12" /><line x1="10" y1="18" x2="21" y2="18" />
-					<text x="2" y="8" font-size="8" font-weight="600" fill="currentColor" stroke="none" font-family="system-ui">1</text>
-					<text x="2" y="14" font-size="8" font-weight="600" fill="currentColor" stroke="none" font-family="system-ui">2</text>
-					<text x="2" y="20" font-size="8" font-weight="600" fill="currentColor" stroke="none" font-family="system-ui">3</text>
-				</svg>
+				<PhListNumbers :size="16" weight="bold" />
 			</button>
 
 			<button
 				type="button"
-				class="p-6 transition-colors"
-				:class="editor.isActive('link') ? 'text-white bg-gray-dark' : 'text-silver hover:text-white'"
+				class="p-8 transition-colors"
+				:class="editor.isActive('link') ? 'text-neutral-900 bg-neutral-200' : 'text-neutral-400 hover:text-neutral-900'"
 				title="Link"
 				@click="openLinkInput">
-				<!-- Link icon -->
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-20 h-20">
-					<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-					<path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-				</svg>
+				<PhLink :size="16" weight="bold" />
 			</button>
 		</div>
 
 		<!-- Link input overlay -->
 		<div
 			v-if="showLinkInput"
-			class="absolute left-10 right-20 top-40 z-10 flex items-center gap-4 w-1/2 border border-silver bg-white p-4">
+			class="absolute left-0 right-0 top-full z-10 flex items-center gap-8 border border-neutral-200 bg-white p-8">
 
 			<input
 				ref="linkInput"
 				v-model="linkUrl"
 				type="url"
 				placeholder="https://..."
-				class="flex-1 border border-silver px-6 py-4 text-xs text-black focus:outline-none focus:border-black"
+				class="flex-1 px-0 py-6 text-xs bg-transparent text-neutral-900 border-0 border-b border-neutral-300 focus:border-neutral-900 focus:ring-0 outline-none"
 				@keydown.enter.prevent="applyLink"
 				@keydown.escape.prevent="closeLinkInput" />
 
 			<button
 				type="button"
-				class="bg-black text-white text-xs font-semibold px-8 py-4"
+				class="bg-neutral-900 text-white text-[11px] font-medium tracking-wide px-12 py-6"
 				@click="applyLink">
-				Apply
+				Übernehmen
 			</button>
 
 			<button
 				v-if="editor.isActive('link')"
 				type="button"
-				class="border border-silver text-black text-xs font-semibold px-8 py-4 hover:border-black"
+				class="border border-neutral-300 text-neutral-900 text-[11px] font-medium tracking-wide px-12 py-6 hover:border-neutral-900"
 				@click="removeLink">
-				Remove
+				Entfernen
 			</button>
 
 			<button
 				type="button"
-				class="text-gray hover:text-black p-4"
-				title="Cancel"
+				class="text-neutral-400 hover:text-neutral-900 p-4 transition-colors"
+				title="Abbrechen"
 				@click="closeLinkInput">
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12">
-					<line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
-				</svg>
+				<PhX :size="14" weight="bold" />
 			</button>
 		</div>
 

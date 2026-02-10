@@ -1,13 +1,17 @@
-.editor .tiptap {
-	@apply border border-silver !border-t-0 p-8 text-sm leading-normal min-h-[200px] outline-none;
+.editor {
+	@apply border border-neutral-200 bg-white overflow-hidden;
 }
 
-.editor .tiptap:focus {
-	@apply border-black;
+.editor:focus-within {
+	@apply border-neutral-900;
+}
+
+.editor .tiptap {
+	@apply px-12 py-12 text-sm leading-normal min-h-[200px] outline-none bg-white text-neutral-900;
 }
 
 .editor .tiptap p {
-	@apply mb-[0.5em];
+	@apply mb-[1em];
 }
 
 .editor .tiptap ul {
@@ -23,7 +27,7 @@
 }
 
 .editor .tiptap a {
-	@apply text-black underline;
+	@apply text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-900;
 }
 
 .editor .tiptap strong {

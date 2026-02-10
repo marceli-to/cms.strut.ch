@@ -8,6 +8,12 @@ import MediaUploader from '../../components/media/MediaUploader.vue'
 import MediaGrid from '../../components/media/MediaGrid.vue'
 import MediaEditModal from '../../components/media/MediaEditModal.vue'
 import Editor from '../../components/ui/editor/Editor.vue'
+import FormLabel from '../../components/ui/form/FormLabel.vue'
+import FormInput from '../../components/ui/form/FormInput.vue'
+import FormCheckbox from '../../components/ui/form/FormCheckbox.vue'
+import FormButton from '../../components/ui/form/FormButton.vue'
+import FormError from '../../components/ui/form/FormError.vue'
+import FormGroup from '../../components/ui/form/FormGroup.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -52,10 +58,10 @@ async function handleSubmit() {
 
 	const success = await store.savePost(form.value, isEdit.value ? route.params.id : null, tempMedia)
 	if (success) {
-		toast.success(isEdit.value ? 'Post updated' : 'Post created')
+		toast.success(isEdit.value ? 'Beitrag aktualisiert' : 'Beitrag erstellt')
 		router.push({ name: 'blog.index' })
 	} else if (Object.keys(store.errors).length) {
-		toast.error('Please check the form for errors')
+		toast.error('Bitte überprüfen Sie das Formular')
 	}
 }
 
@@ -88,84 +94,70 @@ function onSetTeaser(media) {
 </script>
 
 <template>
-	<div class="grid grid-cols-10 gap-x-20">
-		<div class="col-span-9 flex items-center justify-between mb-20">
-			<h2 class="text-lg font-semibold text-black">
-				{{ isEdit ? 'Edit Post' : 'New Post' }}
-			</h2>
+	<div class="max-w-4xl">
+
+		<div class="flex items-center justify-between mb-36">
+			<h1 class="text-lg font-medium text-neutral-900">
+				{{ isEdit ? 'Beitrag bearbeiten' : 'Neuer Beitrag' }}
+			</h1>
 		</div>
 
-		<div v-if="store.loading" class="col-span-9 text-sm text-gray">
-			Loading...
+		<div v-if="store.loading" class="text-sm text-neutral-400">
+			Laden...
 		</div>
 
-		<form v-else class="col-span-9" @submit.prevent="handleSubmit">
-			<div class="mb-16">
-				<label class="block text-sm font-semibold text-black mb-4">Title</label>
-				<input
-					v-model="form.title"
-					type="text"
-					class="w-full border border-silver px-8 py-8 text-sm text-black focus:outline-none focus:border-black"
-				/>
-				<p v-if="store.errors.title" class="text-sm text-red mt-4">
-					{{ store.errors.title[0] }}
-				</p>
-			</div>
+		<form v-else @submit.prevent="handleSubmit">
 
-			<div class="mb-16">
-				<label class="block text-sm font-semibold text-black mb-4">Content</label>
-				<Editor v-model="form.content" />
-				<p v-if="store.errors.content" class="text-sm text-red mt-4">
-					{{ store.errors.content[0] }}
-				</p>
-			</div>
+			<FormGroup>
+				<FormLabel for="title">Titel</FormLabel>
+				<FormInput id="title" v-model="form.title" />
+				<FormError :message="store.errors.title" />
+			</FormGroup>
 
-			<div class="mb-24">
-				<label class="flex items-center gap-8 text-sm text-black">
-					<input
-						v-model="form.publish"
-						type="checkbox"
-						class="w-12 h-12"
+			<FormGroup>
+				<FormLabel>Inhalt</FormLabel>
+				<div class="mt-8">
+					<Editor v-model="form.content" />
+				</div>
+				<FormError :message="store.errors.content" />
+			</FormGroup>
+
+			<FormGroup>
+				<FormCheckbox v-model="form.publish">Veröffentlichen</FormCheckbox>
+			</FormGroup>
+
+			<FormGroup>
+				<FormLabel>Bilder</FormLabel>
+				<div class="mt-12">
+					<MediaGrid
+						v-if="mediaStore.items.length"
+						:items="mediaStore.items"
+						class="mb-16"
+						@edit="onEditMedia"
+						@delete="onDeleteMedia"
+						@reorder="onReorderMedia"
+						@teaser="onSetTeaser"
 					/>
-					Publish
-				</label>
+					<MediaUploader @uploaded="onUploaded" />
+				</div>
+			</FormGroup>
+
+			<div class="flex gap-12 pt-16">
+				<FormButton type="submit">
+					{{ isEdit ? 'Aktualisieren' : 'Erstellen' }}
+				</FormButton>
+				<FormButton variant="secondary" @click="router.push({ name: 'blog.index' })">
+					Abbrechen
+				</FormButton>
 			</div>
 
-			<div class="mb-24">
-				<label class="block text-sm font-semibold text-black mb-8">Bilder</label>
-				<MediaGrid
-					v-if="mediaStore.items.length"
-					:items="mediaStore.items"
-					class="mb-12"
-					@edit="onEditMedia"
-					@delete="onDeleteMedia"
-					@reorder="onReorderMedia"
-					@teaser="onSetTeaser"
-				/>
-				<MediaUploader @uploaded="onUploaded" />
-			</div>
-
-			<div class="flex gap-12">
-				<button
-					type="submit"
-					class="bg-black text-white text-sm font-semibold px-16 py-8"
-				>
-					{{ isEdit ? 'Update' : 'Create' }}
-				</button>
-				<button
-					type="button"
-					class="border border-black text-black text-sm font-semibold px-16 py-8"
-					@click="router.push({ name: 'blog.index' })"
-				>
-					Cancel
-				</button>
-			</div>
 		</form>
 
 		<MediaEditModal
 			:media="editingMedia"
 			@close="editingMedia = null"
-			@save="onSaveMedia" />
-      
+			@save="onSaveMedia"
+		/>
+
 	</div>
 </template>

@@ -3,6 +3,7 @@ import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useBlogStore } from '../../stores/blog'
 import { useToast } from '../../composables/useToast'
+import FormButton from '../../components/ui/form/FormButton.vue'
 
 const router = useRouter()
 const store = useBlogStore()
@@ -13,78 +14,73 @@ onMounted(() => {
 })
 
 async function handleDelete(post) {
-	if (!confirm(`Delete "${post.title}"?`)) return
+	if (!confirm(`"${post.title}" löschen?`)) return
 	await store.deletePost(post.id)
-	toast.success('Post deleted')
+	toast.success('Beitrag gelöscht')
 }
 </script>
 
 <template>
-	<div class="grid grid-cols-10 gap-20 w-full">
-    <div class="col-span-9">
-      
-      <div class="flex items-center justify-between mb-20">
-        <h2 class="text-lg font-semibold text-black">Blog Posts</h2>
-        <button
-          class="bg-black text-white text-sm font-semibold px-16 py-8"
-          @click="router.push({ name: 'blog.create' })"
-        >
-          New Post
-        </button>
-      </div>
+	<div>
+		<div class="flex items-center justify-between mb-36">
+			<h1 class="text-lg font-medium text-neutral-900">Blog</h1>
+			<FormButton @click="router.push({ name: 'blog.create' })">
+				Neuer Beitrag
+			</FormButton>
+		</div>
 
-      <div v-if="store.loading" class="text-sm text-gray">
-        Loading...
-      </div>
+		<div v-if="store.loading" class="text-sm text-neutral-400">
+			Laden...
+		</div>
 
-      <div v-else-if="store.posts.length === 0" class="text-sm text-gray">
-        No posts yet.
-      </div>
+		<div v-else-if="store.posts.length === 0" class="text-sm text-neutral-400">
+			Noch keine Beiträge vorhanden.
+		</div>
 
-      <table v-else class="w-full text-sm">
-        <thead>
-          <tr class="border-b border-silver text-left">
-            <th class="py-8 font-semibold text-gray">Title</th>
-            <th class="py-8 font-semibold text-gray w-80">Status</th>
-            <th class="py-8 font-semibold text-gray w-128">Created</th>
-            <th class="py-8 font-semibold text-gray w-128 text-right">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="post in store.posts"
-            :key="post.id"
-            class="border-b border-snow"
-          >
-            <td class="py-8 text-black">{{ post.title }}</td>
-            <td class="py-8">
-              <span
-                class="text-sm"
-                :class="post.publish ? 'text-lime' : 'text-gray'"
-              >
-                {{ post.publish ? 'Published' : 'Draft' }}
-              </span>
-            </td>
-            <td class="py-8 text-gray">
-              {{ new Date(post.created_at).toLocaleDateString('de-CH') }}
-            </td>
-            <td class="py-8 text-right">
-              <button
-                class="text-black font-semibold mr-12"
-                @click="router.push({ name: 'blog.edit', params: { id: post.id } })"
-              >
-                Edit
-              </button>
-              <button
-                class="text-red font-semibold"
-                @click="handleDelete(post)"
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+		<table v-else class="w-full text-sm">
+			<thead>
+				<tr class="text-left border-b border-neutral-200">
+					<th class="py-12 font-medium text-neutral-500 text-xs uppercase tracking-[0.1em]">Titel</th>
+					<th class="py-12 font-medium text-neutral-500 text-xs uppercase tracking-[0.1em] w-100">Status</th>
+					<th class="py-12 font-medium text-neutral-500 text-xs uppercase tracking-[0.1em] w-140">Erstellt</th>
+					<th class="py-12 font-medium text-neutral-500 text-xs uppercase tracking-[0.1em] w-200 text-right">Aktionen</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr
+					v-for="(post, index) in store.posts"
+					:key="post.id"
+					class="transition-colors hover:bg-neutral-100"
+					:class="index % 2 === 0 ? 'bg-white' : 'bg-neutral-50'"
+				>
+					<td class="py-12 text-neutral-900">{{ post.title }}</td>
+					<td class="py-12">
+						<span
+							class="text-xs"
+							:class="post.publish ? 'text-emerald-600' : 'text-neutral-400'"
+						>
+							{{ post.publish ? 'Publiziert' : 'Entwurf' }}
+						</span>
+					</td>
+					<td class="py-12 text-neutral-400 text-xs">
+						{{ new Date(post.created_at).toLocaleDateString('de-CH') }}
+					</td>
+					<td class="py-12 text-right whitespace-nowrap">
+						<button
+							class="text-xs text-neutral-500 hover:text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-900 transition-colors mr-16 cursor-pointer"
+							@click="router.push({ name: 'blog.edit', params: { id: post.id } })"
+						>
+							Bearbeiten
+						</button>
+						<button
+							class="text-xs text-red-500 hover:text-red-700 underline decoration-red-300 underline-offset-4 hover:decoration-red-700 transition-colors cursor-pointer"
+							@click="handleDelete(post)"
+						>
+							Löschen
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </template>

@@ -1,6 +1,6 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-B5HezYoJ.css",
+    "file": "assets/app-DXp5zvJ5.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -9,7 +9,7 @@
     ]
   },
   "resources/css/site.css": {
-    "file": "assets/site-_Suj3ACQ.css",
+    "file": "assets/site-BGMFEMMy.css",
     "src": "resources/css/site.css",
     "isEntry": true,
     "name": "site",
@@ -17,38 +17,14 @@
       "site.css"
     ]
   },
-  "resources/fonts/Routine-Regular.woff": {
-    "file": "assets/Routine-Regular-DeRzt1oq.woff",
-    "src": "resources/fonts/Routine-Regular.woff"
-  },
-  "resources/fonts/Routine-Regular.woff2": {
-    "file": "assets/Routine-Regular-C7f5m7Gb.woff2",
-    "src": "resources/fonts/Routine-Regular.woff2"
-  },
-  "resources/fonts/Routine-Semibold.woff": {
-    "file": "assets/Routine-Semibold-Drd267j1.woff",
-    "src": "resources/fonts/Routine-Semibold.woff"
-  },
-  "resources/fonts/Routine-Semibold.woff2": {
-    "file": "assets/Routine-Semibold-CGlOAsHt.woff2",
-    "src": "resources/fonts/Routine-Semibold.woff2"
+  "resources/fonts/Geist-Variable.woff2": {
+    "file": "assets/Geist-Variable-CrgPqtmy.woff2",
+    "src": "resources/fonts/Geist-Variable.woff2"
   },
   "resources/js/app/app.js": {
-    "file": "assets/app-BJx38zvC.js",
+    "file": "assets/app-CmtGDCc1.js",
     "name": "app",
     "src": "resources/js/app/app.js",
-    "isEntry": true,
-    "css": [
-      "assets/app-DMnO7Mbx.css"
-    ]
-  },
-  "resources/js/site.js": {
-    "file": "assets/site-C5lzlkuH.js",
-    "name": "site",
-    "src": "resources/js/site.js",
-    "isEntry": true,
-    "css": [
-      "assets/site-CVuONdbL.css"
-    ]
+    "isEntry": true
   }
 }

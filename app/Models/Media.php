@@ -10,6 +10,8 @@ class Media extends Model
 {
 	protected $fillable = [
 		'uuid',
+		'mediable_type',
+		'mediable_id',
 		'file',
 		'original_name',
 		'mime_type',

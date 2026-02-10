@@ -1,19 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import Components from '@/views/Components.vue'
+import Home from '@/views/Home.vue'
 import BlogIndex from '@/views/blog/Index.vue'
 import BlogForm from '@/views/blog/Form.vue'
 
 const routes = [
   {
     path: '/dashboard',
-    redirect: '/dashboard/components',
-  },
-  {
-    path: '/dashboard/components',
-    name: 'components',
-    component: Components,
-    meta: { title: 'Components' },
+    name: 'home',
+    component: Home,
+    meta: { title: 'Dashboard' },
   },
   {
     path: '/dashboard/blog',
@@ -25,13 +21,13 @@ const routes = [
     path: '/dashboard/blog/create',
     name: 'blog.create',
     component: BlogForm,
-    meta: { title: 'Blog' },
+    meta: { title: 'Neuer Beitrag' },
   },
   {
     path: '/dashboard/blog/:id/edit',
     name: 'blog.edit',
     component: BlogForm,
-    meta: { title: 'Blog' },
+    meta: { title: 'Beitrag bearbeiten' },
   },
 ]
 
@@ -41,9 +37,10 @@ const router = createRouter({
 })
 
 router.afterEach((to) => {
+  const appName = document.title.split('–').pop()?.trim() || 'CMS'
   document.title = to.meta.title
-    ? `${to.meta.title} – DataHub`
-    : 'DataHub'
+    ? `${to.meta.title} – ${appName}`
+    : appName
 })
 
 export default router
