@@ -82,7 +82,7 @@ function onSetTeaser(media) {
 </script>
 
 <template>
-	<div class="p-20">
+	<div>
 		<div class="flex items-center justify-between mb-20">
 			<h2 class="text-lg font-semibold text-black">
 				{{ isEdit ? 'Edit Post' : 'New Post' }}
@@ -163,7 +163,7 @@ function onSetTeaser(media) {
 		<MediaEditModal
 			:media="editingMedia"
 			@close="editingMedia = null"
-			@save="onSaveMedia"
-		/>
+			@save="onSaveMedia" />
+      
 	</div>
 </template>
