@@ -19,7 +19,7 @@ class AttachAction
 				continue;
 			}
 
-			$filename = $this->uniqueFilename('uploads', $item['file']);
+			$filename = $this->uniqueFilename($item['file']);
 			Storage::disk('public')->move($tempPath, 'uploads/' . $filename);
 
 			$maxSort++;
@@ -38,22 +38,12 @@ class AttachAction
 		}
 	}
 
-	private function uniqueFilename(string $directory, string $filename): string
+	private function uniqueFilename(string $filename): string
 	{
 		$name = pathinfo($filename, PATHINFO_FILENAME);
 		$extension = Str::lower(pathinfo($filename, PATHINFO_EXTENSION));
-		$candidate = $name . '.' . $extension;
+		$suffix = Str::random(6);
 
-		if (!Storage::disk('public')->exists($directory . '/' . $candidate)) {
-			return $candidate;
-		}
-
-		$counter = 1;
-		do {
-			$candidate = $name . '-' . $counter . '.' . $extension;
-			$counter++;
-		} while (Storage::disk('public')->exists($directory . '/' . $candidate));
-
-		return $candidate;
+		return $name . '-' . $suffix . '.' . $extension;
 	}
 }

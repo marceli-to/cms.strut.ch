@@ -3,7 +3,6 @@
 namespace App\Actions\Media;
 
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class UploadAction
@@ -11,7 +10,7 @@ class UploadAction
 	public function execute(UploadedFile $file): array
 	{
 		$directory = 'temp';
-		$filename = $this->uniqueFilename($directory, $file->getClientOriginalName());
+		$filename = $this->uniqueFilename($file->getClientOriginalName());
 
 		$file->storeAs($directory, $filename, 'public');
 
@@ -36,23 +35,13 @@ class UploadAction
 		];
 	}
 
-	private function uniqueFilename(string $directory, string $originalName): string
+	private function uniqueFilename(string $originalName): string
 	{
 		$name = Str::slug(pathinfo($originalName, PATHINFO_FILENAME));
 		$extension = Str::lower(pathinfo($originalName, PATHINFO_EXTENSION));
-		$filename = $name . '.' . $extension;
+		$suffix = Str::random(6);
 
-		if (!Storage::disk('public')->exists($directory . '/' . $filename)) {
-			return $filename;
-		}
-
-		$counter = 1;
-		do {
-			$filename = $name . '-' . $counter . '.' . $extension;
-			$counter++;
-		} while (Storage::disk('public')->exists($directory . '/' . $filename));
-
-		return $filename;
+		return $name . '-' . $suffix . '.' . $extension;
 	}
 
 	private function orientation(?int $width, ?int $height): string
