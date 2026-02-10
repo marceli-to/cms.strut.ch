@@ -3,7 +3,7 @@
 <x-layout.partials.app.body>
 	<div class="min-h-screen flex flex-col">
 
-		<header class="bg-white min-h-100 sticky top-0 left-0 z-50">
+		<header class="bg-white min-h-100 sticky top-0 left-0 z-10">
 			<div class="w-full h-20"></div>
 			<div class="min-h-80 grid grid-cols-12 gap-x-20">
 
@@ -23,15 +23,20 @@
 					</div>
 				</div>
 
-				<div class="col-span-1"></div>
+				<div class="col-span-1">
+
+				</div>
 			</div>
 		</header>
 
-		<main class="flex-1 bg-snow flex items-center justify-center">
-			<div class="w-full max-w-400 px-20 py-80">
+		<div class="bg-snow grid grid-cols-12 gap-x-20 flex-1">
+			<sidebar class="col-span-2 bg-snow pl-20 border-r border-black">
+        &nbsp;
+      </sidebar>
+			<main class="col-span-10 bg-snow">
 				{{ $slot }}
-			</div>
-		</main>
+			</main>
+		</div>
 
 	</div>
 </x-layout.partials.app.body>
