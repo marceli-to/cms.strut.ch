@@ -2,12 +2,18 @@
 import { ref, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useBlogStore } from '../../stores/blog'
+import { useMediaStore } from '../../stores/media'
+import MediaUploader from '../../components/media/MediaUploader.vue'
+import MediaGrid from '../../components/media/MediaGrid.vue'
+import MediaEditModal from '../../components/media/MediaEditModal.vue'
 
 const route = useRoute()
 const router = useRouter()
 const store = useBlogStore()
+const mediaStore = useMediaStore()
 
 const isEdit = computed(() => !!route.params.id)
+const editingMedia = ref(null)
 
 const form = ref({
 	title: '',
@@ -16,21 +22,62 @@ const form = ref({
 })
 
 onMounted(async () => {
+	mediaStore.setItems([])
 	if (isEdit.value) {
 		await store.fetchPost(route.params.id)
 		if (store.current) {
 			form.value.title = store.current.title
 			form.value.content = store.current.content || ''
 			form.value.publish = store.current.publish
+			mediaStore.setItems(store.current.media || [])
 		}
 	}
 })
 
 async function handleSubmit() {
-	const success = await store.savePost(form.value, isEdit.value ? route.params.id : null)
+	const tempMedia = mediaStore.tempItems.map(item => ({
+		uuid: item.uuid,
+		file: item.file,
+		original_name: item.original_name,
+		mime_type: item.mime_type,
+		size: item.size,
+		width: item.width,
+		height: item.height,
+		alt: item.alt || null,
+		caption: item.caption || null,
+	}))
+
+	const success = await store.savePost(form.value, isEdit.value ? route.params.id : null, tempMedia)
 	if (success) {
 		router.push({ name: 'blog.index' })
 	}
+}
+
+function onUploaded(media) {
+	mediaStore.addItem(media)
+}
+
+function onEditMedia(media) {
+	editingMedia.value = media
+}
+
+async function onSaveMedia({ uuid, data }) {
+	const success = await mediaStore.updateItem(uuid, data)
+	if (success) {
+		editingMedia.value = null
+	}
+}
+
+async function onDeleteMedia(media) {
+	await mediaStore.deleteItem(media.uuid)
+}
+
+function onReorderMedia(items) {
+	mediaStore.reorder(items)
+}
+
+function onSetTeaser(media) {
+	mediaStore.setTeaser(media.uuid)
 }
 </script>
 
@@ -82,6 +129,20 @@ async function handleSubmit() {
 				</label>
 			</div>
 
+			<div class="mb-24">
+				<label class="block text-sm font-semibold text-black mb-8">Bilder</label>
+				<MediaGrid
+					v-if="mediaStore.items.length"
+					:items="mediaStore.items"
+					class="mb-12"
+					@edit="onEditMedia"
+					@delete="onDeleteMedia"
+					@reorder="onReorderMedia"
+					@teaser="onSetTeaser"
+				/>
+				<MediaUploader @uploaded="onUploaded" />
+			</div>
+
 			<div class="flex gap-12">
 				<button
 					type="submit"
@@ -98,5 +159,11 @@ async function handleSubmit() {
 				</button>
 			</div>
 		</form>
+
+		<MediaEditModal
+			:media="editingMedia"
+			@close="editingMedia = null"
+			@save="onSaveMedia"
+		/>
 	</div>
 </template>

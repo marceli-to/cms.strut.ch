@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Actions\Post\DeletePostAction;
-use App\Actions\Post\StorePostAction;
-use App\Actions\Post\UpdatePostAction;
+use App\Actions\Post\DeleteAction as DeletePostAction;
+use App\Actions\Post\StoreAction as StorePostAction;
+use App\Actions\Post\UpdateAction as UpdatePostAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\StorePostRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
@@ -20,28 +20,30 @@ class PostController extends Controller
 		return PostResource::collection($posts);
 	}
 
-	public function store(StorePostRequest $request, StorePostAction $action)
+	public function store(StorePostRequest $request)
 	{
-		$post = $action->execute($request->validated());
+		$post = (new StorePostAction)->execute($request->validated());
 
 		return new PostResource($post);
 	}
 
 	public function show(Post $post)
 	{
-		return new PostResource($post);
-	}
-
-	public function update(UpdatePostRequest $request, Post $post, UpdatePostAction $action)
-	{
-		$post = $action->execute($post, $request->validated());
+		$post->load('media');
 
 		return new PostResource($post);
 	}
 
-	public function destroy(Post $post, DeletePostAction $action)
+	public function update(UpdatePostRequest $request, Post $post)
 	{
-		$action->execute($post);
+		$post = (new UpdatePostAction)->execute($post, $request->validated());
+
+		return new PostResource($post);
+	}
+
+	public function destroy(Post $post)
+	{
+		(new DeletePostAction)->execute($post);
 
 		return response()->json(null, 204);
 	}

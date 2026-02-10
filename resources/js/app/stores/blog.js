@@ -30,13 +30,17 @@ export const useBlogStore = defineStore('blog', {
 			}
 		},
 
-		async savePost(form, id = null) {
+		async savePost(form, id = null, media = []) {
 			this.errors = {}
 			try {
+				const payload = { ...form }
+				if (media.length) {
+					payload.media = media
+				}
 				if (id) {
-					await blogApi.update(id, form)
+					await blogApi.update(id, payload)
 				} else {
-					await blogApi.store(form)
+					await blogApi.store(payload)
 				}
 				return true
 			} catch (error) {

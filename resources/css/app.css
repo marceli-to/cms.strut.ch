@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "./partials/fonts.css";
 @import "./partials/spacing.css";
+@import "./partials/uppy.css";
 
 @theme {
   /* Font family */

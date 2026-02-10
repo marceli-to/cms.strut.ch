@@ -4,39 +4,63 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Str;
 
 class Media extends Model
 {
-    protected $fillable = [
-        'file',
-        'alt',
-        'caption',
-        'width',
-        'height',
-        'is_teaser',
-        'sort_order',
-    ];
+	protected $fillable = [
+		'uuid',
+		'file',
+		'original_name',
+		'mime_type',
+		'size',
+		'alt',
+		'caption',
+		'width',
+		'height',
+		'is_teaser',
+		'sort_order',
+	];
 
-    protected $casts = [
-        'is_teaser' => 'boolean',
-    ];
+	protected $casts = [
+		'is_teaser' => 'boolean',
+		'size' => 'integer',
+		'width' => 'integer',
+		'height' => 'integer',
+	];
 
-    public function mediable(): MorphTo
-    {
-        return $this->morphTo();
-    }
+	protected static function boot()
+	{
+		parent::boot();
 
-    public function getOrientationAttribute(): string
-    {
-        if (!$this->width || !$this->height) {
-            return 'unknown';
-        }
-        if ($this->width > $this->height) {
-            return 'landscape';
-        }
-        if ($this->height > $this->width) {
-            return 'portrait';
-        }
-        return 'square';
-    }
+		static::creating(function ($media) {
+			if (empty($media->uuid)) {
+				$media->uuid = Str::uuid();
+			}
+		});
+	}
+
+	public function getRouteKeyName(): string
+	{
+		return 'uuid';
+	}
+
+	public function mediable(): MorphTo
+	{
+		return $this->morphTo();
+	}
+
+	public function getOrientationAttribute(): string
+	{
+		if (!$this->width || !$this->height) {
+			return 'unknown';
+		}
+		if ($this->width > $this->height) {
+			return 'landscape';
+		}
+		if ($this->height > $this->width) {
+			return 'portrait';
+		}
+		return 'square';
+	}
 }

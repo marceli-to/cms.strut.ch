@@ -4,7 +4,7 @@ namespace App\Actions\Post;
 
 use App\Models\Post;
 
-class DeletePostAction
+class DeleteAction
 {
 	public function execute(Post $post): void
 	{
