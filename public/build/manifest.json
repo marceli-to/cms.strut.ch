@@ -1,6 +1,6 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-DXp5zvJ5.css",
+    "file": "assets/app-C6pP8wIt.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -9,7 +9,7 @@
     ]
   },
   "resources/css/site.css": {
-    "file": "assets/site-BGMFEMMy.css",
+    "file": "assets/site-CUMMbAz8.css",
     "src": "resources/css/site.css",
     "isEntry": true,
     "name": "site",
@@ -22,7 +22,7 @@
     "src": "resources/fonts/Geist-Variable.woff2"
   },
   "resources/js/app/app.js": {
-    "file": "assets/app-CmtGDCc1.js",
+    "file": "assets/app-znmtZ7IQ.js",
     "name": "app",
     "src": "resources/js/app/app.js",
     "isEntry": true

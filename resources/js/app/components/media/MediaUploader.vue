@@ -1,9 +1,13 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import { PhUploadSimple } from '@phosphor-icons/vue'
+import { PhPlus, PhUploadSimple } from '@phosphor-icons/vue'
 import Uppy from '@uppy/core'
 import XHRUpload from '@uppy/xhr-upload'
 import German from '@uppy/locales/lib/de_DE'
+
+const props = defineProps({
+	compact: { type: Boolean, default: false },
+})
 
 const emit = defineEmits(['uploaded'])
 
@@ -74,31 +78,42 @@ function onFileSelect(e) {
 function addFiles(fileList) {
 	for (const file of fileList) {
 		try {
-			uppy.addFile({
-				name: file.name,
-				type: file.type,
-				data: file,
-			})
-		} catch (err) {
-			// duplicate or restricted
-		}
+			uppy.addFile({ name: file.name, type: file.type, data: file })
+		} catch (err) {}
 	}
 }
 </script>
 
 <template>
 	<div>
+		<!-- Compact: slim add bar -->
 		<div
-			class="border transition-colors duration-150 cursor-pointer"
-			:class="isDragging
-				? 'border-neutral-900 bg-neutral-100'
-				: 'border-neutral-300 hover:border-neutral-400 bg-white'"
+			v-if="compact"
+			class="border border-neutral-200 transition-colors duration-150 cursor-pointer hover:border-neutral-400 bg-white"
+			:class="isDragging ? '!border-neutral-900 !bg-neutral-50' : ''"
 			@click="fileInput?.click()"
 			@dragover.prevent="isDragging = true"
 			@dragleave.prevent="isDragging = false"
 			@drop.prevent="onDrop"
 		>
-			<div class="flex flex-col items-center justify-center py-40 px-24">
+			<div class="flex items-center justify-center gap-8 py-24">
+				<PhPlus :size="14" weight="bold" class="text-neutral-400" />
+				<span class="text-xs text-neutral-500">Bilder hinzufügen</span>
+				<span class="text-[10px] text-neutral-400 ml-4">JPG, PNG, WebP, GIF — max. 50 MB</span>
+			</div>
+		</div>
+
+		<!-- Full: drop zone -->
+		<div
+			v-else
+			class="border border-neutral-200 transition-colors duration-150 cursor-pointer hover:border-neutral-400 bg-white"
+			:class="isDragging ? '!border-neutral-900 !bg-neutral-50' : ''"
+			@click="fileInput?.click()"
+			@dragover.prevent="isDragging = true"
+			@dragleave.prevent="isDragging = false"
+			@drop.prevent="onDrop"
+		>
+			<div class="flex flex-col items-center justify-center py-[8rem] px-24">
 				<PhUploadSimple :size="24" weight="regular" class="text-neutral-400 mb-12" />
 				<p class="text-xs text-neutral-500">
 					<span class="text-neutral-900 underline decoration-neutral-300 underline-offset-4">Dateien auswählen</span>
@@ -108,13 +123,10 @@ function addFiles(fileList) {
 			</div>
 		</div>
 
-		<!-- Progress bar -->
-		<div v-if="uploading" class="mt-8">
+		<!-- Progress -->
+		<div v-if="uploading" class="mt-6">
 			<div class="h-2 bg-neutral-200 overflow-hidden">
-				<div
-					class="h-full bg-neutral-900 transition-all duration-300"
-					:style="{ width: progress + '%' }"
-				/>
+				<div class="h-full bg-neutral-900 transition-all duration-300" :style="{ width: progress + '%' }" />
 			</div>
 		</div>
 

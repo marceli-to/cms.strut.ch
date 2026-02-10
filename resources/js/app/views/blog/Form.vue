@@ -138,7 +138,7 @@ function onSetTeaser(media) {
 						@reorder="onReorderMedia"
 						@teaser="onSetTeaser"
 					/>
-					<MediaUploader @uploaded="onUploaded" />
+					<MediaUploader :compact="mediaStore.items.length > 0" @uploaded="onUploaded" />
 				</div>
 			</FormGroup>
 

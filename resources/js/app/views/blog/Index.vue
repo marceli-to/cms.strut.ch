@@ -3,18 +3,26 @@ import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useBlogStore } from '../../stores/blog'
 import { useToast } from '../../composables/useToast'
+import { useConfirm } from '../../composables/useConfirm'
 import FormButton from '../../components/ui/form/FormButton.vue'
 
 const router = useRouter()
 const store = useBlogStore()
 const toast = useToast()
+const { confirm } = useConfirm()
 
 onMounted(() => {
 	store.fetchPosts()
 })
 
 async function handleDelete(post) {
-	if (!confirm(`"${post.title}" löschen?`)) return
+	const ok = await confirm({
+		title: 'Beitrag löschen',
+		message: `"${post.title}" wirklich löschen? Dies kann nicht rückgängig gemacht werden.`,
+		confirmLabel: 'Löschen',
+		destructive: true,
+	})
+	if (!ok) return
 	await store.deletePost(post.id)
 	toast.success('Beitrag gelöscht')
 }
