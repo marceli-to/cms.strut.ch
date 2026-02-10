@@ -1,7 +1,7 @@
 <script setup>
 import AppHeader from '@/components/layout/AppHeader.vue'
 import AppSidebar from '@/components/layout/AppSidebar.vue'
-import ToastContainer from '@/components/ui/ToastContainer.vue'
+import ToastContainer from '@/components/ui/toast/Container.vue'
 </script>
 
 <template>

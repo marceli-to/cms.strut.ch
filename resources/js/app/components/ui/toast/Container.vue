@@ -1,6 +1,6 @@
 <script setup>
 import { useToast } from '@/composables/useToast'
-import ToastMessage from '@/components/ui/ToastMessage.vue'
+import ToastMessage from '@/components/ui/toast/Message.vue'
 
 const { current, dismiss } = useToast()
 </script>
