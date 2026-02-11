@@ -4,7 +4,7 @@ A lightweight, custom-built CMS powered by Laravel 11, Vue 3, and Tailwind CSS.
 
 ## Stack
 
-- **Backend:** Laravel 11, PHP 8.x
+- **Backend:** Laravel 12, PHP 8.x
 - **Frontend:** Vue 3 (SPA), Vue Router, Pinia
 - **Styling:** Tailwind CSS
 - **Icons:** Phosphor Icons
