@@ -1,6 +1,7 @@
 import api from './axios'
 
 export default {
+	index: () => api.get('/media'),
 	upload: (data) => api.post('/media/upload', data, {
 		headers: { 'Content-Type': 'multipart/form-data' },
 	}),

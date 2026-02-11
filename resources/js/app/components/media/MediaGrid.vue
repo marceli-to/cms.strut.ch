@@ -36,7 +36,7 @@ const dragItems = computed({
 				<div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex items-center justify-center gap-6">
 					<button
 						type="button"
-						class="size-28 flex items-center justify-center bg-white text-neutral-900 hover:bg-neutral-100 transition-colors"
+						class="size-28 flex items-center justify-center bg-white text-neutral-900 hover:bg-neutral-100 transition-colors cursor-pointer"
 						title="Bearbeiten"
 						@click.stop="emit('edit', element)"
 					>
@@ -44,7 +44,7 @@ const dragItems = computed({
 					</button>
 					<button
 						type="button"
-						class="size-28 flex items-center justify-center bg-white text-neutral-900 hover:bg-neutral-100 transition-colors"
+						class="size-28 flex items-center justify-center bg-white text-neutral-900 hover:bg-neutral-100 transition-colors cursor-pointer"
 						title="Als Teaser setzen"
 						@click.stop="emit('teaser', element)"
 					>
@@ -52,7 +52,7 @@ const dragItems = computed({
 					</button>
 					<button
 						type="button"
-						class="size-28 flex items-center justify-center bg-white text-red-500 hover:bg-red-50 transition-colors"
+						class="size-28 flex items-center justify-center bg-white text-red-500 hover:bg-red-50 transition-colors cursor-pointer"
 						title="Löschen"
 						@click.stop="emit('delete', element)"
 					>

@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue'
-import { PhX as Cross } from '@phosphor-icons/vue'
+import { PhX } from '@phosphor-icons/vue'
 
 const props = defineProps({
 	media: { type: Object, default: null },
@@ -13,81 +13,135 @@ const form = ref({
 	caption: '',
 })
 
+const visible = ref(false)
+
 watch(() => props.media, (val) => {
 	if (val) {
 		form.value.alt = val.alt || ''
 		form.value.caption = val.caption || ''
+		// Trigger slide-in on next tick
+		requestAnimationFrame(() => {
+			visible.value = true
+		})
+	} else {
+		visible.value = false
 	}
 }, { immediate: true })
+
+function close() {
+	visible.value = false
+	setTimeout(() => emit('close'), 200)
+}
 
 function handleSave() {
 	emit('save', {
 		uuid: props.media.uuid,
 		data: { ...form.value },
 	})
+	visible.value = false
+	setTimeout(() => {}, 200)
 }
 </script>
 
 <template>
-	<div v-if="media" class="fixed inset-0 z-50 flex items-center justify-center">
-		<div class="absolute inset-0 bg-black/50" @click="emit('close')"></div>
-		<div class="relative bg-white w-full max-w-400 p-20">
-			<button
-				type="button"
-				class="absolute top-12 right-12 w-20 h-20 flex items-center justify-center text-black"
-				@click="emit('close')"
-			>
-				<Cross class="w-10 h-10" />
-			</button>
-
-			<h3 class="text-sm font-semibold text-black mb-16">Bild bearbeiten</h3>
-
-			<div class="flex gap-16 mb-16">
-				<img
-					:src="media.thumbnail_url"
-					:alt="media.alt || ''"
-					class="w-80 h-80 object-cover border border-silver flex-none"
+	<Teleport to="body">
+		<div v-if="media" class="fixed inset-0 z-50">
+			<!-- Backdrop -->
+			<Transition name="fade">
+				<div
+					v-if="visible"
+					class="absolute inset-0 bg-black/40"
+					@click="close"
 				/>
-				<div class="text-xs text-gray leading-relaxed">
-					<div>{{ media.original_name }}</div>
-					<div>{{ media.width }} &times; {{ media.height }} px</div>
+			</Transition>
+
+			<!-- Drawer -->
+			<div
+				class="absolute top-0 right-0 bottom-0 w-full max-w-[420px] bg-white shadow-xl transition-transform duration-200 ease-out flex flex-col"
+				:class="visible ? 'translate-x-0' : 'translate-x-full'"
+			>
+				<!-- Header -->
+				<div class="flex items-center justify-between px-24 py-20 border-b border-neutral-200">
+					<h3 class="text-sm font-semibold text-neutral-900">Bild bearbeiten</h3>
+					<button
+						type="button"
+						class="size-28 flex items-center justify-center text-neutral-400 hover:text-neutral-900 transition-colors"
+						@click="close"
+					>
+						<PhX :size="16" weight="bold" />
+					</button>
+				</div>
+
+				<!-- Content -->
+				<div class="flex-1 overflow-y-auto">
+					<!-- Image preview -->
+					<div class="bg-neutral-50 border-b border-neutral-200">
+						<img
+							:src="media.preview_url"
+							:alt="media.alt || ''"
+							class="w-full max-h-[320px] object-contain"
+						/>
+					</div>
+
+					<!-- File info -->
+					<div class="px-24 py-16 border-b border-neutral-100 text-xs text-neutral-400 space-y-2">
+						<div class="text-neutral-900 font-medium">{{ media.original_name }}</div>
+						<div>{{ media.width }} &times; {{ media.height }} px · {{ media.mime_type }}</div>
+					</div>
+
+					<!-- Fields -->
+					<div class="px-24 py-20 space-y-16">
+						<div>
+							<label class="block text-xs font-medium text-neutral-500 uppercase tracking-[0.1em] mb-6">Alt-Text</label>
+							<input
+								v-model="form.alt"
+								type="text"
+								class="w-full border border-neutral-200 px-12 py-10 text-sm text-neutral-900 focus:outline-none focus:border-neutral-900 transition-colors"
+								placeholder="Bildbeschreibung für Screenreader..."
+							/>
+						</div>
+
+						<div>
+							<label class="block text-xs font-medium text-neutral-500 uppercase tracking-[0.1em] mb-6">Bildunterschrift</label>
+							<textarea
+								v-model="form.caption"
+								rows="3"
+								class="w-full border border-neutral-200 px-12 py-10 text-sm text-neutral-900 focus:outline-none focus:border-neutral-900 transition-colors resize-none"
+								placeholder="Optionale Bildunterschrift..."
+							/>
+						</div>
+					</div>
+				</div>
+
+				<!-- Footer -->
+				<div class="px-24 py-16 border-t border-neutral-200 flex gap-12">
+					<button
+						type="button"
+						class="flex-1 bg-neutral-900 text-white text-sm font-medium py-10 hover:bg-neutral-800 active:bg-neutral-950 transition-colors"
+						@click="handleSave"
+					>
+						Speichern
+					</button>
+					<button
+						type="button"
+						class="px-16 py-10 border border-neutral-200 text-sm text-neutral-500 hover:text-neutral-900 hover:border-neutral-400 transition-colors"
+						@click="close"
+					>
+						Abbrechen
+					</button>
 				</div>
 			</div>
-
-			<div class="mb-12">
-				<label class="block text-sm font-semibold text-black mb-4">Alt-Text</label>
-				<input
-					v-model="form.alt"
-					type="text"
-					class="w-full border border-silver px-8 py-8 text-sm text-black focus:outline-none focus:border-black"
-				/>
-			</div>
-
-			<div class="mb-16">
-				<label class="block text-sm font-semibold text-black mb-4">Bildunterschrift</label>
-				<input
-					v-model="form.caption"
-					type="text"
-					class="w-full border border-silver px-8 py-8 text-sm text-black focus:outline-none focus:border-black"
-				/>
-			</div>
-
-			<div class="flex gap-12">
-				<button
-					type="button"
-					class="bg-black text-white text-sm font-semibold px-16 py-8"
-					@click="handleSave"
-				>
-					Speichern
-				</button>
-				<button
-					type="button"
-					class="border border-black text-black text-sm font-semibold px-16 py-8"
-					@click="emit('close')"
-				>
-					Abbrechen
-				</button>
-			</div>
 		</div>
-	</div>
+	</Teleport>
 </template>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity 0.2s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+	opacity: 0;
+}
+</style>

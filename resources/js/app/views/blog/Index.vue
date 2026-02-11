@@ -5,6 +5,7 @@ import { useBlogStore } from '../../stores/blog'
 import { useToast } from '../../composables/useToast'
 import { useConfirm } from '../../composables/useConfirm'
 import FormButton from '../../components/ui/form/FormButton.vue'
+import PageHeader from '../../components/layout/PageHeader.vue'
 
 const router = useRouter()
 const store = useBlogStore()
@@ -30,12 +31,11 @@ async function handleDelete(post) {
 
 <template>
 	<div>
-		<div class="flex items-center justify-between mb-36">
-			<h1 class="text-lg font-medium text-neutral-900">Blog</h1>
+		<PageHeader title="Blog">
 			<FormButton @click="router.push({ name: 'blog.create' })">
 				Neuer Beitrag
 			</FormButton>
-		</div>
+		</PageHeader>
 
 		<div v-if="store.loading" class="text-sm text-neutral-400">
 			Laden...

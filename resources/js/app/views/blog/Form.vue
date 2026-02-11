@@ -8,6 +8,7 @@ import MediaUploader from '../../components/media/MediaUploader.vue'
 import MediaGrid from '../../components/media/MediaGrid.vue'
 import MediaEditModal from '../../components/media/MediaEditModal.vue'
 import Editor from '../../components/ui/editor/Editor.vue'
+import PageHeader from '../../components/layout/PageHeader.vue'
 import FormLabel from '../../components/ui/form/FormLabel.vue'
 import FormInput from '../../components/ui/form/FormInput.vue'
 import FormCheckbox from '../../components/ui/form/FormCheckbox.vue'
@@ -94,13 +95,16 @@ function onSetTeaser(media) {
 </script>
 
 <template>
-	<div class="max-w-4xl">
+	<div>
 
-		<div class="flex items-center justify-between mb-36">
-			<h1 class="text-lg font-medium text-neutral-900">
-				{{ isEdit ? 'Beitrag bearbeiten' : 'Neuer Beitrag' }}
-			</h1>
-		</div>
+		<PageHeader :title="isEdit ? 'Beitrag bearbeiten' : 'Neuer Beitrag'">
+			<FormButton variant="secondary" @click="router.push({ name: 'blog.index' })">
+				Abbrechen
+			</FormButton>
+			<FormButton @click="handleSubmit">
+				{{ isEdit ? 'Aktualisieren' : 'Erstellen' }}
+			</FormButton>
+		</PageHeader>
 
 		<div v-if="store.loading" class="text-sm text-neutral-400">
 			Laden...
@@ -141,15 +145,6 @@ function onSetTeaser(media) {
 					<MediaUploader :compact="mediaStore.items.length > 0" @uploaded="onUploaded" />
 				</div>
 			</FormGroup>
-
-			<div class="flex gap-12 pt-16">
-				<FormButton type="submit">
-					{{ isEdit ? 'Aktualisieren' : 'Erstellen' }}
-				</FormButton>
-				<FormButton variant="secondary" @click="router.push({ name: 'blog.index' })">
-					Abbrechen
-				</FormButton>
-			</div>
 
 		</form>
 

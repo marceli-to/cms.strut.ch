@@ -16,6 +16,13 @@ use App\Models\Media;
 
 class MediaController extends Controller
 {
+	public function index()
+	{
+		$media = Media::orderByDesc('created_at')->get();
+
+		return MediaResource::collection($media);
+	}
+
 	public function upload(UploadMediaRequest $request)
 	{
 		$data = (new UploadMediaAction)->execute($request->file('file'));
@@ -32,6 +39,12 @@ class MediaController extends Controller
 
 	public function destroy(Media $media)
 	{
+		if ($media->mediable_id !== null) {
+			return response()->json([
+				'message' => 'Dieses Bild wird verwendet und kann nicht gelöscht werden.',
+			], 422);
+		}
+
 		(new DeleteMediaAction)->execute($media);
 
 		return response()->json(null, 204);

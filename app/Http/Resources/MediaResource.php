@@ -23,6 +23,7 @@ class MediaResource extends JsonResource
 			'orientation' => $this->orientation,
 			'is_teaser' => $this->is_teaser,
 			'sort_order' => $this->sort_order,
+			'in_use' => $this->mediable_id !== null,
 			'thumbnail_url' => '/img/uploads/' . $this->file . '?w=200&h=200&fit=crop',
 			'preview_url' => '/img/uploads/' . $this->file . '?w=800&fit=max',
 		];

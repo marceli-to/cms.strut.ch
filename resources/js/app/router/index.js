@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/views/Home.vue'
 import BlogIndex from '@/views/blog/Index.vue'
 import BlogForm from '@/views/blog/Form.vue'
+import MediaIndex from '@/views/media/Index.vue'
 
 const routes = [
   {
@@ -22,6 +23,12 @@ const routes = [
     name: 'blog.create',
     component: BlogForm,
     meta: { title: 'Neuer Beitrag' },
+  },
+  {
+    path: '/dashboard/media',
+    name: 'media.index',
+    component: MediaIndex,
+    meta: { title: 'Media' },
   },
   {
     path: '/dashboard/blog/:id/edit',

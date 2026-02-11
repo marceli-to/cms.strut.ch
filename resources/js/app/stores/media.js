@@ -72,11 +72,12 @@ export const useMediaStore = defineStore('media', {
 
 		async setTeaser(uuid) {
 			const item = this.items.find(i => i.uuid === uuid)
+			const wasTeaser = item?.is_teaser
 
 			if (item?._temp) {
 				this.items = this.items.map(i => ({
 					...i,
-					is_teaser: i.uuid === uuid,
+					is_teaser: wasTeaser ? false : i.uuid === uuid,
 				}))
 				return
 			}
@@ -84,7 +85,7 @@ export const useMediaStore = defineStore('media', {
 			await mediaApi.teaser(uuid)
 			this.items = this.items.map(i => ({
 				...i,
-				is_teaser: i.uuid === uuid,
+				is_teaser: wasTeaser ? false : i.uuid === uuid,
 			}))
 		},
 	},
