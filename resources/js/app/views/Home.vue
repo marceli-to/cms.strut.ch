@@ -8,8 +8,8 @@ import {
 	PhArrowRight,
 	PhCircle,
 } from '@phosphor-icons/vue'
-import api from '../api/axios'
-import PageHeader from '../components/layout/PageHeader.vue'
+import api from '@/api/axios'
+import PageHeader from '@/components/layout/PageHeader.vue'
 
 const router = useRouter()
 const data = ref(null)
@@ -57,42 +57,42 @@ function timeAgo(dateStr) {
 			<div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
 				<div class="bg-white border border-neutral-200 p-20 group hover:border-neutral-400 transition-colors">
 					<div class="flex items-center justify-between mb-12">
-						<span class="text-[10px] font-medium text-neutral-400 uppercase tracking-[0.15em]">Projekte</span>
+						<span class="text-xxs font-medium text-neutral-400 uppercase tracking-[0.15em]">Projekte</span>
 						<PhBuildings :size="16" class="text-neutral-300" />
 					</div>
 					<div class="text-2xl font-light text-neutral-900 tracking-tight">{{ data.stats.projects_total }}</div>
-					<div class="text-[10px] text-neutral-400 mt-4">
+					<div class="text-xxs text-neutral-400 mt-4">
 						{{ data.stats.projects_published }} publiziert · {{ data.stats.projects_draft }} Entwürfe
 					</div>
 				</div>
 
 				<div class="bg-white border border-neutral-200 p-20 group hover:border-neutral-400 transition-colors">
 					<div class="flex items-center justify-between mb-12">
-						<span class="text-[10px] font-medium text-neutral-400 uppercase tracking-[0.15em]">Publiziert</span>
+						<span class="text-xxs font-medium text-neutral-400 uppercase tracking-[0.15em]">Publiziert</span>
 						<PhBuildings :size="16" class="text-neutral-300" />
 					</div>
 					<div class="text-2xl font-light text-emerald-600 tracking-tight">{{ data.stats.projects_published }}</div>
-					<div class="text-[10px] text-neutral-400 mt-4">
+					<div class="text-xxs text-neutral-400 mt-4">
 						{{ data.stats.projects_total > 0 ? Math.round(data.stats.projects_published / data.stats.projects_total * 100) : 0 }}% aller Projekte
 					</div>
 				</div>
 
 				<div class="bg-white border border-neutral-200 p-20 group hover:border-neutral-400 transition-colors">
 					<div class="flex items-center justify-between mb-12">
-						<span class="text-[10px] font-medium text-neutral-400 uppercase tracking-[0.15em]">Medien</span>
+						<span class="text-xxs font-medium text-neutral-400 uppercase tracking-[0.15em]">Medien</span>
 						<PhImage :size="16" class="text-neutral-300" />
 					</div>
 					<div class="text-2xl font-light text-neutral-900 tracking-tight">{{ data.stats.media_total }}</div>
-					<div class="text-[10px] text-neutral-400 mt-4">Bilder in der Bibliothek</div>
+					<div class="text-xxs text-neutral-400 mt-4">Bilder in der Bibliothek</div>
 				</div>
 
 				<div class="bg-white border border-neutral-200 p-20 group hover:border-neutral-400 transition-colors">
 					<div class="flex items-center justify-between mb-12">
-						<span class="text-[10px] font-medium text-neutral-400 uppercase tracking-[0.15em]">Speicher</span>
+						<span class="text-xxs font-medium text-neutral-400 uppercase tracking-[0.15em]">Speicher</span>
 						<PhCloudArrowUp :size="16" class="text-neutral-300" />
 					</div>
 					<div class="text-2xl font-light text-neutral-900 tracking-tight">{{ formatSize(data.stats.media_size) }}</div>
-					<div class="text-[10px] text-neutral-400 mt-4">Gesamtgrösse aller Medien</div>
+					<div class="text-xxs text-neutral-400 mt-4">Gesamtgrösse aller Medien</div>
 				</div>
 			</div>
 
@@ -102,9 +102,9 @@ function timeAgo(dateStr) {
 				<!-- Recent Projects -->
 				<div class="bg-white border border-neutral-200">
 					<div class="flex items-center justify-between px-20 py-16 border-b border-neutral-100">
-						<h2 class="text-xs font-medium text-neutral-900 uppercase tracking-[0.1em]">Letzte Projekte</h2>
+						<h2 class="text-xs font-medium text-neutral-900 uppercase">Letzte Projekte</h2>
 						<button
-							class="text-[10px] text-neutral-400 hover:text-neutral-900 flex items-center gap-4 transition-colors cursor-pointer"
+							class="text-xxs text-neutral-400 hover:text-neutral-900 flex items-center gap-4 transition-colors cursor-pointer"
 							@click="router.push({ name: 'projects.index' })"
 						>
 							Alle anzeigen
@@ -132,7 +132,7 @@ function timeAgo(dateStr) {
 							<div class="flex-1 min-w-0">
 								<div class="text-sm text-neutral-900 truncate">{{ project.title }}</div>
 							</div>
-							<div class="text-[10px] text-neutral-400 whitespace-nowrap">{{ timeAgo(project.updated_at) }}</div>
+							<div class="text-xxs text-neutral-400 whitespace-nowrap">{{ timeAgo(project.updated_at) }}</div>
 						</div>
 					</div>
 				</div>
@@ -140,9 +140,9 @@ function timeAgo(dateStr) {
 				<!-- Recent Media -->
 				<div class="bg-white border border-neutral-200">
 					<div class="flex items-center justify-between px-20 py-16 border-b border-neutral-100">
-						<h2 class="text-xs font-medium text-neutral-900 uppercase tracking-[0.1em]">Letzte Uploads</h2>
+						<h2 class="text-xs font-medium text-neutral-900 uppercase">Letzte Uploads</h2>
 						<button
-							class="text-[10px] text-neutral-400 hover:text-neutral-900 flex items-center gap-4 transition-colors cursor-pointer"
+							class="text-xxs text-neutral-400 hover:text-neutral-900 flex items-center gap-4 transition-colors cursor-pointer"
 							@click="router.push({ name: 'media.index' })"
 						>
 							Alle anzeigen

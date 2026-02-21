@@ -1,24 +1,25 @@
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useProjectStore } from '../../stores/projects'
-import { useMediaStore } from '../../stores/media'
-import { useToast } from '../../composables/useToast'
-import MediaUploader from '../../components/media/MediaUploader.vue'
-import MediaGrid from '../../components/media/MediaGrid.vue'
-import MediaEditModal from '../../components/media/MediaEditModal.vue'
-import Editor from '../../components/ui/editor/Editor.vue'
-import FormWithSidebar from '../../components/layout/FormWithSidebar.vue'
-import PageHeader from '../../components/layout/PageHeader.vue'
-import FormLabel from '../../components/ui/form/FormLabel.vue'
-import FormInput from '../../components/ui/form/FormInput.vue'
-import FormSelect from '../../components/ui/form/FormSelect.vue'
-import FormCheckbox from '../../components/ui/form/FormCheckbox.vue'
-import FormButton from '../../components/ui/form/FormButton.vue'
-import FormError from '../../components/ui/form/FormError.vue'
-import FormGroup from '../../components/ui/form/FormGroup.vue'
-import Tabs from '../../components/ui/tabs/Tabs.vue'
-import Tab from '../../components/ui/tabs/Tab.vue'
+import { useProjectStore } from '@/stores/projects'
+import { useMediaStore } from '@/stores/media'
+import { useToast } from '@/composables/useToast'
+import MediaUploader from '@/components/media/MediaUploader.vue'
+import MediaGrid from '@/components/media/MediaGrid.vue'
+import MediaEdit from '@/components/media/MediaEdit.vue'
+import Editor from '@/components/ui/editor/Editor.vue'
+import FormWithSidebar from '@/components/layout/FormWithSidebar.vue'
+import PageHeader from '@/components/layout/PageHeader.vue'
+import FormLabel from '@/components/ui/form/FormLabel.vue'
+import FormInput from '@/components/ui/form/FormInput.vue'
+import FormSelect from '@/components/ui/form/FormSelect.vue'
+import FormCheckbox from '@/components/ui/form/FormCheckbox.vue'
+import FormButton from '@/components/ui/form/FormButton.vue'
+import FormError from '@/components/ui/form/FormError.vue'
+import FormGroup from '@/components/ui/form/FormGroup.vue'
+import Tabs from '@/components/ui/tabs/Tabs.vue'
+import Tab from '@/components/ui/tabs/Tab.vue'
+import GridBuilder from '@/components/grid/GridBuilder.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -31,11 +32,17 @@ const editingMedia = ref(null)
 const mounted = ref(false)
 const activeTab = ref('data')
 
-const formTabs = [
-	{ key: 'data', label: 'Daten' },
-	{ key: 'images', label: 'Bilder' },
-	{ key: 'videos', label: 'Videos' },
-]
+const formTabs = computed(() => {
+	const tabs = [
+		{ key: 'data', label: 'Daten' },
+		{ key: 'images', label: 'Bilder' },
+		{ key: 'videos', label: 'Videos' },
+	]
+	if (isEdit.value) {
+		tabs.push({ key: 'layout', label: 'Layout' })
+	}
+	return tabs
+})
 
 const imageItems = computed(() => mediaStore.items.filter(i => i.type === 'image'))
 const videoItems = computed(() => mediaStore.items.filter(i => i.type === 'video'))
@@ -295,10 +302,14 @@ function onSetTeaser(media) { mediaStore.setTeaser(media.uuid) }
 						@teaser="onSetTeaser"
 					/>
 				</Tab>
+
+				<Tab v-if="isEdit" name="layout">
+					<GridBuilder :project-id="route.params.id" />
+				</Tab>
 			</Tabs>
 		</form>
 
-		<MediaEditModal
+		<MediaEdit
 			:media="editingMedia"
 			@close="editingMedia = null"
 			@save="onSaveMedia"

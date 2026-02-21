@@ -1,6 +1,6 @@
 <script setup>
 import AppDialog from './AppDialog.vue'
-import FormButton from '../form/FormButton.vue'
+import FormButton from '@/components/ui/form/FormButton.vue'
 
 const props = defineProps({
 	open: { type: Boolean, default: false },

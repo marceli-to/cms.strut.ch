@@ -1,6 +1,10 @@
 <script setup>
 import { ref, watch } from 'vue'
 import Drawer from '@/components/ui/drawer/Drawer.vue'
+import FormLabel from '@/components/ui/form/FormLabel.vue'
+import FormInput from '@/components/ui/form/FormInput.vue'
+import FormGroup from '@/components/ui/form/FormGroup.vue'
+import FormTextarea from '@/components/ui/form/FormTextarea.vue'
 
 const props = defineProps({
 	media: { type: Object, default: null },
@@ -73,26 +77,16 @@ function handleSave() {
 		</div>
 
 		<!-- Fields -->
-		<div class="px-24 py-20 space-y-16">
-			<div>
-				<label class="block text-xs font-medium text-neutral-500 uppercase mb-6">Alt-Text</label>
-				<input
-					v-model="form.alt"
-					type="text"
-					class="w-full border border-neutral-200 px-12 py-10 text-sm text-neutral-900 focus:outline-none focus:border-neutral-900 transition-colors"
-					placeholder="Bildbeschreibung für Screenreader..."
-				/>
-			</div>
+		<div class="px-24 py-20">
+			<FormGroup>
+				<FormLabel for="alt">Alt-Text</FormLabel>
+				<FormInput id="alt" v-model="form.alt" placeholder="Bildbeschreibung für Screenreader..." />
+			</FormGroup>
 
-			<div>
-				<label class="block text-xs font-medium text-neutral-500 uppercase mb-6">Bildunterschrift</label>
-				<textarea
-					v-model="form.caption"
-					rows="3"
-					class="w-full border border-neutral-200 px-12 py-10 text-sm text-neutral-900 focus:outline-none focus:border-neutral-900 transition-colors resize-none"
-					placeholder="Optionale Bildunterschrift..."
-				/>
-			</div>
+			<FormGroup>
+				<FormLabel for="caption">Bildunterschrift</FormLabel>
+				<FormTextarea id="caption" v-model="form.caption" placeholder="Optionale Bildunterschrift..." />
+			</FormGroup>
 		</div>
 
 		<!-- Footer -->

@@ -1,12 +1,12 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import { useToast } from '../../composables/useToast'
-import { useConfirm } from '../../composables/useConfirm'
-import mediaApi from '../../api/media'
-import MediaUploader from '../../components/media/MediaUploader.vue'
-import MediaEditModal from '../../components/media/MediaEditModal.vue'
+import { useToast } from '@/composables/useToast'
+import { useConfirm } from '@/composables/useConfirm'
+import mediaApi from '@/api/media'
+import MediaUploader from '@/components/media/MediaUploader.vue'
+import MediaEdit from '@/components/media/MediaEdit.vue'
 import { PhTrash, PhPencil, PhMagnifyingGlass } from '@phosphor-icons/vue'
-import PageHeader from '../../components/layout/PageHeader.vue'
+import PageHeader from '@/components/layout/PageHeader.vue'
 
 const toast = useToast()
 const { confirm } = useConfirm()
@@ -141,10 +141,10 @@ function formatSize(bytes) {
 				<!-- Info -->
 				<div class="px-10 py-8 border-t border-neutral-100">
 					<div class="text-xs text-neutral-900 truncate">{{ media.original_name }}</div>
-					<div class="text-[10px] text-neutral-400 mt-2">
+					<div class="text-xxs text-neutral-400 mt-2">
 						{{ media.width }}&times;{{ media.height }} · {{ formatSize(media.size) }}
 					</div>
-					<div v-if="media.alt" class="text-[10px] text-neutral-500 truncate mt-2">
+					<div v-if="media.alt" class="text-xxs text-neutral-500 truncate mt-2">
 						Alt: {{ media.alt }}
 					</div>
 				</div>
@@ -186,7 +186,7 @@ function formatSize(bytes) {
 		</div>
 
 		<!-- Edit Modal -->
-		<MediaEditModal
+		<MediaEdit
 			:media="editingMedia"
 			@close="editingMedia = null"
 			@save="handleSave"

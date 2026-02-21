@@ -1,13 +1,13 @@
 <script setup>
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useProjectStore } from '../../stores/projects'
-import { useToast } from '../../composables/useToast'
-import { useConfirm } from '../../composables/useConfirm'
+import { useProjectStore } from '@/stores/projects'
+import { useToast } from '@/composables/useToast'
+import { useConfirm } from '@/composables/useConfirm'
 import { PhPencil, PhTrash } from '@phosphor-icons/vue'
-import FormButton from '../../components/ui/form/FormButton.vue'
-import PageHeader from '../../components/layout/PageHeader.vue'
-import DataTable from '../../components/ui/table/DataTable.vue'
+import FormButton from '@/components/ui/form/FormButton.vue'
+import PageHeader from '@/components/layout/PageHeader.vue'
+import DataTable from '@/components/ui/table/DataTable.vue'
 
 const router = useRouter()
 const store = useProjectStore()
