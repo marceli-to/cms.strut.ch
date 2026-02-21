@@ -75,7 +75,7 @@ function onClosePicker() {
 	<div>
 		<!-- Header with layout selector and view toggle -->
 		<div class="">
-			<p class="text-xxs font-medium uppercase tracking-[0.08em] text-neutral-500 mb-6">
+			<p class="text-xxs font-medium uppercase tracking-[0.08em] text-neutral-500 mb-12">
 				Zeile hinzufügen
 			</p>
 			<GridLayoutSelector

@@ -17,7 +17,15 @@
       "Bash(npm install:*)",
       "Bash(npm run build:*)",
       "Bash(composer require:*)",
-      "Bash(php:*)"
+      "Bash(php:*)",
+      "Bash(grep -o \"text-xs\\\\|text-sm\\\\|text-base\\\\|text-lg\\\\|text-xl\\\\|text-2xl\\\\|text-3xl\" /Users/marceli.to/Jamon.digital/Webroot/cms.strut.ch/public/build/assets/app-*.css | sort | uniq -c | sort -rn)",
+      "Bash(grep -A 2 \"\\\\.text-xs\\\\|\\\\.text-sm\\\\|\\\\.text-base\\\\|\\\\.text-lg\\\\|\\\\.text-xl\\\\|\\\\.text-2xl\\\\|\\\\.text-3xl\" /Users/marceli.to/Jamon.digital/Webroot/cms.strut.ch/public/build/assets/app-*.css | grep -E \"font-size\" | head -20)",
+      "Bash(grep -r \"ProjectGridLayout\\\\|project_grid_layouts\" /Users/marceli.to/Jamon.digital/Webroot/strut.ch --include=\"*.php\" 2>/dev/null | head -30)",
+      "Bash(git push)",
+      "Bash(npx vite build 2>&1 | tail -20)",
+      "Bash(xxd /Users/marceli.to/Jamon.digital/Webroot/cms.strut.ch/resources/js/app/views/projects/Form.vue | sed -n '700,720p')",
+      "Bash(grep -r \"1fr_stacked\\\\|1fr_lg\\\\|1fr_sm\" /Users/marceli.to/Jamon.digital/Webroot/strut.ch/app --include=\"*.php\" 2>/dev/null | head -20)",
+      "Bash(grep -r \"grid-layout\\\\|grid-2fr\\\\|grid-1fr\" /Users/marceli.to/Jamon.digital/Webroot/cms.strut.ch/resources --include=\"*.vue\" --include=\"*.scss\" --include=\"*.css\" 2>/dev/null | head -20)"
     ]
   }
 }

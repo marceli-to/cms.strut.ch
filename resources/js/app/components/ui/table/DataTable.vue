@@ -12,7 +12,7 @@ defineProps({
 				<th
 					v-for="col in columns"
 					:key="col.key"
-					class="py-12 font-medium text-neutral-500 text-xs uppercase tracking-[0.1em]"
+					class="py-12 font-medium text-neutral-500 text-xs uppercase"
 					:class="[
 						col.class || '',
 						col.align === 'right' ? 'text-right' : '',
