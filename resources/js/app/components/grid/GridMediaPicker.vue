@@ -17,18 +17,18 @@ function selectMedia(media) {
 <template>
 	<Drawer :open="visible" title="Bild auswählen" size="md" @close="emit('close')">
 		<div class="p-24">
-			<div v-if="media.length" class="grid grid-cols-3 gap-8">
+			<div v-if="media.length" class="grid grid-cols-4 gap-8">
 				<button
 					v-for="item in media"
 					:key="item.id"
 					type="button"
-					class="border border-neutral-200 overflow-hidden p-4 bg-white hover:border-neutral-900 transition-colors cursor-pointer"
+					class="aspect-square border border-neutral-200 overflow-hidden bg-white hover:border-neutral-900 transition-colors cursor-pointer flex items-center justify-center p-8"
 					@click="selectMedia(item)"
 				>
 					<img
-						:src="item.thumbnail_url"
+						:src="item.preview_url"
 						:alt="item.alt || ''"
-						class="block w-full aspect-square object-cover"
+						class="block max-w-full max-h-full object-contain"
 					/>
 				</button>
 			</div>

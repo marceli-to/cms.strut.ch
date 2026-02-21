@@ -12,13 +12,13 @@ const hasMedia = () => props.item?.media
 </script>
 
 <template>
-	<div class="relative group border border-neutral-200 bg-neutral-50 overflow-hidden">
+	<div class="relative group border border-dashed border-neutral-300 bg-neutral-50 overflow-hidden">
 		<!-- Filled slot -->
 		<template v-if="hasMedia()">
 			<img
-				:src="item.media.thumbnail_url"
+				:src="item.media.preview_url"
 				:alt="item.media.alt || ''"
-				class="block w-full h-full object-cover"
+				class="block w-full h-auto object-cover"
 			/>
 			<!-- Remove overlay -->
 			<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex items-center justify-center">

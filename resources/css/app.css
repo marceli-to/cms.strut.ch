@@ -44,7 +44,7 @@
 /* Grid layout builder */
 .grid-layout {
   display: grid;
-  gap: 4px;
+  gap: 16px;
 }
 
 .grid-2fr {
@@ -62,21 +62,27 @@
 
 .grid-stacked {
   display: grid;
-  gap: 4px;
+  gap: 16px;
   grid-template-columns: 1fr;
 }
 
-/* Slot aspect ratios matching frontend image dimensions */
-.grid-slot--landscape {
-  aspect-ratio: 687 / 458;
+/* Grid slots */
+.grid-slot {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
 }
 
-.grid-slot--portrait {
-  aspect-ratio: 687 / 940;
+.grid-stacked .grid-slot {
+  min-height: 125px;
 }
 
-.grid-slot--spacer {
-  /* invisible spacer to match stacked column heights */
+/* Grid slot images */
+.grid-layout img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 
