@@ -31,6 +31,9 @@ class Seed extends Command
 		$this->info('Seeding categories...');
 		$this->call('app:categories');
 
+		$this->info('Seeding projects...');
+		$this->call('app:projects');
+
 		$this->info('Done!');
 	}
 }
