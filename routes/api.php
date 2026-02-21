@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\MediaController;
 
 Route::prefix('dashboard')
@@ -19,6 +20,17 @@ Route::prefix('dashboard')
 				Route::get('/{post}', 'show');
 				Route::put('/{post}', 'update');
 				Route::delete('/{post}', 'destroy');
+			});
+
+		Route::controller(ProjectController::class)
+			->prefix('projects')
+			->group(function () {
+				Route::get('/', 'index');
+				Route::post('/', 'store');
+				Route::get('/categories', 'categories');
+				Route::get('/{project}', 'show');
+				Route::put('/{project}', 'update');
+				Route::delete('/{project}', 'destroy');
 			});
 
 		Route::controller(MediaController::class)

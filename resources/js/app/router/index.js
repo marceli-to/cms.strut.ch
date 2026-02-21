@@ -3,6 +3,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/views/Home.vue'
 import BlogIndex from '@/views/blog/Index.vue'
 import BlogForm from '@/views/blog/Form.vue'
+import ProjectIndex from '@/views/projects/Index.vue'
+import ProjectForm from '@/views/projects/Form.vue'
 import MediaIndex from '@/views/media/Index.vue'
 
 const routes = [
@@ -23,6 +25,24 @@ const routes = [
     name: 'blog.create',
     component: BlogForm,
     meta: { title: 'Neuer Beitrag' },
+  },
+  {
+    path: '/dashboard/projects',
+    name: 'projects.index',
+    component: ProjectIndex,
+    meta: { title: 'Projekte' },
+  },
+  {
+    path: '/dashboard/projects/create',
+    name: 'projects.create',
+    component: ProjectForm,
+    meta: { title: 'Neues Projekt' },
+  },
+  {
+    path: '/dashboard/projects/:id/edit',
+    name: 'projects.edit',
+    component: ProjectForm,
+    meta: { title: 'Projekt bearbeiten' },
   },
   {
     path: '/dashboard/media',

@@ -28,6 +28,9 @@ class Seed extends Command
 			'password' => Hash::make('7aq31rr23'),
 		]);
 
+		$this->info('Seeding categories...');
+		$this->call('app:categories');
+
 		$this->info('Seeding posts...');
 		$this->call('app:posts');
 

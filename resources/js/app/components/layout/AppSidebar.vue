@@ -1,12 +1,13 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { PhArticle, PhImage, PhSignOut, PhSquaresFour } from '@phosphor-icons/vue'
+import { PhArticle, PhBuildings, PhImage, PhSignOut, PhSquaresFour } from '@phosphor-icons/vue'
 
 const route = useRoute()
 
 const navigation = [
 	{ name: 'Dashboard', to: '/dashboard', icon: PhSquaresFour, exact: true },
+	{ name: 'Projekte', to: '/dashboard/projects', icon: PhBuildings },
 	{ name: 'Blog', to: '/dashboard/blog', icon: PhArticle },
 	{ name: 'Media', to: '/dashboard/media', icon: PhImage },
 ]
@@ -35,8 +36,8 @@ function logout() {
 
 		<!-- Brand -->
 		<div class="px-24 pt-32 pb-24">
-			<div class="text-neutral-500 text-[10px] tracking-[0.2em] uppercase mb-4">Content Management</div>
-			<div class="text-white text-lg font-light tracking-tight">{{ $root.$appName || 'CMS' }}</div>
+			<div class="text-neutral-500 text-[10px] tracking-[0.2em] uppercase mb-4">CMS</div>
+			<div class="text-white text-lg font-light tracking-tight">strut.ch</div>
 		</div>
 
 		<!-- Navigation -->
