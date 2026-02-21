@@ -4,17 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Media;
-use App\Models\Post;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Project;
 
 class DashboardController extends Controller
 {
 	public function index()
 	{
-		$posts = Post::all();
+		$projects = Project::all();
 		$media = Media::all();
-
-		$totalSize = $media->sum('size');
 
 		$recentMedia = Media::orderByDesc('created_at')
 			->limit(8)
@@ -26,7 +23,7 @@ class DashboardController extends Controller
 				'created_at' => $m->created_at,
 			]);
 
-		$recentPosts = Post::orderByDesc('created_at')
+		$recentProjects = Project::orderByDesc('created_at')
 			->limit(5)
 			->get()
 			->map(fn ($p) => [
@@ -39,13 +36,13 @@ class DashboardController extends Controller
 
 		return response()->json([
 			'stats' => [
-				'posts_total' => $posts->count(),
-				'posts_published' => $posts->where('publish', true)->count(),
-				'posts_draft' => $posts->where('publish', false)->count(),
+				'projects_total' => $projects->count(),
+				'projects_published' => $projects->where('publish', true)->count(),
+				'projects_draft' => $projects->where('publish', false)->count(),
 				'media_total' => $media->count(),
-				'media_size' => $totalSize,
+				'media_size' => $media->sum('size'),
 			],
-			'recent_posts' => $recentPosts,
+			'recent_projects' => $recentProjects,
 			'recent_media' => $recentMedia,
 		]);
 	}

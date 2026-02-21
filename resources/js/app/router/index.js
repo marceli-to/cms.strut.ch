@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from '@/views/Home.vue'
-import BlogIndex from '@/views/blog/Index.vue'
-import BlogForm from '@/views/blog/Form.vue'
 import ProjectIndex from '@/views/projects/Index.vue'
 import ProjectForm from '@/views/projects/Form.vue'
 import MediaIndex from '@/views/media/Index.vue'
@@ -13,18 +11,6 @@ const routes = [
     name: 'home',
     component: Home,
     meta: { title: 'Dashboard' },
-  },
-  {
-    path: '/dashboard/blog',
-    name: 'blog.index',
-    component: BlogIndex,
-    meta: { title: 'Blog' },
-  },
-  {
-    path: '/dashboard/blog/create',
-    name: 'blog.create',
-    component: BlogForm,
-    meta: { title: 'Neuer Beitrag' },
   },
   {
     path: '/dashboard/projects',
@@ -49,12 +35,6 @@ const routes = [
     name: 'media.index',
     component: MediaIndex,
     meta: { title: 'Media' },
-  },
-  {
-    path: '/dashboard/blog/:id/edit',
-    name: 'blog.edit',
-    component: BlogForm,
-    meta: { title: 'Beitrag bearbeiten' },
   },
 ]
 

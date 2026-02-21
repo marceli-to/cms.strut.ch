@@ -2,9 +2,8 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import {
-	PhArticle,
+	PhBuildings,
 	PhImage,
-	PhFileText,
 	PhCloudArrowUp,
 	PhArrowRight,
 	PhCircle,
@@ -58,23 +57,23 @@ function timeAgo(dateStr) {
 			<div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
 				<div class="bg-white border border-neutral-200 p-20 group hover:border-neutral-400 transition-colors">
 					<div class="flex items-center justify-between mb-12">
-						<span class="text-[10px] font-medium text-neutral-400 uppercase tracking-[0.15em]">Beiträge</span>
-						<PhArticle :size="16" class="text-neutral-300" />
+						<span class="text-[10px] font-medium text-neutral-400 uppercase tracking-[0.15em]">Projekte</span>
+						<PhBuildings :size="16" class="text-neutral-300" />
 					</div>
-					<div class="text-2xl font-light text-neutral-900 tracking-tight">{{ data.stats.posts_total }}</div>
+					<div class="text-2xl font-light text-neutral-900 tracking-tight">{{ data.stats.projects_total }}</div>
 					<div class="text-[10px] text-neutral-400 mt-4">
-						{{ data.stats.posts_published }} publiziert · {{ data.stats.posts_draft }} Entwürfe
+						{{ data.stats.projects_published }} publiziert · {{ data.stats.projects_draft }} Entwürfe
 					</div>
 				</div>
 
 				<div class="bg-white border border-neutral-200 p-20 group hover:border-neutral-400 transition-colors">
 					<div class="flex items-center justify-between mb-12">
 						<span class="text-[10px] font-medium text-neutral-400 uppercase tracking-[0.15em]">Publiziert</span>
-						<PhFileText :size="16" class="text-neutral-300" />
+						<PhBuildings :size="16" class="text-neutral-300" />
 					</div>
-					<div class="text-2xl font-light text-emerald-600 tracking-tight">{{ data.stats.posts_published }}</div>
+					<div class="text-2xl font-light text-emerald-600 tracking-tight">{{ data.stats.projects_published }}</div>
 					<div class="text-[10px] text-neutral-400 mt-4">
-						{{ data.stats.posts_total > 0 ? Math.round(data.stats.posts_published / data.stats.posts_total * 100) : 0 }}% aller Beiträge
+						{{ data.stats.projects_total > 0 ? Math.round(data.stats.projects_published / data.stats.projects_total * 100) : 0 }}% aller Projekte
 					</div>
 				</div>
 
@@ -97,43 +96,43 @@ function timeAgo(dateStr) {
 				</div>
 			</div>
 
-			<!-- Two columns: Recent posts + Recent media -->
+			<!-- Two columns: Recent projects + Recent media -->
 			<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-				<!-- Recent Posts -->
+				<!-- Recent Projects -->
 				<div class="bg-white border border-neutral-200">
 					<div class="flex items-center justify-between px-20 py-16 border-b border-neutral-100">
-						<h2 class="text-xs font-medium text-neutral-900 uppercase tracking-[0.1em]">Letzte Beiträge</h2>
+						<h2 class="text-xs font-medium text-neutral-900 uppercase tracking-[0.1em]">Letzte Projekte</h2>
 						<button
 							class="text-[10px] text-neutral-400 hover:text-neutral-900 flex items-center gap-4 transition-colors cursor-pointer"
-							@click="router.push({ name: 'blog.index' })"
+							@click="router.push({ name: 'projects.index' })"
 						>
 							Alle anzeigen
 							<PhArrowRight :size="10" />
 						</button>
 					</div>
 
-					<div v-if="data.recent_posts.length === 0" class="px-20 py-24 text-sm text-neutral-400">
-						Noch keine Beiträge.
+					<div v-if="data.recent_projects.length === 0" class="px-20 py-24 text-sm text-neutral-400">
+						Noch keine Projekte.
 					</div>
 
 					<div v-else>
 						<div
-							v-for="(post, index) in data.recent_posts"
-							:key="post.id"
+							v-for="(project, index) in data.recent_projects"
+							:key="project.id"
 							class="flex items-center gap-12 px-20 py-12 hover:bg-neutral-50 transition-colors cursor-pointer"
 							:class="{ 'border-t border-neutral-100': index > 0 }"
-							@click="router.push({ name: 'blog.edit', params: { id: post.id } })"
+							@click="router.push({ name: 'projects.edit', params: { id: project.id } })"
 						>
 							<PhCircle
 								:size="8"
 								weight="fill"
-								:class="post.publish ? 'text-emerald-500' : 'text-neutral-300'"
+								:class="project.publish ? 'text-emerald-500' : 'text-neutral-300'"
 							/>
 							<div class="flex-1 min-w-0">
-								<div class="text-sm text-neutral-900 truncate">{{ post.title }}</div>
+								<div class="text-sm text-neutral-900 truncate">{{ project.title }}</div>
 							</div>
-							<div class="text-[10px] text-neutral-400 whitespace-nowrap">{{ timeAgo(post.updated_at) }}</div>
+							<div class="text-[10px] text-neutral-400 whitespace-nowrap">{{ timeAgo(project.updated_at) }}</div>
 						</div>
 					</div>
 				</div>

@@ -10,7 +10,7 @@ class Seed extends Command
 {
 	protected $signature = 'app:seed';
 
-	protected $description = 'Nuke all tables, run migrations and create default user';
+	protected $description = 'Nuke all tables, run migrations and seed default data';
 
 	public function handle(): void
 	{
@@ -30,9 +30,6 @@ class Seed extends Command
 
 		$this->info('Seeding categories...');
 		$this->call('app:categories');
-
-		$this->info('Seeding posts...');
-		$this->call('app:posts');
 
 		$this->info('Done!');
 	}

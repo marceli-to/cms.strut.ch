@@ -1,14 +1,13 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { PhArticle, PhBuildings, PhImage, PhSignOut, PhSquaresFour } from '@phosphor-icons/vue'
+import { PhBuildings, PhImage, PhSignOut, PhSquaresFour } from '@phosphor-icons/vue'
 
 const route = useRoute()
 
 const navigation = [
 	{ name: 'Dashboard', to: '/dashboard', icon: PhSquaresFour, exact: true },
 	{ name: 'Projekte', to: '/dashboard/projects', icon: PhBuildings },
-	{ name: 'Blog', to: '/dashboard/blog', icon: PhArticle },
 	{ name: 'Media', to: '/dashboard/media', icon: PhImage },
 ]
 
@@ -58,7 +57,7 @@ function logout() {
 			</ul>
 		</nav>
 
-		<!-- User / Logout -->
+		<!-- Logout -->
 		<div class="px-12 pb-24">
 			<button
 				@click="logout"
