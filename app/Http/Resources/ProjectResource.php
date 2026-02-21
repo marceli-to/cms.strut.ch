@@ -28,6 +28,7 @@ class ProjectResource extends JsonResource
 			'category' => $this->whenLoaded('category'),
 			'category_type' => $this->whenLoaded('categoryType'),
 			'media' => MediaResource::collection($this->whenLoaded('media')),
+			'grids' => ProjectGridResource::collection($this->whenLoaded('grids')),
 			'created_at' => $this->created_at,
 			'updated_at' => $this->updated_at,
 		];

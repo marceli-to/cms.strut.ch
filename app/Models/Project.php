@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Project extends Model
@@ -50,5 +51,10 @@ class Project extends Model
 	public function teaser(): MorphMany
 	{
 		return $this->morphMany(Media::class, 'mediable')->where('is_teaser', true);
+	}
+
+	public function grids(): HasMany
+	{
+		return $this->hasMany(ProjectGrid::class)->orderBy('sort_order');
 	}
 }

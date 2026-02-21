@@ -34,7 +34,7 @@ class ProjectController extends Controller
 
 	public function show(Project $project)
 	{
-		$project->load('category', 'categoryType', 'media');
+		$project->load('category', 'categoryType', 'media', 'grids.items.media');
 
 		return new ProjectResource($project);
 	}
