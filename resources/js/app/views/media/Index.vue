@@ -5,8 +5,9 @@ import { useConfirm } from '@/composables/useConfirm'
 import mediaApi from '@/api/media'
 import MediaUploader from '@/components/media/MediaUploader.vue'
 import MediaEdit from '@/components/media/MediaEdit.vue'
-import { PhTrash, PhPencil, PhMagnifyingGlass } from '@phosphor-icons/vue'
+import { PhMagnifyingGlass } from '@phosphor-icons/vue'
 import PageHeader from '@/components/layout/PageHeader.vue'
+import MediaCard from '@/components/media/MediaCard.vue'
 
 const toast = useToast()
 const { confirm } = useConfirm()
@@ -80,12 +81,6 @@ async function handleDelete(media) {
 	}
 }
 
-function formatSize(bytes) {
-	if (!bytes) return '–'
-	if (bytes < 1024) return bytes + ' B'
-	if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB'
-	return (bytes / (1024 * 1024)).toFixed(1) + ' MB'
-}
 </script>
 
 <template>
@@ -124,60 +119,15 @@ function formatSize(bytes) {
 
 		<!-- Grid -->
 		<div v-else-if="filteredItems.length > 0" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
-			<div
+			<MediaCard
 				v-for="media in filteredItems"
 				:key="media.uuid"
-				class="group relative bg-white border border-neutral-200 overflow-hidden hover:border-neutral-400 transition-colors"
-			>
-				<!-- Image -->
-				<div class="aspect-square overflow-hidden">
-					<img
-						:src="media.thumbnail_url"
-						:alt="media.alt || media.original_name"
-						class="w-full h-full object-cover"
-					/>
-				</div>
-
-				<!-- Info -->
-				<div class="px-10 py-8 border-t border-neutral-100">
-					<div class="text-xs text-neutral-900 truncate">{{ media.original_name }}</div>
-					<div class="text-xxs text-neutral-400 mt-2">
-						{{ media.width }}&times;{{ media.height }} · {{ formatSize(media.size) }}
-					</div>
-					<div v-if="media.alt" class="text-xxs text-neutral-500 truncate mt-2">
-						Alt: {{ media.alt }}
-					</div>
-				</div>
-
-				<!-- In-use badge -->
-				<div
-					v-if="media.in_use"
-					class="absolute top-0 left-0 bg-neutral-900 text-white text-[9px] font-medium tracking-wide uppercase px-6 py-3 leading-none"
-				>
-					Verwendet
-				</div>
-
-				<!-- Overlay actions -->
-				<div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex items-center justify-center gap-8">
-					<button
-						type="button"
-						class="size-32 flex items-center justify-center bg-white text-neutral-900 hover:bg-neutral-100 transition-colors"
-						title="Bearbeiten"
-						@click="openEdit(media)"
-					>
-						<PhPencil :size="14" weight="light" />
-					</button>
-					<button
-						v-if="!media.in_use"
-						type="button"
-						class="size-32 flex items-center justify-center bg-white text-red-500 hover:bg-red-50 transition-colors"
-						title="Löschen"
-						@click="handleDelete(media)"
-					>
-						<PhTrash :size="14" weight="light" />
-					</button>
-				</div>
-			</div>
+				:media="media"
+				:badge="media.in_use ? 'Verwendet' : null"
+				:deletable="!media.in_use"
+				@edit="openEdit"
+				@delete="handleDelete"
+			/>
 		</div>
 
 		<!-- No search results -->

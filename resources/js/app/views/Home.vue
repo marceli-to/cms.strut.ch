@@ -10,6 +10,7 @@ import {
 } from '@phosphor-icons/vue'
 import api from '@/api/axios'
 import PageHeader from '@/components/layout/PageHeader.vue'
+import MediaCard from '@/components/media/MediaCard.vue'
 
 const router = useRouter()
 const data = ref(null)
@@ -156,19 +157,15 @@ function timeAgo(dateStr) {
 
 					<div v-else class="p-12">
 						<div class="grid grid-cols-4 gap-6">
-							<div
+							<MediaCard
 								v-for="media in data.recent_media"
 								:key="media.uuid"
-								class="group relative aspect-square overflow-hidden bg-neutral-50 cursor-pointer"
+								:media="media"
+								:showInfo="true"
+								:showOverlay="false"
+								class="cursor-pointer"
 								@click="router.push({ name: 'media.index' })"
-							>
-								<img
-									:src="media.thumbnail_url"
-									:alt="media.original_name"
-									class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-								/>
-								<div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-150" />
-							</div>
+							/>
 						</div>
 					</div>
 				</div>

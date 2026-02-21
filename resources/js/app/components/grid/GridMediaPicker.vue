@@ -1,5 +1,6 @@
 <script setup>
 import Drawer from '@/components/ui/drawer/Drawer.vue'
+import MediaCard from '@/components/media/MediaCard.vue'
 
 const props = defineProps({
 	media: { type: Array, default: () => [] },
@@ -17,20 +18,17 @@ function selectMedia(media) {
 <template>
 	<Drawer :open="visible" title="Bild auswählen" size="md" @close="emit('close')">
 		<div class="p-24">
-			<div v-if="media.length" class="grid grid-cols-4 gap-8">
-				<button
+			<div v-if="media.length" class="grid grid-cols-3 gap-8">
+				<MediaCard
 					v-for="item in media"
 					:key="item.id"
-					type="button"
-					class="aspect-square border border-neutral-200 overflow-hidden bg-white hover:border-neutral-900 transition-colors cursor-pointer flex items-center justify-center p-8"
+					:media="item"
+					:showInfo="false"
+					:showOverlay="false"
+					:realFormat="true"
+					class="cursor-pointer"
 					@click="selectMedia(item)"
-				>
-					<img
-						:src="item.preview_url"
-						:alt="item.alt || ''"
-						class="block max-w-full max-h-full object-contain"
-					/>
-				</button>
+				/>
 			</div>
 			<p v-else class="text-sm text-neutral-400">
 				Keine Bilder vorhanden. Laden Sie zuerst Bilder im «Bilder»-Tab hoch.
