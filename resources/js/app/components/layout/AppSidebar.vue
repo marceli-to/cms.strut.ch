@@ -35,7 +35,7 @@ function logout() {
 
 		<!-- Brand -->
 		<div class="px-24 pt-32 pb-24">
-			<div class="text-neutral-500 text-[10px] tracking-[0.2em] uppercase mb-4">CMS</div>
+			<div class="text-neutral-500 text-xxs tracking-[0.2em] uppercase mb-4">CMS</div>
 			<div class="text-white text-lg font-light tracking-tight">strut.ch</div>
 		</div>
 
@@ -61,7 +61,7 @@ function logout() {
 		<div class="px-12 pb-24">
 			<button
 				@click="logout"
-				class="flex items-center gap-12 px-12 py-10 w-full text-sm text-neutral-500 hover:text-white hover:bg-white/5 transition-colors duration-150 cursor-pointer"
+				class="flex items-center gap-8 px-12 py-10 w-full text-xs text-neutral-500 hover:text-white hover:bg-white/5 transition-colors duration-150 cursor-pointer"
 			>
 				<PhSignOut :size="18" weight="regular" />
 				<span>Abmelden</span>

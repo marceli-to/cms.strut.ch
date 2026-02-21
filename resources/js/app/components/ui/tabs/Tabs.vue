@@ -23,7 +23,7 @@ provide('activeTab', activeTab)
 				v-for="tab in tabs"
 				:key="tab.key"
 				type="button"
-				class="pb-4 text-[10px] font-medium tracking-[0.1em] uppercase transition-colors cursor-pointer"
+				class="pb-4 text-xs font-medium uppercase tracking-[0.08em] transition-colors cursor-pointer"
 				:class="activeTab === tab.key
 					? 'text-neutral-900 border-b border-neutral-900'
 					: 'text-neutral-400 hover:text-neutral-600'"
