@@ -7,7 +7,23 @@ import German from '@uppy/locales/lib/de_DE'
 
 const props = defineProps({
 	compact: { type: Boolean, default: false },
+	accept: { type: String, default: 'image/*' },
 })
+
+const fileTypes = {
+	'image/*': {
+		extensions: ['.jpg', '.jpeg', '.png', '.webp', '.gif'],
+		label: 'Bilder hinzufügen',
+		hint: 'JPG, PNG, WebP, GIF — max. 50 MB',
+	},
+	'video/*': {
+		extensions: ['.mp4', '.mov', '.webm'],
+		label: 'Videos hinzufügen',
+		hint: 'MP4, MOV, WebM — max. 50 MB',
+	},
+}
+
+const activeType = fileTypes[props.accept] || fileTypes['image/*']
 
 const emit = defineEmits(['uploaded'])
 
@@ -24,7 +40,7 @@ onMounted(() => {
 		locale: German,
 		autoProceed: true,
 		restrictions: {
-			allowedFileTypes: ['.jpg', '.jpeg', '.png', '.webp', '.gif'],
+			allowedFileTypes: activeType.extensions,
 			maxFileSize: 51200 * 1024,
 		},
 	})
@@ -98,8 +114,8 @@ function addFiles(fileList) {
 		>
 			<div class="flex items-center justify-center gap-8 py-24">
 				<PhPlus :size="14" weight="bold" class="text-neutral-400" />
-				<span class="text-xs text-neutral-500">Bilder hinzufügen</span>
-				<span class="text-[10px] text-neutral-400 ml-4">JPG, PNG, WebP, GIF — max. 50 MB</span>
+				<span class="text-xs text-neutral-500">{{ activeType.label }}</span>
+				<span class="text-[10px] text-neutral-400 ml-4">{{ activeType.hint }}</span>
 			</div>
 		</div>
 
@@ -119,7 +135,7 @@ function addFiles(fileList) {
 					<span class="text-neutral-900 underline decoration-neutral-300 underline-offset-4">Dateien auswählen</span>
 					oder hierhin ziehen
 				</p>
-				<p class="text-[10px] text-neutral-400 mt-6">JPG, PNG, WebP, GIF — max. 50 MB</p>
+				<p class="text-[10px] text-neutral-400 mt-6">{{ activeType.hint }}</p>
 			</div>
 		</div>
 
@@ -134,7 +150,7 @@ function addFiles(fileList) {
 			ref="fileInput"
 			type="file"
 			multiple
-			accept=".jpg,.jpeg,.png,.webp,.gif"
+			:accept="activeType.extensions.join(',')"
 			class="hidden"
 			@change="onFileSelect"
 		/>

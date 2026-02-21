@@ -30,7 +30,6 @@
   --color-bronze: #8c6900;
 }
 
-
 /* Debug for grids */
 .debug-grid {
   @apply bg-yellow-50/50;

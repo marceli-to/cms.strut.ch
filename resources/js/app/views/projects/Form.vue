@@ -17,6 +17,8 @@ import FormCheckbox from '../../components/ui/form/FormCheckbox.vue'
 import FormButton from '../../components/ui/form/FormButton.vue'
 import FormError from '../../components/ui/form/FormError.vue'
 import FormGroup from '../../components/ui/form/FormGroup.vue'
+import Tabs from '../../components/ui/tabs/Tabs.vue'
+import Tab from '../../components/ui/tabs/Tab.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -27,6 +29,16 @@ const toast = useToast()
 const isEdit = computed(() => !!route.params.id)
 const editingMedia = ref(null)
 const mounted = ref(false)
+const activeTab = ref('data')
+
+const formTabs = [
+	{ key: 'data', label: 'Daten' },
+	{ key: 'images', label: 'Bilder' },
+	{ key: 'videos', label: 'Videos' },
+]
+
+const imageItems = computed(() => mediaStore.items.filter(i => i.type === 'image'))
+const videoItems = computed(() => mediaStore.items.filter(i => i.type === 'video'))
 
 // Year options: current year down to 1990
 const currentYear = new Date().getFullYear()
@@ -162,121 +174,129 @@ function onSetTeaser(media) { mediaStore.setTeaser(media.uuid) }
 			Laden...
 		</div>
 
-		<FormWithSidebar v-else>
+		<form v-else @submit.prevent="handleSubmit">
+			<Tabs v-model="activeTab" :tabs="formTabs">
+				<Tab name="data">
+					<FormWithSidebar>
+						<div>
+							<FormGroup>
+								<FormLabel for="title">Titel *</FormLabel>
+								<FormInput id="title" v-model="form.title" />
+								<FormError :message="store.errors.title" />
+							</FormGroup>
 
-			<!-- Main content -->
-			<form @submit.prevent="handleSubmit">
+							<div class="grid grid-cols-2 gap-24">
+								<FormGroup>
+									<FormLabel for="name">Name</FormLabel>
+									<FormInput id="name" v-model="form.name" />
+									<FormError :message="store.errors.name" />
+								</FormGroup>
+								<FormGroup>
+									<FormLabel for="location">Ort</FormLabel>
+									<FormInput id="location" v-model="form.location" />
+									<FormError :message="store.errors.location" />
+								</FormGroup>
+							</div>
 
-				<FormGroup>
-					<FormLabel for="title">Titel *</FormLabel>
-					<FormInput id="title" v-model="form.title" />
-					<FormError :message="store.errors.title" />
-				</FormGroup>
+							<FormGroup>
+								<FormLabel>Beschreibung</FormLabel>
+								<div class="mt-8">
+									<Editor v-model="form.description" />
+								</div>
+								<FormError :message="store.errors.description" />
+							</FormGroup>
 
-				<div class="grid grid-cols-2 gap-24">
-					<FormGroup>
-						<FormLabel for="name">Name</FormLabel>
-						<FormInput id="name" v-model="form.name" />
-						<FormError :message="store.errors.name" />
-					</FormGroup>
-					<FormGroup>
-						<FormLabel for="location">Ort</FormLabel>
-						<FormInput id="location" v-model="form.location" />
-						<FormError :message="store.errors.location" />
-					</FormGroup>
-				</div>
+							<FormGroup>
+								<FormLabel>Info</FormLabel>
+								<div class="mt-8">
+									<Editor v-model="form.info" />
+								</div>
+								<FormError :message="store.errors.info" />
+							</FormGroup>
+						</div>
 
-				<FormGroup>
-					<FormLabel>Beschreibung</FormLabel>
-					<div class="mt-8">
-						<Editor v-model="form.description" />
-					</div>
-					<FormError :message="store.errors.description" />
-				</FormGroup>
+						<template #sidebar>
+							<FormGroup>
+								<FormLabel for="category">Kategorie</FormLabel>
+								<FormSelect
+									id="category"
+									v-model="form.category_id"
+									:options="categoryOptions"
+								/>
+							</FormGroup>
 
-				<FormGroup>
-					<FormLabel>Info</FormLabel>
-					<div class="mt-8">
-						<Editor v-model="form.info" />
-					</div>
-					<FormError :message="store.errors.info" />
-				</FormGroup>
+							<FormGroup>
+								<FormLabel for="type">Typ</FormLabel>
+								<FormSelect
+									id="type"
+									v-model="form.category_type_id"
+									:options="typeOptions"
+									:disabled="!typeOptions.length"
+								/>
+							</FormGroup>
 
-				<FormGroup>
-					<FormLabel>Bilder / Videos</FormLabel>
-					<div class="mt-12">
-						<MediaGrid
-							v-if="mediaStore.items.length"
-							:items="mediaStore.items"
-							class="mb-16"
-							@edit="onEditMedia"
-							@delete="onDeleteMedia"
-							@reorder="onReorderMedia"
-							@teaser="onSetTeaser"
-						/>
-						<MediaUploader :compact="mediaStore.items.length > 0" @uploaded="onUploaded" />
-					</div>
-				</FormGroup>
+							<FormGroup>
+								<FormLabel for="year">Jahr</FormLabel>
+								<FormSelect
+									id="year"
+									v-model="form.year"
+									:options="yearOptions"
+								/>
+							</FormGroup>
 
-			</form>
+							<FormGroup>
+								<FormLabel for="status">Status</FormLabel>
+								<FormSelect
+									id="status"
+									v-model="form.status"
+									:options="statusOptions"
+								/>
+							</FormGroup>
 
-			<!-- Sidebar -->
-			<template #sidebar>
+							<FormGroup>
+								<FormLabel for="competition">Wettbewerb</FormLabel>
+								<FormSelect
+									id="competition"
+									v-model="form.competition"
+									:options="competitionOptions"
+								/>
+							</FormGroup>
 
-				<FormGroup>
-					<FormLabel for="category">Kategorie</FormLabel>
-					<FormSelect
-						id="category"
-						v-model="form.category_id"
-						:options="categoryOptions"
+							<div class="border-t border-neutral-200 pt-20 mt-4 flex flex-col gap-14">
+								<FormCheckbox v-model="form.has_detail">Detailseite</FormCheckbox>
+								<FormCheckbox v-model="form.publish">Veröffentlichen</FormCheckbox>
+							</div>
+						</template>
+					</FormWithSidebar>
+				</Tab>
+
+				<Tab name="images">
+					<MediaUploader :compact="imageItems.length > 0" accept="image/*" @uploaded="onUploaded" />
+					<MediaGrid
+						v-if="imageItems.length"
+						:items="imageItems"
+						class="mt-16"
+						@edit="onEditMedia"
+						@delete="onDeleteMedia"
+						@reorder="onReorderMedia"
+						@teaser="onSetTeaser"
 					/>
-				</FormGroup>
+				</Tab>
 
-				<FormGroup>
-					<FormLabel for="type">Typ</FormLabel>
-					<FormSelect
-						id="type"
-						v-model="form.category_type_id"
-						:options="typeOptions"
-						:disabled="!typeOptions.length"
+				<Tab name="videos">
+					<MediaUploader :compact="videoItems.length > 0" accept="video/*" @uploaded="onUploaded" />
+					<MediaGrid
+						v-if="videoItems.length"
+						:items="videoItems"
+						class="mt-16"
+						@edit="onEditMedia"
+						@delete="onDeleteMedia"
+						@reorder="onReorderMedia"
+						@teaser="onSetTeaser"
 					/>
-				</FormGroup>
-
-				<FormGroup>
-					<FormLabel for="year">Jahr</FormLabel>
-					<FormSelect
-						id="year"
-						v-model="form.year"
-						:options="yearOptions"
-					/>
-				</FormGroup>
-
-				<FormGroup>
-					<FormLabel for="status">Status</FormLabel>
-					<FormSelect
-						id="status"
-						v-model="form.status"
-						:options="statusOptions"
-					/>
-				</FormGroup>
-
-				<FormGroup>
-					<FormLabel for="competition">Wettbewerb</FormLabel>
-					<FormSelect
-						id="competition"
-						v-model="form.competition"
-						:options="competitionOptions"
-					/>
-				</FormGroup>
-
-				<div class="border-t border-neutral-200 pt-20 mt-4 flex flex-col gap-14">
-					<FormCheckbox v-model="form.has_detail">Detailseite</FormCheckbox>
-					<FormCheckbox v-model="form.publish">Veröffentlichen</FormCheckbox>
-				</div>
-
-			</template>
-
-		</FormWithSidebar>
+				</Tab>
+			</Tabs>
+		</form>
 
 		<MediaEditModal
 			:media="editingMedia"

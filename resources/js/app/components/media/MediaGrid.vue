@@ -26,37 +26,45 @@ const dragItems = computed({
 		<template #item="{ element }">
 			<div class="relative group cursor-grab active:cursor-grabbing">
 				<div class="border border-neutral-200 overflow-hidden p-4 bg-white" :class="{ '!border-neutral-900': element.is_teaser }">
+					<video
+						v-if="element.type === 'video'"
+						:src="element.original_url"
+						class="block w-full aspect-square object-cover"
+						muted
+						preload="metadata"
+					/>
 					<img
+						v-else
 						:src="element.thumbnail_url"
 						:alt="element.alt || ''"
 						class="block w-full aspect-square object-cover"
 					/>
 				</div>
 				<!-- Overlay -->
-				<div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex items-center justify-center gap-6">
+				<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex items-center justify-center gap-12">
 					<button
 						type="button"
-						class="size-28 flex items-center justify-center bg-white text-neutral-900 hover:bg-neutral-100 transition-colors cursor-pointer"
+						class="text-white/70 hover:text-white transition-colors cursor-pointer"
 						title="Bearbeiten"
 						@click.stop="emit('edit', element)"
 					>
-						<PhPencil :size="13" weight="bold" />
+						<PhPencil :size="16" />
 					</button>
 					<button
 						type="button"
-						class="size-28 flex items-center justify-center bg-white text-neutral-900 hover:bg-neutral-100 transition-colors cursor-pointer"
+						class="text-white/70 hover:text-white transition-colors cursor-pointer"
 						title="Als Teaser setzen"
 						@click.stop="emit('teaser', element)"
 					>
-						<PhStar :size="13" :weight="element.is_teaser ? 'fill' : 'bold'" />
+						<PhStar :size="16" :weight="element.is_teaser ? 'fill' : 'regular'" />
 					</button>
 					<button
 						type="button"
-						class="size-28 flex items-center justify-center bg-white text-red-500 hover:bg-red-50 transition-colors cursor-pointer"
+						class="text-white/70 hover:text-white transition-colors cursor-pointer"
 						title="Löschen"
 						@click.stop="emit('delete', element)"
 					>
-						<PhX :size="13" weight="bold" />
+						<PhX :size="16" />
 					</button>
 				</div>
 				<!-- Teaser badge -->

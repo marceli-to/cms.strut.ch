@@ -34,7 +34,7 @@ function onClose() {
 <template>
 	<dialog
 		ref="dialogRef"
-		class="p-0 m-auto bg-white border border-neutral-200 shadow-xl backdrop:bg-black/40 w-full"
+		class="p-0 m-auto bg-white backdrop:bg-black/40 w-full"
 		:class="sizes[size]"
 		@close="onClose"
 		@click.self="onClose"

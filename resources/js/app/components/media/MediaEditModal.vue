@@ -62,7 +62,7 @@ function handleSave() {
 			>
 				<!-- Header -->
 				<div class="flex items-center justify-between px-24 py-20 border-b border-neutral-200">
-					<h3 class="text-sm font-semibold text-neutral-900">Bild bearbeiten</h3>
+					<h3 class="text-sm font-semibold text-neutral-900">{{ media.type === 'video' ? 'Video' : 'Bild' }} bearbeiten</h3>
 					<button
 						type="button"
 						class="size-28 flex items-center justify-center text-neutral-400 hover:text-neutral-900 transition-colors"
@@ -74,9 +74,18 @@ function handleSave() {
 
 				<!-- Content -->
 				<div class="flex-1 overflow-y-auto">
-					<!-- Image preview -->
+					<!-- Preview -->
 					<div class="bg-neutral-50 border-b border-neutral-200">
+						<video
+							v-if="media.type === 'video'"
+							:src="media.original_url"
+							class="w-full max-h-[320px] object-contain"
+							controls
+							muted
+							preload="metadata"
+						/>
 						<img
+							v-else
 							:src="media.preview_url"
 							:alt="media.alt || ''"
 							class="w-full max-h-[320px] object-contain"
@@ -86,7 +95,10 @@ function handleSave() {
 					<!-- File info -->
 					<div class="px-24 py-16 border-b border-neutral-100 text-xs text-neutral-400 space-y-2">
 						<div class="text-neutral-900 font-medium">{{ media.original_name }}</div>
-						<div>{{ media.width }} &times; {{ media.height }} px · {{ media.mime_type }}</div>
+						<div>
+							<template v-if="media.width && media.height">{{ media.width }} &times; {{ media.height }} px · </template>
+							{{ media.mime_type }}
+						</div>
 					</div>
 
 					<!-- Fields -->
