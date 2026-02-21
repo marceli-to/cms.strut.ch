@@ -50,7 +50,7 @@ function onClose() {
 					class="text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer -mt-2 -mr-2"
 					@click="onClose"
 				>
-					<PhX :size="16" weight="bold" />
+					<PhX :size="16" weight="light" />
 				</button>
 			</div>
 

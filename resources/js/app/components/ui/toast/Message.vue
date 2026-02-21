@@ -27,8 +27,8 @@ const icons = {
 		:class="styles[toast.type]"
 		@click="$emit('close')"
 	>
-		<component :is="icons[toast.type]" :size="14" weight="bold" class="shrink-0" />
+		<component :is="icons[toast.type]" :size="14" weight="light" class="shrink-0" />
 		<span class="flex-1">{{ toast.message }}</span>
-		<PhX :size="12" weight="bold" class="shrink-0 opacity-60 hover:opacity-100 transition-opacity" />
+		<PhX :size="12" weight="light" class="shrink-0 opacity-60 hover:opacity-100 transition-opacity" />
 	</div>
 </template>

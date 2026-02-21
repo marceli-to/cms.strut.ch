@@ -77,13 +77,7 @@
   min-height: 125px;
 }
 
-/* Grid slot images */
-.grid-layout img {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
+
 
 
 

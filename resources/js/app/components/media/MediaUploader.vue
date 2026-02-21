@@ -113,9 +113,9 @@ function addFiles(fileList) {
 			@drop.prevent="onDrop"
 		>
 			<div class="flex items-center justify-center gap-8 py-24">
-				<PhPlus :size="14" weight="bold" class="text-neutral-400" />
+				<PhPlus :size="14" weight="light" class="text-neutral-400" />
 				<span class="text-xs text-neutral-500">{{ activeType.label }}</span>
-				<span class="text-[10px] text-neutral-400 ml-4">{{ activeType.hint }}</span>
+				<span class="text-xxs text-neutral-400 ml-4">{{ activeType.hint }}</span>
 			</div>
 		</div>
 
@@ -130,12 +130,12 @@ function addFiles(fileList) {
 			@drop.prevent="onDrop"
 		>
 			<div class="flex flex-col items-center justify-center py-[8rem] px-24">
-				<PhUploadSimple :size="24" weight="regular" class="text-neutral-400 mb-12" />
+				<PhUploadSimple :size="24" weight="light" class="text-neutral-400 mb-12" />
 				<p class="text-xs text-neutral-500">
 					<span class="text-neutral-900 underline decoration-neutral-300 underline-offset-4">Dateien auswählen</span>
 					oder hierhin ziehen
 				</p>
-				<p class="text-[10px] text-neutral-400 mt-6">{{ activeType.hint }}</p>
+				<p class="text-xxs text-neutral-400 mt-6">{{ activeType.hint }}</p>
 			</div>
 		</div>
 

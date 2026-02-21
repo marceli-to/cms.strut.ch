@@ -49,7 +49,7 @@ function closeLinkInput() {
 				:class="editor.isActive('bold') ? 'text-neutral-900 bg-neutral-200' : 'text-neutral-400 hover:text-neutral-900'"
 				title="Bold"
 				@click="editor.chain().focus().toggleBold().run()">
-				<PhTextB :size="16" weight="bold" />
+				<PhTextB :size="16" weight="light" />
 			</button>
 
 			<button
@@ -58,7 +58,7 @@ function closeLinkInput() {
 				:class="editor.isActive('bulletList') ? 'text-neutral-900 bg-neutral-200' : 'text-neutral-400 hover:text-neutral-900'"
 				title="Liste"
 				@click="editor.chain().focus().toggleBulletList().run()">
-				<PhListBullets :size="16" weight="bold" />
+				<PhListBullets :size="16" weight="light" />
 			</button>
 
 			<button
@@ -67,7 +67,7 @@ function closeLinkInput() {
 				:class="editor.isActive('orderedList') ? 'text-neutral-900 bg-neutral-200' : 'text-neutral-400 hover:text-neutral-900'"
 				title="Nummerierte Liste"
 				@click="editor.chain().focus().toggleOrderedList().run()">
-				<PhListNumbers :size="16" weight="bold" />
+				<PhListNumbers :size="16" weight="light" />
 			</button>
 
 			<button
@@ -76,7 +76,7 @@ function closeLinkInput() {
 				:class="editor.isActive('link') ? 'text-neutral-900 bg-neutral-200' : 'text-neutral-400 hover:text-neutral-900'"
 				title="Link"
 				@click="openLinkInput">
-				<PhLink :size="16" weight="bold" />
+				<PhLink :size="16" weight="light" />
 			</button>
 		</div>
 
@@ -114,7 +114,7 @@ function closeLinkInput() {
 				class="text-neutral-400 hover:text-neutral-900 p-4 transition-colors"
 				title="Abbrechen"
 				@click="closeLinkInput">
-				<PhX :size="14" weight="bold" />
+				<PhX :size="14" weight="light" />
 			</button>
 		</div>
 

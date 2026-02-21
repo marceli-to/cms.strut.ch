@@ -49,7 +49,7 @@ function logout() {
 							? 'bg-white/10 text-white'
 							: 'text-neutral-400 hover:text-white hover:bg-white/5'"
 					>
-						<component :is="item.icon" :size="18" weight="regular" />
+						<component :is="item.icon" :size="18" weight="light" />
 						<span>{{ item.name }}</span>
 					</router-link>
 				</li>
@@ -62,7 +62,7 @@ function logout() {
 				@click="logout"
 				class="flex items-center gap-8 px-12 py-10 w-full text-xs text-neutral-500 hover:text-white hover:bg-white/5 transition-colors duration-150 cursor-pointer"
 			>
-				<PhSignOut :size="18" weight="regular" />
+				<PhSignOut :size="18" weight="light" />
 				<span>Abmelden</span>
 			</button>
 		</div>

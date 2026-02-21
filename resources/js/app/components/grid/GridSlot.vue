@@ -1,5 +1,5 @@
 <script setup>
-import { PhPlus, PhX } from '@phosphor-icons/vue'
+import { PhPlus, PhTrash } from '@phosphor-icons/vue'
 
 const props = defineProps({
 	item: { type: Object, default: null },
@@ -18,17 +18,17 @@ const hasMedia = () => props.item?.media
 			<img
 				:src="item.media.preview_url"
 				:alt="item.media.alt || ''"
-				class="block w-full h-auto object-cover"
+				class="block w-full h-full object-cover"
 			/>
 			<!-- Remove overlay -->
-			<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex items-center justify-center">
+			<div class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex items-center justify-center">
 				<button
 					type="button"
-					class="text-white/80 hover:text-white transition-colors cursor-pointer"
+					class="text-white hover:text-white/80 transition-colors cursor-pointer"
 					title="Entfernen"
 					@click="emit('remove', item)"
 				>
-					<PhX :size="20" />
+					<PhTrash :size="20" weight="light" />
 				</button>
 			</div>
 		</template>
@@ -40,7 +40,7 @@ const hasMedia = () => props.item?.media
 				class="w-full h-full flex items-center justify-center text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 transition-colors cursor-pointer"
 				@click="emit('add', position)"
 			>
-				<PhPlus :size="20" />
+				<PhPlus :size="20" weight="light" />
 			</button>
 		</template>
 	</div>

@@ -165,7 +165,7 @@ function formatSize(bytes) {
 						title="Bearbeiten"
 						@click="openEdit(media)"
 					>
-						<PhPencil :size="14" weight="bold" />
+						<PhPencil :size="14" weight="light" />
 					</button>
 					<button
 						v-if="!media.in_use"
@@ -174,7 +174,7 @@ function formatSize(bytes) {
 						title="Löschen"
 						@click="handleDelete(media)"
 					>
-						<PhTrash :size="14" weight="bold" />
+						<PhTrash :size="14" weight="light" />
 					</button>
 				</div>
 			</div>

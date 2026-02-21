@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import draggable from 'vuedraggable'
-import { PhX, PhPencil, PhStar } from '@phosphor-icons/vue'
+import { PhTrash, PhPencil, PhStar } from '@phosphor-icons/vue'
 
 const props = defineProps({
 	items: { type: Array, default: () => [] },
@@ -41,14 +41,14 @@ const dragItems = computed({
 					/>
 				</div>
 				<!-- Overlay -->
-				<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex items-center justify-center gap-12">
+				<div class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex items-center justify-center gap-16">
 					<button
 						type="button"
 						class="text-white/70 hover:text-white transition-colors cursor-pointer"
 						title="Bearbeiten"
 						@click.stop="emit('edit', element)"
 					>
-						<PhPencil :size="16" />
+						<PhPencil :size="18" />
 					</button>
 					<button
 						type="button"
@@ -56,7 +56,7 @@ const dragItems = computed({
 						title="Als Teaser setzen"
 						@click.stop="emit('teaser', element)"
 					>
-						<PhStar :size="16" :weight="element.is_teaser ? 'fill' : 'regular'" />
+						<PhStar :size="18" :weight="element.is_teaser ? 'fill' : 'light'" />
 					</button>
 					<button
 						type="button"
@@ -64,7 +64,7 @@ const dragItems = computed({
 						title="Löschen"
 						@click.stop="emit('delete', element)"
 					>
-						<PhX :size="16" />
+						<PhTrash :size="18" weight="light" />
 					</button>
 				</div>
 				<!-- Teaser badge -->

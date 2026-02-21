@@ -66,7 +66,7 @@ function close() {
 						class="size-28 flex items-center justify-center text-neutral-400 hover:text-neutral-900 transition-colors"
 						@click="close"
 					>
-						<PhX :size="16" weight="bold" />
+						<PhX :size="16" weight="light" />
 					</button>
 				</div>
 

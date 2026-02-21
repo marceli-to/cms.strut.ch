@@ -32,7 +32,7 @@ function onRemove(item) {
 				title="Zeile löschen"
 				@click="emit('delete', grid)"
 			>
-				<PhTrash :size="14" />
+				<PhTrash :size="14" weight="light" />
 			</button>
 		</div>
 
