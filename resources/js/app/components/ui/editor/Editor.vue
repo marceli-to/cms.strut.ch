@@ -20,6 +20,7 @@ const editor = useEditor({
 			blockquote: false,
 			code: false,
 			horizontalRule: false,
+			link: false,
 		}),
 		Link.configure({
 			openOnClick: false,
