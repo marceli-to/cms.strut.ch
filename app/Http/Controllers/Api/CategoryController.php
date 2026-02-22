@@ -2,12 +2,23 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Actions\Category\DeleteAction as DeleteCategoryAction;
+use App\Actions\Category\StoreAction as StoreCategoryAction;
+use App\Actions\Category\UpdateAction as UpdateCategoryAction;
+use App\Actions\CategoryType\DeleteAction as DeleteCategoryTypeAction;
+use App\Actions\CategoryType\ReorderAction as ReorderCategoryTypeAction;
+use App\Actions\CategoryType\StoreAction as StoreCategoryTypeAction;
+use App\Actions\CategoryType\UpdateAction as UpdateCategoryTypeAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Category\StoreCategoryRequest;
+use App\Http\Requests\Category\UpdateCategoryRequest;
+use App\Http\Requests\CategoryType\ReorderCategoryTypeRequest;
+use App\Http\Requests\CategoryType\StoreCategoryTypeRequest;
+use App\Http\Requests\CategoryType\UpdateCategoryTypeRequest;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\CategoryTypeResource;
 use App\Models\Category;
 use App\Models\CategoryType;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -18,93 +29,58 @@ class CategoryController extends Controller
 		return CategoryResource::collection($categories);
 	}
 
-	public function store(Request $request)
+	public function store(StoreCategoryRequest $request)
 	{
-		$data = $request->validate([
-			'name' => 'required|string|max:255',
-			'publish' => 'boolean',
-		]);
-
-		$data['sort_order'] = Category::max('sort_order') + 1;
-
-		$category = Category::create($data);
+		$category = (new StoreCategoryAction)->execute($request->validated());
 
 		return new CategoryResource($category->load('types'));
 	}
 
-	public function update(Request $request, Category $category)
+	public function update(UpdateCategoryRequest $request, Category $category)
 	{
-		$data = $request->validate([
-			'name' => 'required|string|max:255',
-			'publish' => 'boolean',
-		]);
-
-		$category->update($data);
+		$category = (new UpdateCategoryAction)->execute($category, $request->validated());
 
 		return new CategoryResource($category->load('types'));
 	}
 
 	public function togglePublish(Category $category)
 	{
-		$category->update(['publish' => !$category->publish]);
+		$category = (new UpdateCategoryAction)->execute($category, ['publish' => !$category->publish]);
 
 		return new CategoryResource($category->load('types'));
 	}
 
 	public function destroy(Category $category)
 	{
-		$category->delete();
+		(new DeleteCategoryAction)->execute($category);
 
 		return response()->json(null, 204);
 	}
 
-	public function storeType(Request $request, Category $category)
+	public function storeType(StoreCategoryTypeRequest $request, Category $category)
 	{
-		$data = $request->validate([
-			'name' => 'required|string|max:255',
-			'name_singular' => 'nullable|string|max:255',
-			'publish' => 'boolean',
-		]);
-
-		$data['category_id'] = $category->id;
-		$data['sort_order'] = $category->types()->max('sort_order') + 1;
-
-		$type = CategoryType::create($data);
+		$type = (new StoreCategoryTypeAction)->execute($category, $request->validated());
 
 		return new CategoryTypeResource($type);
 	}
 
-	public function updateType(Request $request, Category $category, CategoryType $type)
+	public function updateType(UpdateCategoryTypeRequest $request, Category $category, CategoryType $type)
 	{
-		$data = $request->validate([
-			'name' => 'required|string|max:255',
-			'name_singular' => 'nullable|string|max:255',
-			'publish' => 'boolean',
-		]);
-
-		$type->update($data);
+		$type = (new UpdateCategoryTypeAction)->execute($type, $request->validated());
 
 		return new CategoryTypeResource($type);
 	}
 
 	public function destroyType(Category $category, CategoryType $type)
 	{
-		$type->delete();
+		(new DeleteCategoryTypeAction)->execute($type);
 
 		return response()->json(null, 204);
 	}
 
-	public function reorderTypes(Request $request, Category $category)
+	public function reorderTypes(ReorderCategoryTypeRequest $request, Category $category)
 	{
-		$data = $request->validate([
-			'items' => 'required|array',
-			'items.*.id' => 'required|integer',
-			'items.*.sort_order' => 'required|integer',
-		]);
-
-		foreach ($data['items'] as $item) {
-			$category->types()->where('id', $item['id'])->update(['sort_order' => $item['sort_order']]);
-		}
+		(new ReorderCategoryTypeAction)->execute($category, $request->validated('items'));
 
 		return response()->json(null, 204);
 	}
