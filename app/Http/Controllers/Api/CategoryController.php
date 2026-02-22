@@ -43,7 +43,7 @@ class CategoryController extends Controller
 		return new CategoryResource($category->load('types'));
 	}
 
-	public function togglePublish(Category $category)
+	public function toggle(Category $category)
 	{
 		$category = (new UpdateCategoryAction)->execute($category, ['publish' => !$category->publish]);
 

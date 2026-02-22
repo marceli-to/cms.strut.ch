@@ -1,12 +1,33 @@
 <script setup>
 import { useRoute } from 'vue-router'
-import { PhBuildings, PhImage, PhSignOut, PhSquaresFour, PhGear } from '@phosphor-icons/vue'
+import {
+	PhBooks,
+	PhBriefcase,
+	PhBuildings,
+	PhFileText,
+	PhGear,
+	PhImage,
+	PhMicrophone,
+	PhNewspaper,
+	PhSignOut,
+	PhSquaresFour,
+	PhTrophy,
+	PhUsers,
+} from '@phosphor-icons/vue'
 
 const route = useRoute()
 
 const navigation = [
 	{ name: 'Dashboard', to: '/dashboard', icon: PhSquaresFour, exact: true },
 	{ name: 'Projekte', to: '/dashboard/projects', icon: PhBuildings },
+	{ name: 'Auszeichnungen', to: '/dashboard/awards', icon: PhTrophy },
+	{ name: 'Bücher', to: '/dashboard/books', icon: PhBooks },
+	{ name: 'Inhalte', to: '/dashboard/content', icon: PhFileText },
+	{ name: 'Stellen', to: '/dashboard/jobs', icon: PhBriefcase },
+	{ name: 'Vorträge', to: '/dashboard/lectures', icon: PhMicrophone },
+	{ name: 'News', to: '/dashboard/news', icon: PhNewspaper },
+	{ name: 'Presse', to: '/dashboard/press', icon: PhNewspaper },
+	{ name: 'Team', to: '/dashboard/team', icon: PhUsers },
 	{ name: 'Media', to: '/dashboard/media', icon: PhImage },
 	{ name: 'Einstellungen', to: '/dashboard/settings', icon: PhGear },
 ]
@@ -39,7 +60,7 @@ function logout() {
 		</div>
 
 		<!-- Navigation -->
-		<nav class="flex-1 px-12 mt-16">
+		<nav class="flex-1 px-12 mt-16 overflow-y-auto">
 			<ul class="space-y-12">
 				<li v-for="item in navigation" :key="item.to">
 					<router-link

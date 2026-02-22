@@ -63,7 +63,7 @@ async function handleDelete(project) {
 						class="transition-colors cursor-pointer"
 						:class="row.publish ? 'text-neutral-400 hover:text-neutral-900' : 'text-neutral-300 hover:text-neutral-600'"
 						:title="row.publish ? 'Veröffentlicht – klicken zum Verstecken' : 'Versteckt – klicken zum Veröffentlichen'"
-						@click="store.togglePublish(row.id)"
+						@click="store.toggle(row.id)"
 					>
 						<PhEye v-if="row.publish" :size="16" weight="light" />
 						<PhEyeSlash v-else :size="16" weight="light" />

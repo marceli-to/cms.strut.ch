@@ -30,11 +30,11 @@ export const useCategoryStore = defineStore('categories', {
 			if (idx !== -1) this.categories[idx] = data.data
 		},
 
-		async togglePublish(id) {
+		async toggle(id) {
 			const cat = this.categories.find(c => c.id === id)
 			if (cat) cat.publish = !cat.publish
 			try {
-				const { data } = await categoriesApi.togglePublish(id)
+				const { data } = await categoriesApi.toggle(id)
 				const idx = this.categories.findIndex(c => c.id === id)
 				if (idx !== -1) this.categories[idx] = data.data
 			} catch {

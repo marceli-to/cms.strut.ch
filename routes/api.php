@@ -1,11 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AwardController;
+use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ContentController;
 use App\Http\Controllers\Api\DashboardController;
-use App\Http\Controllers\Api\ProjectController;
+use App\Http\Controllers\Api\JobController;
+use App\Http\Controllers\Api\LectureController;
 use App\Http\Controllers\Api\MediaController;
+use App\Http\Controllers\Api\NewsController;
+use App\Http\Controllers\Api\PressController;
+use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\ProjectGridController;
+use App\Http\Controllers\Api\TeamController;
 
 Route::prefix('dashboard')
 	->middleware(['web', 'auth'])
@@ -21,7 +29,7 @@ Route::prefix('dashboard')
 				Route::get('/categories', 'categories');
 				Route::get('/{project}', 'show');
 				Route::put('/{project}', 'update');
-				Route::patch('/{project}/publish', 'togglePublish');
+				Route::patch('/{project}/publish', 'toggle');
 				Route::delete('/{project}', 'destroy');
 			});
 
@@ -43,7 +51,7 @@ Route::prefix('dashboard')
 				Route::get('/', 'index');
 				Route::post('/', 'store');
 				Route::put('/{category}', 'update');
-				Route::patch('/{category}/publish', 'togglePublish');
+				Route::patch('/{category}/publish', 'toggle');
 				Route::delete('/{category}', 'destroy');
 				Route::post('/{category}/types', 'storeType');
 				Route::patch('/{category}/types/reorder', 'reorderTypes');
@@ -60,6 +68,103 @@ Route::prefix('dashboard')
 				Route::delete('/{media}', 'destroy');
 				Route::patch('/reorder', 'reorder');
 				Route::patch('/{media}/teaser', 'teaser');
+			});
+
+		Route::controller(AwardController::class)
+			->prefix('awards')
+			->group(function () {
+				Route::get('/', 'index');
+				Route::post('/', 'store');
+				Route::get('/{award}', 'show');
+				Route::put('/{award}', 'update');
+				Route::patch('/{award}/publish', 'toggle');
+				Route::delete('/{award}', 'destroy');
+				Route::delete('/{award}/unlink/{field}', 'unlink');
+			});
+
+		Route::controller(BookController::class)
+			->prefix('books')
+			->group(function () {
+				Route::get('/', 'index');
+				Route::post('/', 'store');
+				Route::get('/{book}', 'show');
+				Route::put('/{book}', 'update');
+				Route::patch('/{book}/publish', 'toggle');
+				Route::delete('/{book}', 'destroy');
+				Route::patch('/reorder', 'reorder');
+				Route::delete('/{book}/unlink', 'unlink');
+			});
+
+		Route::controller(ContentController::class)
+			->prefix('content')
+			->group(function () {
+				Route::get('/', 'index');
+				Route::post('/', 'store');
+				Route::get('/{content}', 'show');
+				Route::put('/{content}', 'update');
+				Route::patch('/{content}/publish', 'toggle');
+				Route::delete('/{content}/unlink', 'unlink');
+			});
+
+		Route::controller(JobController::class)
+			->prefix('jobs')
+			->group(function () {
+				Route::get('/', 'index');
+				Route::post('/', 'store');
+				Route::get('/{job}', 'show');
+				Route::put('/{job}', 'update');
+				Route::patch('/{job}/publish', 'toggle');
+				Route::delete('/{job}', 'destroy');
+				Route::patch('/reorder', 'reorder');
+				Route::delete('/{job}/unlink', 'unlink');
+			});
+
+		Route::controller(LectureController::class)
+			->prefix('lectures')
+			->group(function () {
+				Route::get('/', 'index');
+				Route::post('/', 'store');
+				Route::get('/{lecture}', 'show');
+				Route::put('/{lecture}', 'update');
+				Route::patch('/{lecture}/publish', 'toggle');
+				Route::delete('/{lecture}', 'destroy');
+				Route::delete('/{lecture}/unlink/{field}', 'unlink');
+			});
+
+		Route::controller(NewsController::class)
+			->prefix('news')
+			->group(function () {
+				Route::get('/', 'index');
+				Route::post('/', 'store');
+				Route::get('/{news}', 'show');
+				Route::put('/{news}', 'update');
+				Route::delete('/{news}', 'destroy');
+				Route::delete('/{news}/unlink', 'unlink');
+			});
+
+		Route::controller(PressController::class)
+			->prefix('press')
+			->group(function () {
+				Route::get('/', 'index');
+				Route::post('/', 'store');
+				Route::get('/{press}', 'show');
+				Route::put('/{press}', 'update');
+				Route::patch('/{press}/publish', 'toggle');
+				Route::delete('/{press}', 'destroy');
+				Route::delete('/{press}/unlink/{field}', 'unlink');
+			});
+
+		Route::controller(TeamController::class)
+			->prefix('team')
+			->group(function () {
+				Route::get('/', 'index');
+				Route::post('/', 'store');
+				Route::get('/{team}', 'show');
+				Route::put('/{team}', 'update');
+				Route::patch('/{team}/publish', 'toggle');
+				Route::delete('/{team}', 'destroy');
+				Route::patch('/reorder', 'reorder');
+				Route::delete('/{team}/unlink', 'unlink');
 			});
 
 	});

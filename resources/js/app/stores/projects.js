@@ -57,11 +57,11 @@ export const useProjectStore = defineStore('projects', {
 			}
 		},
 
-		async togglePublish(id) {
+		async toggle(id) {
 			const project = this.projects.find(p => p.id === id)
 			if (project) project.publish = !project.publish
 			try {
-				const { data } = await projectsApi.togglePublish(id)
+				const { data } = await projectsApi.toggle(id)
 				const idx = this.projects.findIndex(p => p.id === id)
 				if (idx !== -1) this.projects[idx] = data.data
 			} catch {
