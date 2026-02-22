@@ -4,6 +4,8 @@ import Home from '@/views/Home.vue'
 import ProjectIndex from '@/views/projects/Index.vue'
 import ProjectForm from '@/views/projects/Form.vue'
 import MediaIndex from '@/views/media/Index.vue'
+import SettingsIndex from '@/views/settings/Index.vue'
+import CategoryForm from '@/views/settings/CategoryForm.vue'
 
 const routes = [
   {
@@ -35,6 +37,24 @@ const routes = [
     name: 'media.index',
     component: MediaIndex,
     meta: { title: 'Media' },
+  },
+  {
+    path: '/dashboard/settings',
+    name: 'settings.index',
+    component: SettingsIndex,
+    meta: { title: 'Einstellungen' },
+  },
+  {
+    path: '/dashboard/settings/categories/create',
+    name: 'settings.categories.create',
+    component: CategoryForm,
+    meta: { title: 'Neue Kategorie' },
+  },
+  {
+    path: '/dashboard/settings/categories/:id/edit',
+    name: 'settings.categories.edit',
+    component: CategoryForm,
+    meta: { title: 'Kategorie bearbeiten' },
   },
 ]
 

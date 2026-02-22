@@ -46,6 +46,13 @@ class ProjectController extends Controller
 		return new ProjectResource($project->load('category', 'categoryType', 'media'));
 	}
 
+	public function togglePublish(Project $project)
+	{
+		$project->update(['publish' => !$project->publish]);
+
+		return new ProjectResource($project);
+	}
+
 	public function destroy(Project $project)
 	{
 		(new DeleteProjectAction)->execute($project);

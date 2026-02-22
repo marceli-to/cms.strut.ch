@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useProjectStore } from '@/stores/projects'
+import { useCategoryStore } from '@/stores/categories'
 import { useToast } from '@/composables/useToast'
 import { useConfirm } from '@/composables/useConfirm'
 import { PhPencil, PhTrash, PhEye, PhEyeSlash } from '@phosphor-icons/vue'
@@ -10,59 +10,61 @@ import PageHeader from '@/components/layout/PageHeader.vue'
 import DataTable from '@/components/ui/table/DataTable.vue'
 
 const router = useRouter()
-const store = useProjectStore()
+const store = useCategoryStore()
 const toast = useToast()
 const { confirm } = useConfirm()
 
 const columns = [
-	{ key: 'title', label: 'Titel', primary: true },
-	{ key: 'name', label: 'Name' },
-	{ key: 'location', label: 'Ort' },
-	{ key: 'year', label: 'Jahr', class: 'w-80' },
-	{ key: 'status', label: 'Status', class: 'w-120' },
+	{ key: 'name', label: 'Name', primary: true },
+	{ key: 'types_count', label: 'Typen', class: 'w-80' },
 	{ key: 'actions', label: '', class: 'w-100', align: 'right' },
 ]
 
 onMounted(() => {
-	store.fetchProjects()
+	store.fetchCategories()
 })
 
-async function handleDelete(project) {
+async function handleDelete(cat) {
 	const ok = await confirm({
-		title: 'Projekt löschen',
-		message: `"${project.title}" wirklich löschen? Dies kann nicht rückgängig gemacht werden.`,
+		title: 'Kategorie löschen',
+		message: `"${cat.name}" und alle zugehörigen Typen wirklich löschen? Dies kann nicht rückgängig gemacht werden.`,
 		confirmLabel: 'Löschen',
 		destructive: true,
 	})
 	if (!ok) return
-	await store.deleteProject(project.id)
-	toast.success('Projekt gelöscht')
+	await store.deleteCategory(cat.id)
+	toast.success('Kategorie gelöscht')
 }
 </script>
 
 <template>
 	<div>
-		<PageHeader title="Projekte">
-			<FormButton @click="router.push({ name: 'projects.create' })">
-				Neues Projekt
+		<PageHeader title="Einstellungen">
+			<FormButton @click="router.push({ name: 'settings.categories.create' })">
+				Neue Kategorie
 			</FormButton>
 		</PageHeader>
+
+		<p class="text-xxs font-medium uppercase tracking-[0.08em] text-neutral-500 mb-20">Kategorien</p>
 
 		<div v-if="store.loading" class="text-sm text-neutral-400">
 			Laden...
 		</div>
 
-		<div v-else-if="store.projects.length === 0" class="text-sm text-neutral-400">
-			Noch keine Projekte vorhanden.
+		<div v-else-if="store.categories.length === 0" class="text-sm text-neutral-400">
+			Noch keine Kategorien vorhanden.
 		</div>
 
-		<DataTable v-else :columns="columns" :rows="store.projects">
+		<DataTable v-else :columns="columns" :rows="store.categories">
+			<template #cell-types_count="{ row }">
+				{{ row.types?.length ?? 0 }}
+			</template>
 			<template #cell-actions="{ row }">
 				<div class="flex items-center justify-end gap-12">
 					<button
 						class="transition-colors cursor-pointer"
 						:class="row.publish ? 'text-neutral-400 hover:text-neutral-900' : 'text-neutral-300 hover:text-neutral-600'"
-						:title="row.publish ? 'Veröffentlicht – klicken zum Verstecken' : 'Versteckt – klicken zum Veröffentlichen'"
+						:title="row.publish ? 'Aktiv – klicken zum Deaktivieren' : 'Inaktiv – klicken zum Aktivieren'"
 						@click="store.togglePublish(row.id)"
 					>
 						<PhEye v-if="row.publish" :size="16" weight="light" />
@@ -70,7 +72,7 @@ async function handleDelete(project) {
 					</button>
 					<button
 						class="text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
-						@click="router.push({ name: 'projects.edit', params: { id: row.id } })"
+						@click="router.push({ name: 'settings.categories.edit', params: { id: row.id } })"
 					>
 						<PhPencil :size="16" weight="light" />
 					</button>

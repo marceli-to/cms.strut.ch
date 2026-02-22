@@ -269,7 +269,7 @@ function onSetTeaser(media) { mediaStore.setTeaser(media.uuid) }
 								/>
 							</FormGroup>
 
-							<div class="border-t border-neutral-200 pt-20 mt-4 flex flex-col gap-14">
+							<div class="flex flex-col gap-14">
 								<FormCheckbox v-model="form.has_detail">Detailseite</FormCheckbox>
 								<FormCheckbox v-model="form.publish">Veröffentlichen</FormCheckbox>
 							</div>

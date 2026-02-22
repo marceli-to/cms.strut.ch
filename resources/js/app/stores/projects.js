@@ -57,6 +57,18 @@ export const useProjectStore = defineStore('projects', {
 			}
 		},
 
+		async togglePublish(id) {
+			const project = this.projects.find(p => p.id === id)
+			if (project) project.publish = !project.publish
+			try {
+				const { data } = await projectsApi.togglePublish(id)
+				const idx = this.projects.findIndex(p => p.id === id)
+				if (idx !== -1) this.projects[idx] = data.data
+			} catch {
+				if (project) project.publish = !project.publish
+			}
+		},
+
 		async deleteProject(id) {
 			await projectsApi.destroy(id)
 			this.projects = this.projects.filter(p => p.id !== id)

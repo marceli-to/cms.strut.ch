@@ -1,7 +1,6 @@
 <script setup>
-import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { PhBuildings, PhImage, PhSignOut, PhSquaresFour } from '@phosphor-icons/vue'
+import { PhBuildings, PhImage, PhSignOut, PhSquaresFour, PhGear } from '@phosphor-icons/vue'
 
 const route = useRoute()
 
@@ -9,6 +8,7 @@ const navigation = [
 	{ name: 'Dashboard', to: '/dashboard', icon: PhSquaresFour, exact: true },
 	{ name: 'Projekte', to: '/dashboard/projects', icon: PhBuildings },
 	{ name: 'Media', to: '/dashboard/media', icon: PhImage },
+	{ name: 'Einstellungen', to: '/dashboard/settings', icon: PhGear },
 ]
 
 function isActive(item) {
