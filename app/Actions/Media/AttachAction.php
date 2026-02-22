@@ -4,8 +4,6 @@ namespace App\Actions\Media;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-
 class AttachAction
 {
 	public function execute(array $mediaItems, Model $parent): void
@@ -19,13 +17,12 @@ class AttachAction
 				continue;
 			}
 
-			$filename = $this->uniqueFilename($item['file']);
-			Storage::disk('public')->move($tempPath, 'uploads/' . $filename);
+			Storage::disk('public')->move($tempPath, 'uploads/' . $item['file']);
 
 			$maxSort++;
 			$parent->media()->create([
 				'uuid' => $item['uuid'],
-				'file' => $filename,
+				'file' => $item['file'],
 				'original_name' => $item['original_name'],
 				'mime_type' => $item['mime_type'],
 				'size' => $item['size'],
@@ -36,14 +33,5 @@ class AttachAction
 				'sort_order' => $maxSort,
 			]);
 		}
-	}
-
-	private function uniqueFilename(string $filename): string
-	{
-		$name = pathinfo($filename, PATHINFO_FILENAME);
-		$extension = Str::lower(pathinfo($filename, PATHINFO_EXTENSION));
-		$suffix = Str::random(6);
-
-		return $name . '-' . $suffix . '.' . $extension;
 	}
 }
