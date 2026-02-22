@@ -9,8 +9,9 @@ class DeleteAction
 {
 	public function execute(TeamMember $member): void
 	{
-		if ($member->media) {
-			Storage::disk('public')->delete($member->media);
+		foreach ($member->media as $media) {
+			Storage::disk('public')->delete('uploads/' . $media->file);
+			$media->delete();
 		}
 
 		$member->delete();

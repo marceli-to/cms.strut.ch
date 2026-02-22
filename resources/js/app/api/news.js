@@ -6,5 +6,4 @@ export default {
 	store: (data) => api.post('/news', data),
 	update: (id, data) => api.put(`/news/${id}`, data),
 	destroy: (id) => api.delete(`/news/${id}`),
-	unlink: (id) => api.delete(`/news/${id}/unlink`),
 }

@@ -16,10 +16,10 @@ class PressResource extends JsonResource
 			'description' => $this->description,
 			'year' => $this->year,
 			'url' => $this->url,
-			'media' => $this->media,
-			'file' => $this->file,
 			'publish' => $this->publish,
+			'sort_order' => $this->sort_order,
 			'project' => $this->whenLoaded('project'),
+			'media' => MediaResource::collection($this->whenLoaded('media')),
 			'created_at' => $this->created_at,
 			'updated_at' => $this->updated_at,
 		];

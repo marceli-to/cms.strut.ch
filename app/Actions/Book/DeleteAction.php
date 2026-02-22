@@ -9,8 +9,9 @@ class DeleteAction
 {
 	public function execute(Book $book): void
 	{
-		if ($book->media) {
-			Storage::disk('public')->delete($book->media);
+		foreach ($book->media as $media) {
+			Storage::disk('public')->delete('uploads/' . $media->file);
+			$media->delete();
 		}
 
 		$book->delete();

@@ -13,9 +13,8 @@ return new class extends Migration
 			$table->string('title');
 			$table->text('lead')->nullable();
 			$table->text('info')->nullable();
-			$table->string('media')->nullable();
-			$table->unsignedInteger('order')->default(0);
 			$table->boolean('publish')->default(true);
+			$table->integer('sort_order')->default(0);
 			$table->timestamps();
 		});
 	}

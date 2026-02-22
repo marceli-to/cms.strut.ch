@@ -30,13 +30,17 @@ export const useJobStore = defineStore('jobs', {
 			}
 		},
 
-		async saveJob(form, id = null) {
+		async saveJob(form, id = null, media = []) {
 			this.errors = {}
 			try {
+				const payload = { ...form }
+				if (media.length) {
+					payload.media = media
+				}
 				if (id) {
-					await jobsApi.update(id, form)
+					await jobsApi.update(id, payload)
 				} else {
-					await jobsApi.store(form)
+					await jobsApi.store(payload)
 				}
 				return true
 			} catch (error) {

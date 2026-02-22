@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class News extends Model
 {
@@ -11,11 +12,20 @@ class News extends Model
 
 	protected $fillable = [
 		'date',
-		'subtitle',
 		'title',
+		'subtitle',
 		'text',
 		'link',
 		'link_text',
-		'media',
+		'sort_order',
 	];
+
+	protected $casts = [
+		'sort_order' => 'integer',
+	];
+
+	public function media(): MorphMany
+	{
+		return $this->morphMany(Media::class, 'mediable')->orderBy('sort_order');
+	}
 }

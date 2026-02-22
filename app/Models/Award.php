@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Award extends Model
 {
@@ -13,8 +14,6 @@ class Award extends Model
 		'title',
 		'description',
 		'year',
-		'media',
-		'file',
 		'url',
 		'publish',
 	];
@@ -22,6 +21,11 @@ class Award extends Model
 	protected $casts = [
 		'publish' => 'boolean',
 	];
+
+	public function media(): MorphMany
+	{
+		return $this->morphMany(Media::class, 'mediable')->orderBy('sort_order');
+	}
 
 	public function scopePublished($query)
 	{

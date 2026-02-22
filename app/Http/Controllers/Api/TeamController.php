@@ -11,13 +11,12 @@ use App\Http\Requests\Team\UpdateTeamRequest;
 use App\Http\Resources\TeamMemberResource;
 use App\Models\TeamMember;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class TeamController extends Controller
 {
 	public function index()
 	{
-		$members = TeamMember::orderBy('order')->get();
+		$members = TeamMember::with('media')->orderBy('sort_order')->get();
 
 		return TeamMemberResource::collection($members);
 	}
@@ -26,19 +25,19 @@ class TeamController extends Controller
 	{
 		$member = (new StoreTeamAction)->execute($request->validated());
 
-		return new TeamMemberResource($member);
+		return new TeamMemberResource($member->load('media'));
 	}
 
 	public function show(TeamMember $team)
 	{
-		return new TeamMemberResource($team);
+		return new TeamMemberResource($team->load('media'));
 	}
 
 	public function update(UpdateTeamRequest $request, TeamMember $team)
 	{
 		$member = (new UpdateTeamAction)->execute($team, $request->validated());
 
-		return new TeamMemberResource($member);
+		return new TeamMemberResource($member->load('media'));
 	}
 
 	public function toggle(TeamMember $team)
@@ -58,19 +57,9 @@ class TeamController extends Controller
 	public function reorder(Request $request)
 	{
 		foreach ($request->items as $item) {
-			TeamMember::find($item['id'])->update(['order' => $item['order']]);
+			TeamMember::find($item['id'])->update(['sort_order' => $item['sort_order']]);
 		}
 
 		return response()->json(['message' => 'Reordered']);
-	}
-
-	public function unlink(TeamMember $team)
-	{
-		if ($team->media) {
-			Storage::disk('public')->delete($team->media);
-			$team->update(['media' => null]);
-		}
-
-		return new TeamMemberResource($team);
 	}
 }

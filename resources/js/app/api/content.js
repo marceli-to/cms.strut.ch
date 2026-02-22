@@ -6,5 +6,4 @@ export default {
 	store: (data) => api.post('/content', data),
 	update: (id, data) => api.put(`/content/${id}`, data),
 	toggle: (id) => api.patch(`/content/${id}/publish`),
-	unlink: (id) => api.delete(`/content/${id}/unlink`),
 }

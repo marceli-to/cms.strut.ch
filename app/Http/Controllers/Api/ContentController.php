@@ -9,13 +9,12 @@ use App\Http\Requests\Content\StoreContentRequest;
 use App\Http\Requests\Content\UpdateContentRequest;
 use App\Http\Resources\ContentResource;
 use App\Models\Content;
-use Illuminate\Support\Facades\Storage;
 
 class ContentController extends Controller
 {
 	public function index()
 	{
-		$content = Content::orderBy('title')->get();
+		$content = Content::with('media')->orderBy('title')->get();
 
 		return ContentResource::collection($content);
 	}
@@ -24,36 +23,24 @@ class ContentController extends Controller
 	{
 		$content = (new StoreContentAction)->execute($request->validated());
 
-		return new ContentResource($content);
+		return new ContentResource($content->load('media'));
 	}
 
 	public function show(Content $content)
 	{
-		$content->load('images');
-
-		return new ContentResource($content);
+		return new ContentResource($content->load('media'));
 	}
 
 	public function update(UpdateContentRequest $request, Content $content)
 	{
 		$content = (new UpdateContentAction)->execute($content, $request->validated());
 
-		return new ContentResource($content->load('images'));
+		return new ContentResource($content->load('media'));
 	}
 
 	public function toggle(Content $content)
 	{
 		$content->update(['publish' => !$content->publish]);
-
-		return new ContentResource($content);
-	}
-
-	public function unlink(Content $content)
-	{
-		if ($content->media) {
-			Storage::disk('public')->delete($content->media);
-			$content->update(['media' => null]);
-		}
 
 		return new ContentResource($content);
 	}

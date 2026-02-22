@@ -10,13 +10,12 @@ use App\Http\Requests\Press\StorePressRequest;
 use App\Http\Requests\Press\UpdatePressRequest;
 use App\Http\Resources\PressResource;
 use App\Models\Press;
-use Illuminate\Support\Facades\Storage;
 
 class PressController extends Controller
 {
 	public function index()
 	{
-		$grouped = Press::with('project')->orderBy('year', 'desc')->get()->groupBy('year');
+		$grouped = Press::with('project', 'media')->orderBy('year', 'desc')->get()->groupBy('year');
 
 		return response()->json([
 			'data' => $grouped->map(fn ($items) => PressResource::collection($items)),
@@ -27,21 +26,19 @@ class PressController extends Controller
 	{
 		$press = (new StorePressAction)->execute($request->validated());
 
-		return new PressResource($press->load('project'));
+		return new PressResource($press->load('project', 'media'));
 	}
 
 	public function show(Press $press)
 	{
-		$press->load('project');
-
-		return new PressResource($press);
+		return new PressResource($press->load('project', 'media'));
 	}
 
 	public function update(UpdatePressRequest $request, Press $press)
 	{
 		$press = (new UpdatePressAction)->execute($press, $request->validated());
 
-		return new PressResource($press->load('project'));
+		return new PressResource($press->load('project', 'media'));
 	}
 
 	public function toggle(Press $press)
@@ -56,19 +53,5 @@ class PressController extends Controller
 		(new DeletePressAction)->execute($press);
 
 		return response()->json(null, 204);
-	}
-
-	public function unlink(Press $press, string $field)
-	{
-		if (!in_array($field, ['media', 'file'])) {
-			return response()->json(['message' => 'Invalid field'], 422);
-		}
-
-		if ($press->$field) {
-			Storage::disk('public')->delete($press->$field);
-			$press->update([$field => null]);
-		}
-
-		return new PressResource($press);
 	}
 }

@@ -7,5 +7,4 @@ export default {
 	update: (id, data) => api.put(`/awards/${id}`, data),
 	toggle: (id) => api.patch(`/awards/${id}/publish`),
 	destroy: (id) => api.delete(`/awards/${id}`),
-	unlink: (id, field) => api.delete(`/awards/${id}/unlink/${field}`),
 }

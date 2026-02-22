@@ -15,9 +15,9 @@ class BookResource extends JsonResource
 			'description' => $this->description,
 			'info' => $this->info,
 			'url' => $this->url,
-			'media' => $this->media,
-			'order' => $this->order,
 			'publish' => $this->publish,
+			'sort_order' => $this->sort_order,
+			'media' => MediaResource::collection($this->whenLoaded('media')),
 			'created_at' => $this->created_at,
 			'updated_at' => $this->updated_at,
 		];

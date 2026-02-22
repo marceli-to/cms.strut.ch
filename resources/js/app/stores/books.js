@@ -30,13 +30,17 @@ export const useBookStore = defineStore('books', {
 			}
 		},
 
-		async saveBook(form, id = null) {
+		async saveBook(form, id = null, media = []) {
 			this.errors = {}
 			try {
+				const payload = { ...form }
+				if (media.length) {
+					payload.media = media
+				}
 				if (id) {
-					await booksApi.update(id, form)
+					await booksApi.update(id, payload)
 				} else {
-					await booksApi.store(form)
+					await booksApi.store(payload)
 				}
 				return true
 			} catch (error) {

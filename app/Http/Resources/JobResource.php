@@ -14,9 +14,9 @@ class JobResource extends JsonResource
 			'title' => $this->title,
 			'lead' => $this->lead,
 			'info' => $this->info,
-			'media' => $this->media,
-			'order' => $this->order,
 			'publish' => $this->publish,
+			'sort_order' => $this->sort_order,
+			'media' => MediaResource::collection($this->whenLoaded('media')),
 			'created_at' => $this->created_at,
 			'updated_at' => $this->updated_at,
 		];

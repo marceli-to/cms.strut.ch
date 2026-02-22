@@ -10,13 +10,12 @@ use App\Http\Requests\Lecture\StoreLectureRequest;
 use App\Http\Requests\Lecture\UpdateLectureRequest;
 use App\Http\Resources\LectureResource;
 use App\Models\Lecture;
-use Illuminate\Support\Facades\Storage;
 
 class LectureController extends Controller
 {
 	public function index()
 	{
-		$grouped = Lecture::orderBy('year', 'desc')->get()->groupBy('year');
+		$grouped = Lecture::with('media')->orderBy('year', 'desc')->get()->groupBy('year');
 
 		return response()->json([
 			'data' => $grouped->map(fn ($items) => LectureResource::collection($items)),
@@ -27,19 +26,19 @@ class LectureController extends Controller
 	{
 		$lecture = (new StoreLectureAction)->execute($request->validated());
 
-		return new LectureResource($lecture);
+		return new LectureResource($lecture->load('media'));
 	}
 
 	public function show(Lecture $lecture)
 	{
-		return new LectureResource($lecture);
+		return new LectureResource($lecture->load('media'));
 	}
 
 	public function update(UpdateLectureRequest $request, Lecture $lecture)
 	{
 		$lecture = (new UpdateLectureAction)->execute($lecture, $request->validated());
 
-		return new LectureResource($lecture);
+		return new LectureResource($lecture->load('media'));
 	}
 
 	public function toggle(Lecture $lecture)
@@ -54,19 +53,5 @@ class LectureController extends Controller
 		(new DeleteLectureAction)->execute($lecture);
 
 		return response()->json(null, 204);
-	}
-
-	public function unlink(Lecture $lecture, string $field)
-	{
-		if (!in_array($field, ['media', 'file'])) {
-			return response()->json(['message' => 'Invalid field'], 422);
-		}
-
-		if ($lecture->$field) {
-			Storage::disk('public')->delete($lecture->$field);
-			$lecture->update([$field => null]);
-		}
-
-		return new LectureResource($lecture);
 	}
 }

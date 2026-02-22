@@ -14,9 +14,8 @@ return new class extends Migration
 			$table->text('description')->nullable();
 			$table->text('info')->nullable();
 			$table->string('url')->nullable();
-			$table->string('media')->nullable();
-			$table->unsignedInteger('order')->default(0);
 			$table->boolean('publish')->default(true);
+			$table->integer('sort_order')->default(0);
 			$table->timestamps();
 		});
 	}

@@ -11,13 +11,12 @@ use App\Http\Requests\Job\UpdateJobRequest;
 use App\Http\Resources\JobResource;
 use App\Models\Job;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class JobController extends Controller
 {
 	public function index()
 	{
-		$jobs = Job::orderBy('order')->get();
+		$jobs = Job::with('media')->orderBy('sort_order')->get();
 
 		return JobResource::collection($jobs);
 	}
@@ -26,19 +25,19 @@ class JobController extends Controller
 	{
 		$job = (new StoreJobAction)->execute($request->validated());
 
-		return new JobResource($job);
+		return new JobResource($job->load('media'));
 	}
 
 	public function show(Job $job)
 	{
-		return new JobResource($job);
+		return new JobResource($job->load('media'));
 	}
 
 	public function update(UpdateJobRequest $request, Job $job)
 	{
 		$job = (new UpdateJobAction)->execute($job, $request->validated());
 
-		return new JobResource($job);
+		return new JobResource($job->load('media'));
 	}
 
 	public function toggle(Job $job)
@@ -58,19 +57,9 @@ class JobController extends Controller
 	public function reorder(Request $request)
 	{
 		foreach ($request->items as $item) {
-			Job::find($item['id'])->update(['order' => $item['order']]);
+			Job::find($item['id'])->update(['sort_order' => $item['sort_order']]);
 		}
 
 		return response()->json(['message' => 'Reordered']);
-	}
-
-	public function unlink(Job $job)
-	{
-		if ($job->media) {
-			Storage::disk('public')->delete($job->media);
-			$job->update(['media' => null]);
-		}
-
-		return new JobResource($job);
 	}
 }

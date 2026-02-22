@@ -13,10 +13,9 @@ return new class extends Migration
 			$table->string('title');
 			$table->text('description')->nullable();
 			$table->string('year');
-			$table->string('media')->nullable();
-			$table->string('file')->nullable();
 			$table->string('url')->nullable();
 			$table->boolean('publish')->default(true);
+			$table->integer('sort_order')->default(0);
 			$table->timestamps();
 		});
 	}

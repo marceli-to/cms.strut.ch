@@ -79,7 +79,6 @@ Route::prefix('dashboard')
 				Route::put('/{award}', 'update');
 				Route::patch('/{award}/publish', 'toggle');
 				Route::delete('/{award}', 'destroy');
-				Route::delete('/{award}/unlink/{field}', 'unlink');
 			});
 
 		Route::controller(BookController::class)
@@ -87,12 +86,11 @@ Route::prefix('dashboard')
 			->group(function () {
 				Route::get('/', 'index');
 				Route::post('/', 'store');
+				Route::patch('/reorder', 'reorder');
 				Route::get('/{book}', 'show');
 				Route::put('/{book}', 'update');
 				Route::patch('/{book}/publish', 'toggle');
 				Route::delete('/{book}', 'destroy');
-				Route::patch('/reorder', 'reorder');
-				Route::delete('/{book}/unlink', 'unlink');
 			});
 
 		Route::controller(ContentController::class)
@@ -103,7 +101,6 @@ Route::prefix('dashboard')
 				Route::get('/{content}', 'show');
 				Route::put('/{content}', 'update');
 				Route::patch('/{content}/publish', 'toggle');
-				Route::delete('/{content}/unlink', 'unlink');
 			});
 
 		Route::controller(JobController::class)
@@ -111,12 +108,11 @@ Route::prefix('dashboard')
 			->group(function () {
 				Route::get('/', 'index');
 				Route::post('/', 'store');
+				Route::patch('/reorder', 'reorder');
 				Route::get('/{job}', 'show');
 				Route::put('/{job}', 'update');
 				Route::patch('/{job}/publish', 'toggle');
 				Route::delete('/{job}', 'destroy');
-				Route::patch('/reorder', 'reorder');
-				Route::delete('/{job}/unlink', 'unlink');
 			});
 
 		Route::controller(LectureController::class)
@@ -128,7 +124,6 @@ Route::prefix('dashboard')
 				Route::put('/{lecture}', 'update');
 				Route::patch('/{lecture}/publish', 'toggle');
 				Route::delete('/{lecture}', 'destroy');
-				Route::delete('/{lecture}/unlink/{field}', 'unlink');
 			});
 
 		Route::controller(NewsController::class)
@@ -139,7 +134,6 @@ Route::prefix('dashboard')
 				Route::get('/{news}', 'show');
 				Route::put('/{news}', 'update');
 				Route::delete('/{news}', 'destroy');
-				Route::delete('/{news}/unlink', 'unlink');
 			});
 
 		Route::controller(PressController::class)
@@ -151,7 +145,6 @@ Route::prefix('dashboard')
 				Route::put('/{press}', 'update');
 				Route::patch('/{press}/publish', 'toggle');
 				Route::delete('/{press}', 'destroy');
-				Route::delete('/{press}/unlink/{field}', 'unlink');
 			});
 
 		Route::controller(TeamController::class)
@@ -159,12 +152,11 @@ Route::prefix('dashboard')
 			->group(function () {
 				Route::get('/', 'index');
 				Route::post('/', 'store');
+				Route::patch('/reorder', 'reorder');
 				Route::get('/{team}', 'show');
 				Route::put('/{team}', 'update');
 				Route::patch('/{team}/publish', 'toggle');
 				Route::delete('/{team}', 'destroy');
-				Route::patch('/reorder', 'reorder');
-				Route::delete('/{team}/unlink', 'unlink');
 			});
 
 	});

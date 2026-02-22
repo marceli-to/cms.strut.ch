@@ -14,10 +14,9 @@ class LectureResource extends JsonResource
 			'title' => $this->title,
 			'description' => $this->description,
 			'year' => $this->year,
-			'media' => $this->media,
-			'file' => $this->file,
-			'url' => $this->url,
 			'publish' => $this->publish,
+			'sort_order' => $this->sort_order,
+			'media' => MediaResource::collection($this->whenLoaded('media')),
 			'created_at' => $this->created_at,
 			'updated_at' => $this->updated_at,
 		];

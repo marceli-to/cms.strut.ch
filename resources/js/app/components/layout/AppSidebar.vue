@@ -6,11 +6,9 @@ import {
 	PhBuildings,
 	PhFileText,
 	PhGear,
-	PhImage,
 	PhMicrophone,
 	PhNewspaper,
 	PhSignOut,
-	PhSquaresFour,
 	PhTrophy,
 	PhUsers,
 } from '@phosphor-icons/vue'
@@ -18,18 +16,34 @@ import {
 const route = useRoute()
 
 const navigation = [
-	{ name: 'Dashboard', to: '/dashboard', icon: PhSquaresFour, exact: true },
-	{ name: 'Projekte', to: '/dashboard/projects', icon: PhBuildings },
-	{ name: 'Auszeichnungen', to: '/dashboard/awards', icon: PhTrophy },
-	{ name: 'Bücher', to: '/dashboard/books', icon: PhBooks },
-	{ name: 'Inhalte', to: '/dashboard/content', icon: PhFileText },
-	{ name: 'Stellen', to: '/dashboard/jobs', icon: PhBriefcase },
-	{ name: 'Vorträge', to: '/dashboard/lectures', icon: PhMicrophone },
-	{ name: 'News', to: '/dashboard/news', icon: PhNewspaper },
-	{ name: 'Presse', to: '/dashboard/press', icon: PhNewspaper },
-	{ name: 'Team', to: '/dashboard/team', icon: PhUsers },
-	{ name: 'Media', to: '/dashboard/media', icon: PhImage },
-	{ name: 'Einstellungen', to: '/dashboard/settings', icon: PhGear },
+	{
+		items: [
+			{ name: 'News', to: '/dashboard/news', icon: PhNewspaper },
+			{ name: 'Projekte', to: '/dashboard/projects', icon: PhBuildings },
+		],
+	},
+	{
+		label: 'Büro',
+		items: [
+			{ name: 'Stellen', to: '/dashboard/jobs', icon: PhBriefcase },
+			{ name: 'Team', to: '/dashboard/team', icon: PhUsers },
+			{ name: 'Auszeichnungen', to: '/dashboard/awards', icon: PhTrophy },
+			{ name: 'Vorträge', to: '/dashboard/lectures', icon: PhMicrophone },
+		],
+	},
+	{
+		label: 'Publikationen',
+		items: [
+			{ name: 'Bücher', to: '/dashboard/books', icon: PhBooks },
+			{ name: 'Presse', to: '/dashboard/press', icon: PhNewspaper },
+		],
+	},
+	{
+		items: [
+			{ name: 'Inhalte', to: '/dashboard/content', icon: PhFileText },
+			{ name: 'Einstellungen', to: '/dashboard/settings', icon: PhGear },
+		],
+	},
 ]
 
 function isActive(item) {
@@ -61,20 +75,27 @@ function logout() {
 
 		<!-- Navigation -->
 		<nav class="flex-1 px-12 mt-16 overflow-y-auto">
-			<ul class="space-y-12">
-				<li v-for="item in navigation" :key="item.to">
-					<router-link
-						:to="item.to"
-						class="flex items-center gap-12 px-12 py-10 text-sm transition-colors duration-150"
-						:class="isActive(item)
-							? 'bg-white/10 text-white'
-							: 'text-neutral-400 hover:text-white hover:bg-white/5'"
-					>
-						<component :is="item.icon" :size="18" weight="light" />
-						<span>{{ item.name }}</span>
-					</router-link>
-				</li>
-			</ul>
+			<div class="space-y-24">
+				<div v-for="(group, index) in navigation" :key="index">
+					<p v-if="group.label" class="px-12 pb-6 text-xxs text-neutral-500 uppercase tracking-wider">
+						{{ group.label }}
+					</p>
+					<ul>
+						<li v-for="item in group.items" :key="item.to">
+							<router-link
+								:to="item.to"
+								class="flex items-center gap-12 px-12 py-10 text-sm transition-colors duration-150"
+								:class="isActive(item)
+									? 'bg-white/10 text-white'
+									: 'text-neutral-400 hover:text-white hover:bg-white/5'"
+							>
+								<component :is="item.icon" :size="18" weight="light" />
+								<span>{{ item.name }}</span>
+							</router-link>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</nav>
 
 		<!-- Logout -->

@@ -11,13 +11,12 @@ use App\Http\Requests\Book\UpdateBookRequest;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
 	public function index()
 	{
-		$books = Book::orderBy('order')->get();
+		$books = Book::with('media')->orderBy('sort_order')->get();
 
 		return BookResource::collection($books);
 	}
@@ -26,19 +25,19 @@ class BookController extends Controller
 	{
 		$book = (new StoreBookAction)->execute($request->validated());
 
-		return new BookResource($book);
+		return new BookResource($book->load('media'));
 	}
 
 	public function show(Book $book)
 	{
-		return new BookResource($book);
+		return new BookResource($book->load('media'));
 	}
 
 	public function update(UpdateBookRequest $request, Book $book)
 	{
 		$book = (new UpdateBookAction)->execute($book, $request->validated());
 
-		return new BookResource($book);
+		return new BookResource($book->load('media'));
 	}
 
 	public function toggle(Book $book)
@@ -58,19 +57,9 @@ class BookController extends Controller
 	public function reorder(Request $request)
 	{
 		foreach ($request->items as $item) {
-			Book::find($item['id'])->update(['order' => $item['order']]);
+			Book::find($item['id'])->update(['sort_order' => $item['sort_order']]);
 		}
 
 		return response()->json(['message' => 'Reordered']);
-	}
-
-	public function unlink(Book $book)
-	{
-		if ($book->media) {
-			Storage::disk('public')->delete($book->media);
-			$book->update(['media' => null]);
-		}
-
-		return new BookResource($book);
 	}
 }

@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router'
 import { useAwardStore } from '@/stores/awards'
 import { useToast } from '@/composables/useToast'
 import { useConfirm } from '@/composables/useConfirm'
-import { PhPencil, PhTrash, PhEye, PhEyeSlash } from '@phosphor-icons/vue'
+import { PhPencil, PhTrash } from '@phosphor-icons/vue'
 import FormButton from '@/components/ui/form/FormButton.vue'
 import PageHeader from '@/components/layout/PageHeader.vue'
 import DataTable from '@/components/ui/table/DataTable.vue'
@@ -63,14 +63,6 @@ async function handleDelete(award) {
 				<DataTable :columns="columns" :rows="items">
 					<template #cell-actions="{ row }">
 						<div class="flex items-center justify-end gap-12">
-							<button
-								class="transition-colors cursor-pointer"
-								:class="row.publish ? 'text-neutral-400 hover:text-neutral-900' : 'text-neutral-300 hover:text-neutral-600'"
-								@click="store.toggle(row.id)"
-							>
-								<PhEye v-if="row.publish" :size="16" weight="light" />
-								<PhEyeSlash v-else :size="16" weight="light" />
-							</button>
 							<button
 								class="text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
 								@click="router.push({ name: 'awards.edit', params: { id: row.id } })"

@@ -9,8 +9,9 @@ class DeleteAction
 {
 	public function execute(Job $job): void
 	{
-		if ($job->media) {
-			Storage::disk('public')->delete($job->media);
+		foreach ($job->media as $media) {
+			Storage::disk('public')->delete('uploads/' . $media->file);
+			$media->delete();
 		}
 
 		$job->delete();

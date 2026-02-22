@@ -9,12 +9,9 @@ class DeleteAction
 {
 	public function execute(Press $press): void
 	{
-		if ($press->media) {
-			Storage::disk('public')->delete($press->media);
-		}
-
-		if ($press->file) {
-			Storage::disk('public')->delete($press->file);
+		foreach ($press->media as $media) {
+			Storage::disk('public')->delete('uploads/' . $media->file);
+			$media->delete();
 		}
 
 		$press->delete();

@@ -10,16 +10,15 @@ return new class extends Migration
 	{
 		Schema::create('team', function (Blueprint $table) {
 			$table->id();
-			$table->string('name');
 			$table->string('firstname');
+			$table->string('name');
 			$table->string('role')->nullable();
 			$table->string('position')->nullable();
 			$table->string('phone')->nullable();
 			$table->string('email');
 			$table->text('cv')->nullable();
-			$table->string('media')->nullable();
-			$table->unsignedInteger('order')->default(0);
 			$table->boolean('publish')->default(true);
+			$table->integer('sort_order')->default(0);
 			$table->timestamps();
 		});
 	}

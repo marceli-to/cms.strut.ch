@@ -30,13 +30,17 @@ export const useContentStore = defineStore('content', {
 			}
 		},
 
-		async saveItem(form, id = null) {
+		async saveItem(form, id = null, media = []) {
 			this.errors = {}
 			try {
+				const payload = { ...form }
+				if (media.length) {
+					payload.media = media
+				}
 				if (id) {
-					await contentApi.update(id, form)
+					await contentApi.update(id, payload)
 				} else {
-					await contentApi.store(form)
+					await contentApi.store(payload)
 				}
 				return true
 			} catch (error) {

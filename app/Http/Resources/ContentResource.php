@@ -14,10 +14,10 @@ class ContentResource extends JsonResource
 			'key' => $this->key,
 			'title' => $this->title,
 			'text' => $this->text,
-			'media' => $this->media,
 			'publish' => $this->publish,
 			'has_media' => $this->has_media,
-			'images' => ContentImageResource::collection($this->whenLoaded('images')),
+			'sort_order' => $this->sort_order,
+			'media' => MediaResource::collection($this->whenLoaded('media')),
 			'created_at' => $this->created_at,
 			'updated_at' => $this->updated_at,
 		];

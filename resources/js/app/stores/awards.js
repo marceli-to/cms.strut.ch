@@ -30,13 +30,17 @@ export const useAwardStore = defineStore('awards', {
 			}
 		},
 
-		async saveAward(form, id = null) {
+		async saveAward(form, id = null, media = []) {
 			this.errors = {}
 			try {
+				const payload = { ...form }
+				if (media.length) {
+					payload.media = media
+				}
 				if (id) {
-					await awardsApi.update(id, form)
+					await awardsApi.update(id, payload)
 				} else {
-					await awardsApi.store(form)
+					await awardsApi.store(payload)
 				}
 				return true
 			} catch (error) {

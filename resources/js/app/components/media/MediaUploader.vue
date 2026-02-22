@@ -8,6 +8,7 @@ import German from '@uppy/locales/lib/de_DE'
 const props = defineProps({
 	compact: { type: Boolean, default: false },
 	accept: { type: String, default: 'image/*' },
+	maxFiles: { type: Number, default: null },
 })
 
 const fileTypes = {
@@ -42,6 +43,7 @@ onMounted(() => {
 		restrictions: {
 			allowedFileTypes: activeType.extensions,
 			maxFileSize: 51200 * 1024,
+			maxNumberOfFiles: props.maxFiles,
 		},
 	})
 
@@ -149,7 +151,7 @@ function addFiles(fileList) {
 		<input
 			ref="fileInput"
 			type="file"
-			multiple
+			:multiple="!maxFiles || maxFiles > 1"
 			:accept="activeType.extensions.join(',')"
 			class="hidden"
 			@change="onFileSelect"

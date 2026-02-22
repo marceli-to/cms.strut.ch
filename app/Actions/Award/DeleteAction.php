@@ -9,12 +9,9 @@ class DeleteAction
 {
 	public function execute(Award $award): void
 	{
-		if ($award->media) {
-			Storage::disk('public')->delete($award->media);
-		}
-
-		if ($award->file) {
-			Storage::disk('public')->delete($award->file);
+		foreach ($award->media as $media) {
+			Storage::disk('public')->delete('uploads/' . $media->file);
+			$media->delete();
 		}
 
 		$award->delete();

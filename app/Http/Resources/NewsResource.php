@@ -12,12 +12,13 @@ class NewsResource extends JsonResource
 		return [
 			'id' => $this->id,
 			'date' => $this->date,
-			'subtitle' => $this->subtitle,
 			'title' => $this->title,
+			'subtitle' => $this->subtitle,
 			'text' => $this->text,
 			'link' => $this->link,
 			'link_text' => $this->link_text,
-			'media' => $this->media,
+			'sort_order' => $this->sort_order,
+			'media' => MediaResource::collection($this->whenLoaded('media')),
 			'created_at' => $this->created_at,
 			'updated_at' => $this->updated_at,
 		];

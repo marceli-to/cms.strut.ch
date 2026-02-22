@@ -8,5 +8,4 @@ export default {
 	toggle: (id) => api.patch(`/team/${id}/publish`),
 	destroy: (id) => api.delete(`/team/${id}`),
 	reorder: (items) => api.patch('/team/reorder', { items }),
-	unlink: (id) => api.delete(`/team/${id}/unlink`),
 }

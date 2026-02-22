@@ -30,13 +30,17 @@ export const useLectureStore = defineStore('lectures', {
 			}
 		},
 
-		async saveLecture(form, id = null) {
+		async saveLecture(form, id = null, media = []) {
 			this.errors = {}
 			try {
+				const payload = { ...form }
+				if (media.length) {
+					payload.media = media
+				}
 				if (id) {
-					await lecturesApi.update(id, form)
+					await lecturesApi.update(id, payload)
 				} else {
-					await lecturesApi.store(form)
+					await lecturesApi.store(payload)
 				}
 				return true
 			} catch (error) {

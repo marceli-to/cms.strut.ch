@@ -2,32 +2,37 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useJobStore } from '@/stores/jobs'
+import { useMediaStore } from '@/stores/media'
 import { useToast } from '@/composables/useToast'
 import Editor from '@/components/ui/editor/Editor.vue'
-import FormWithSidebar from '@/components/layout/FormWithSidebar.vue'
+import MediaUploader from '@/components/media/MediaUploader.vue'
+import MediaGrid from '@/components/media/MediaGrid.vue'
+import MediaEdit from '@/components/media/MediaEdit.vue'
 import PageHeader from '@/components/layout/PageHeader.vue'
 import FormLabel from '@/components/ui/form/FormLabel.vue'
-import FormCheckbox from '@/components/ui/form/FormCheckbox.vue'
+import FormInput from '@/components/ui/form/FormInput.vue'
 import FormButton from '@/components/ui/form/FormButton.vue'
 import FormError from '@/components/ui/form/FormError.vue'
 import FormGroup from '@/components/ui/form/FormGroup.vue'
-import FormInput from '@/components/ui/form/FormInput.vue'
 
 const route = useRoute()
 const router = useRouter()
 const store = useJobStore()
+const mediaStore = useMediaStore()
 const toast = useToast()
 
 const isEdit = computed(() => !!route.params.id)
+const editingMedia = ref(null)
 
 const form = ref({
 	title: '',
 	lead: '',
 	info: '',
-	publish: true,
 })
 
 onMounted(async () => {
+	mediaStore.setItems([])
+
 	if (isEdit.value) {
 		await store.fetchJob(route.params.id)
 		if (store.current) {
@@ -36,14 +41,30 @@ onMounted(async () => {
 				title: j.title || '',
 				lead: j.lead || '',
 				info: j.info || '',
-				publish: j.publish,
 			}
+			mediaStore.setItems(j.media || [])
 		}
 	}
 })
 
 async function handleSubmit() {
-	const success = await store.saveJob(form.value, isEdit.value ? route.params.id : null)
+	const tempMedia = mediaStore.tempItems.map(item => ({
+		uuid: item.uuid,
+		file: item.file,
+		original_name: item.original_name,
+		mime_type: item.mime_type,
+		size: item.size,
+		width: item.width,
+		height: item.height,
+		alt: item.alt || null,
+		caption: item.caption || null,
+	}))
+
+	const success = await store.saveJob(
+		form.value,
+		isEdit.value ? route.params.id : null,
+		tempMedia
+	)
 
 	if (success) {
 		toast.success(isEdit.value ? 'Stelle aktualisiert' : 'Stelle erstellt')
@@ -52,6 +73,15 @@ async function handleSubmit() {
 		toast.error('Bitte überprüfen Sie das Formular')
 	}
 }
+
+function onUploaded(media) { mediaStore.addItem(media) }
+function onEditMedia(media) { editingMedia.value = media }
+async function onSaveMedia({ uuid, data }) {
+	const success = await mediaStore.updateItem(uuid, data)
+	if (success) editingMedia.value = null
+}
+async function onDeleteMedia(media) { await mediaStore.deleteItem(media.uuid) }
+function onReorderMedia(items) { mediaStore.reorder(items) }
 </script>
 
 <template>
@@ -69,38 +99,47 @@ async function handleSubmit() {
 			Laden...
 		</div>
 
-		<form v-else @submit.prevent="handleSubmit">
-			<FormWithSidebar>
-				<div>
-					<FormGroup>
-						<FormLabel for="title">Titel *</FormLabel>
-						<FormInput id="title" v-model="form.title" />
-						<FormError :message="store.errors.title" />
-					</FormGroup>
+		<form v-else class="max-w-4xl" @submit.prevent="handleSubmit">
+			<FormGroup>
+				<FormLabel for="title">Titel *</FormLabel>
+				<FormInput id="title" v-model="form.title" />
+				<FormError :message="store.errors.title" />
+			</FormGroup>
 
-					<FormGroup>
-						<FormLabel>Lead</FormLabel>
-						<div class="mt-8">
-							<Editor v-model="form.lead" />
-						</div>
-						<FormError :message="store.errors.lead" />
-					</FormGroup>
+			<FormGroup>
+				<FormLabel for="lead">Lead/Beschreibung *</FormLabel>
+				<textarea id="lead" v-model="form.lead" rows="4" class="w-full rounded-md border border-neutral-200 bg-white px-12 py-8 text-sm focus:border-neutral-900 focus:outline-none" />
+				<FormError :message="store.errors.lead" />
+			</FormGroup>
 
-					<FormGroup>
-						<FormLabel>Info</FormLabel>
-						<div class="mt-8">
-							<Editor v-model="form.info" />
-						</div>
-						<FormError :message="store.errors.info" />
-					</FormGroup>
+			<FormGroup>
+				<FormLabel>Info</FormLabel>
+				<div class="mt-8">
+					<Editor v-model="form.info" />
 				</div>
+				<FormError :message="store.errors.info" />
+			</FormGroup>
 
-				<template #sidebar>
-					<div class="flex flex-col gap-14">
-						<FormCheckbox v-model="form.publish">Veröffentlichen</FormCheckbox>
-					</div>
-				</template>
-			</FormWithSidebar>
+			<FormGroup>
+				<FormLabel>Medien</FormLabel>
+				<div class="mt-8">
+					<MediaUploader :compact="mediaStore.items.length > 0" @uploaded="onUploaded" />
+					<MediaGrid
+						v-if="mediaStore.items.length"
+						:items="mediaStore.items"
+						class="mt-16"
+						@edit="onEditMedia"
+						@delete="onDeleteMedia"
+						@reorder="onReorderMedia"
+					/>
+				</div>
+			</FormGroup>
 		</form>
+
+		<MediaEdit
+			:media="editingMedia"
+			@close="editingMedia = null"
+			@save="onSaveMedia"
+		/>
 	</div>
 </template>

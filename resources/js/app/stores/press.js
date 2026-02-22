@@ -30,13 +30,17 @@ export const usePressStore = defineStore('press', {
 			}
 		},
 
-		async savePress(form, id = null) {
+		async savePress(form, id = null, media = []) {
 			this.errors = {}
 			try {
+				const payload = { ...form }
+				if (media.length) {
+					payload.media = media
+				}
 				if (id) {
-					await pressApi.update(id, form)
+					await pressApi.update(id, payload)
 				} else {
-					await pressApi.store(form)
+					await pressApi.store(payload)
 				}
 				return true
 			} catch (error) {

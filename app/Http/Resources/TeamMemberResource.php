@@ -11,16 +11,16 @@ class TeamMemberResource extends JsonResource
 	{
 		return [
 			'id' => $this->id,
-			'name' => $this->name,
 			'firstname' => $this->firstname,
+			'name' => $this->name,
 			'role' => $this->role,
 			'position' => $this->position,
 			'phone' => $this->phone,
 			'email' => $this->email,
 			'cv' => $this->cv,
-			'media' => $this->media,
-			'order' => $this->order,
 			'publish' => $this->publish,
+			'sort_order' => $this->sort_order,
+			'media' => MediaResource::collection($this->whenLoaded('media')),
 			'created_at' => $this->created_at,
 			'updated_at' => $this->updated_at,
 		];

@@ -30,13 +30,17 @@ export const useNewsStore = defineStore('news', {
 			}
 		},
 
-		async saveNews(form, id = null) {
+		async saveNews(form, id = null, media = []) {
 			this.errors = {}
 			try {
+				const payload = { ...form }
+				if (media.length) {
+					payload.media = media
+				}
 				if (id) {
-					await newsApi.update(id, form)
+					await newsApi.update(id, payload)
 				} else {
-					await newsApi.store(form)
+					await newsApi.store(payload)
 				}
 				return true
 			} catch (error) {
