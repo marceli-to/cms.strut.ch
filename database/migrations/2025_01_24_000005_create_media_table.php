@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->id();
-            $table->morphs('mediable');
+            $table->nullableMorphs('mediable');
             $table->string('file');
             $table->string('alt')->nullable();
             $table->string('caption')->nullable();

@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\User;
 use App\Models\Media;
-use App\Models\Post;
+use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
@@ -65,11 +65,23 @@ it('prevents deletion of attached media', function () {
     expect(Media::count())->toBe(1);
 });
 
+it('deletes unattached media', function () {
+    Storage::disk('public')->put('uploads/test.jpg', 'fake');
+    $media = Media::factory()->unattached()->create(['file' => 'test.jpg']);
+
+    $this->actingAs($this->user)
+        ->deleteJson("/api/dashboard/media/{$media->uuid}")
+        ->assertNoContent();
+
+    expect(Media::count())->toBe(0);
+    Storage::disk('public')->assertMissing('uploads/test.jpg');
+});
+
 it('toggles teaser on', function () {
-    $post = Post::factory()->create();
+    $project = Project::factory()->create();
     $media = Media::factory()->create([
-        'mediable_type' => Post::class,
-        'mediable_id' => $post->id,
+        'mediable_type' => Project::class,
+        'mediable_id' => $project->id,
         'is_teaser' => false,
     ]);
 
@@ -80,10 +92,10 @@ it('toggles teaser on', function () {
 });
 
 it('toggles teaser off', function () {
-    $post = Post::factory()->create();
+    $project = Project::factory()->create();
     $media = Media::factory()->create([
-        'mediable_type' => Post::class,
-        'mediable_id' => $post->id,
+        'mediable_type' => Project::class,
+        'mediable_id' => $project->id,
         'is_teaser' => true,
     ]);
 

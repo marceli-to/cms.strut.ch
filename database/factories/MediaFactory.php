@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Media;
-use App\Models\Post;
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -15,8 +15,8 @@ class MediaFactory extends Factory
     {
         return [
             'uuid' => Str::uuid(),
-            'mediable_type' => 'App\\Models\\Post',
-            'mediable_id' => Post::factory(),
+            'mediable_type' => Project::class,
+            'mediable_id' => Project::factory(),
             'file' => fake()->uuid() . '.jpg',
             'original_name' => fake()->word() . '.jpg',
             'mime_type' => 'image/jpeg',
@@ -28,5 +28,13 @@ class MediaFactory extends Factory
             'is_teaser' => false,
             'sort_order' => 0,
         ];
+    }
+
+    public function unattached(): static
+    {
+        return $this->state(fn () => [
+            'mediable_type' => null,
+            'mediable_id' => null,
+        ]);
     }
 }
