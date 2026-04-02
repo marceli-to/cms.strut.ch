@@ -45,7 +45,7 @@ async function handleDelete(cat) {
 			</FormButton>
 		</PageHeader>
 
-		<p class="text-xxs font-medium uppercase tracking-[0.08em] text-neutral-500 mb-20">Kategorien</p>
+		<p class="text-xxs font-medium uppercase tracking-[0.08em] text-neutral-500 dark:text-neutral-400 mb-20">Kategorien</p>
 
 		<div v-if="store.loading" class="text-sm text-neutral-400">
 			Laden...
@@ -63,7 +63,7 @@ async function handleDelete(cat) {
 				<div class="flex items-center justify-end gap-12">
 					<button
 						class="transition-colors cursor-pointer"
-						:class="row.publish ? 'text-neutral-400 hover:text-neutral-900' : 'text-neutral-300 hover:text-neutral-600'"
+						:class="row.publish ? 'text-neutral-400 hover:text-neutral-900 dark:hover:text-white' : 'text-neutral-300 dark:text-neutral-600 hover:text-neutral-600 dark:hover:text-neutral-400'"
 						:title="row.publish ? 'Aktiv – klicken zum Deaktivieren' : 'Inaktiv – klicken zum Aktivieren'"
 						@click="store.toggle(row.id)"
 					>
@@ -71,13 +71,13 @@ async function handleDelete(cat) {
 						<PhEyeSlash v-else :size="16" weight="light" />
 					</button>
 					<button
-						class="text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
+						class="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer"
 						@click="router.push({ name: 'settings.categories.edit', params: { id: row.id } })"
 					>
 						<PhPencil :size="16" weight="light" />
 					</button>
 					<button
-						class="text-neutral-400 hover:text-red-600 transition-colors cursor-pointer"
+						class="text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors cursor-pointer"
 						@click="handleDelete(row)"
 					>
 						<PhTrash :size="16" weight="light" />

@@ -23,12 +23,12 @@ function onRemove(item) {
 </script>
 
 <template>
-	<div class="border border-neutral-200 bg-white p-16">
+	<div class="border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-16">
 		<!-- Delete button -->
 		<div class="flex justify-end mb-12">
 			<button
 				type="button"
-				class="text-neutral-400 hover:text-red-600 transition-colors cursor-pointer"
+				class="text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors cursor-pointer"
 				title="Zeile löschen"
 				@click="emit('delete', grid)"
 			>

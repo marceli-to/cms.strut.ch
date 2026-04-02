@@ -8,7 +8,7 @@ const { state: confirmState, onConfirm, onCancel } = useConfirm()
 </script>
 
 <template>
-	<div class="min-h-screen bg-neutral-50">
+	<div class="min-h-screen bg-neutral-50 dark:bg-neutral-950">
 		<AppSidebar />
 		<div class="ml-240">
 			<main class="pt-24 px-32 pb-32 relative">

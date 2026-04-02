@@ -107,8 +107,8 @@ function addFiles(fileList) {
 		<!-- Compact: slim add bar -->
 		<div
 			v-if="compact"
-			class="border border-neutral-200 transition-colors duration-150 cursor-pointer hover:border-neutral-400 bg-white"
-			:class="isDragging ? '!border-neutral-900 !bg-neutral-50' : ''"
+			class="border border-neutral-200 dark:border-neutral-800 transition-colors duration-150 cursor-pointer hover:border-neutral-400 dark:hover:border-neutral-600 bg-white dark:bg-neutral-900"
+			:class="isDragging ? '!border-neutral-900 dark:!border-neutral-400 !bg-neutral-50 dark:!bg-neutral-800' : ''"
 			@click="fileInput?.click()"
 			@dragover.prevent="isDragging = true"
 			@dragleave.prevent="isDragging = false"
@@ -124,8 +124,8 @@ function addFiles(fileList) {
 		<!-- Full: drop zone -->
 		<div
 			v-else
-			class="border border-neutral-200 transition-colors duration-150 cursor-pointer hover:border-neutral-400 bg-white"
-			:class="isDragging ? '!border-neutral-900 !bg-neutral-50' : ''"
+			class="border border-neutral-200 dark:border-neutral-800 transition-colors duration-150 cursor-pointer hover:border-neutral-400 dark:hover:border-neutral-600 bg-white dark:bg-neutral-900"
+			:class="isDragging ? '!border-neutral-900 dark:!border-neutral-400 !bg-neutral-50 dark:!bg-neutral-800' : ''"
 			@click="fileInput?.click()"
 			@dragover.prevent="isDragging = true"
 			@dragleave.prevent="isDragging = false"
@@ -134,7 +134,7 @@ function addFiles(fileList) {
 			<div class="flex flex-col items-center justify-center py-[8rem] px-24">
 				<PhUploadSimple :size="24" weight="light" class="text-neutral-400 mb-12" />
 				<p class="text-xs text-neutral-500">
-					<span class="text-neutral-900 underline decoration-neutral-300 underline-offset-4">Dateien auswählen</span>
+					<span class="text-neutral-900 dark:text-neutral-100 underline decoration-neutral-300 dark:decoration-neutral-600 underline-offset-4">Dateien auswählen</span>
 					oder hierhin ziehen
 				</p>
 				<p class="text-xxs text-neutral-400 mt-6">{{ activeType.hint }}</p>
@@ -143,8 +143,8 @@ function addFiles(fileList) {
 
 		<!-- Progress -->
 		<div v-if="uploading" class="mt-6">
-			<div class="h-2 bg-neutral-200 overflow-hidden">
-				<div class="h-full bg-neutral-900 transition-all duration-300" :style="{ width: progress + '%' }" />
+			<div class="h-2 bg-neutral-200 dark:bg-neutral-800 overflow-hidden">
+				<div class="h-full bg-neutral-900 dark:bg-neutral-100 transition-all duration-300" :style="{ width: progress + '%' }" />
 			</div>
 		</div>
 

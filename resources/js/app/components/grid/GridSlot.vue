@@ -12,7 +12,7 @@ const hasMedia = () => props.item?.media
 </script>
 
 <template>
-	<div class="relative group border border-dashed border-neutral-300 bg-neutral-50 overflow-hidden">
+	<div class="relative group border border-dashed border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 overflow-hidden">
 		<!-- Filled slot -->
 		<template v-if="hasMedia()">
 			<img
@@ -37,7 +37,7 @@ const hasMedia = () => props.item?.media
 		<template v-else>
 			<button
 				type="button"
-				class="w-full h-full flex items-center justify-center text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 transition-colors cursor-pointer"
+				class="w-full h-full flex items-center justify-center text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
 				@click="emit('add', position)"
 			>
 				<PhPlus :size="20" weight="light" />

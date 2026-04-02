@@ -57,13 +57,13 @@ async function handleDelete(item) {
 			<template #cell-actions="{ row }">
 				<div class="flex items-center justify-end gap-12">
 					<button
-						class="text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
+						class="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer"
 						@click="router.push({ name: 'news.edit', params: { id: row.id } })"
 					>
 						<PhPencil :size="16" weight="light" />
 					</button>
 					<button
-						class="text-neutral-400 hover:text-red-600 transition-colors cursor-pointer"
+						class="text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors cursor-pointer"
 						@click="handleDelete(row)"
 					>
 						<PhTrash :size="16" weight="light" />

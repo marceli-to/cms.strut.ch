@@ -59,26 +59,26 @@ async function handleDelete(item) {
 
 		<template v-else>
 			<div v-for="(items, year) in store.press" :key="year" class="mb-32">
-				<h2 class="text-sm font-medium text-neutral-500 mb-8">{{ year }}</h2>
+				<h2 class="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-8">{{ year }}</h2>
 				<DataTable :columns="columns" :rows="items">
 					<template #cell-actions="{ row }">
 						<div class="flex items-center justify-end gap-12">
 							<button
 								class="transition-colors cursor-pointer"
-								:class="row.publish ? 'text-neutral-400 hover:text-neutral-900' : 'text-neutral-300 hover:text-neutral-600'"
+								:class="row.publish ? 'text-neutral-400 hover:text-neutral-900 dark:hover:text-white' : 'text-neutral-300 hover:text-neutral-600 dark:text-neutral-600 dark:hover:text-neutral-400'"
 								@click="store.toggle(row.id)"
 							>
 								<PhEye v-if="row.publish" :size="16" weight="light" />
 								<PhEyeSlash v-else :size="16" weight="light" />
 							</button>
 							<button
-								class="text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
+								class="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer"
 								@click="router.push({ name: 'press.edit', params: { id: row.id } })"
 							>
 								<PhPencil :size="16" weight="light" />
 							</button>
 							<button
-								class="text-neutral-400 hover:text-red-600 transition-colors cursor-pointer"
+								class="text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors cursor-pointer"
 								@click="handleDelete(row)"
 							>
 								<PhTrash :size="16" weight="light" />

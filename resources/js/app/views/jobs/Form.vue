@@ -108,7 +108,7 @@ function onReorderMedia(items) { mediaStore.reorder(items) }
 
 			<FormGroup>
 				<FormLabel for="lead">Lead/Beschreibung *</FormLabel>
-				<textarea id="lead" v-model="form.lead" rows="4" class="w-full rounded-md border border-neutral-200 bg-white px-12 py-8 text-sm focus:border-neutral-900 focus:outline-none" />
+				<textarea id="lead" v-model="form.lead" rows="4" class="w-full rounded-md border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 px-12 py-8 text-sm text-neutral-900 dark:text-neutral-100 focus:border-neutral-900 dark:focus:border-neutral-400 focus:outline-none" />
 				<FormError :message="store.errors.lead" />
 			</FormGroup>
 

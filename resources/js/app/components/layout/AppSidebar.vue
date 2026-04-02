@@ -66,7 +66,7 @@ function logout() {
 </script>
 
 <template>
-	<aside class="fixed top-0 left-0 bottom-0 w-240 bg-neutral-900 flex flex-col z-30">
+	<aside class="fixed top-0 left-0 bottom-0 w-240 bg-neutral-900 dark:bg-neutral-900 flex flex-col z-30">
 
 		<!-- Brand -->
 		<div class="px-24 pt-32 pb-24 text-white">

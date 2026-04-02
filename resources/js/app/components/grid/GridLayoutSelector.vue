@@ -14,7 +14,7 @@ const emit = defineEmits(['add'])
 			v-for="layout in layouts"
 			:key="layout.key"
 			type="button"
-			class="border border-neutral-200 p-10 hover:border-neutral-900 transition-colors cursor-pointer bg-white"
+			class="border border-neutral-200 dark:border-neutral-700 p-10 hover:border-neutral-900 dark:hover:border-neutral-400 transition-colors cursor-pointer bg-white dark:bg-neutral-900"
 			:title="layout.label"
 			@click="emit('add', layout.key)"
 		>
@@ -27,7 +27,7 @@ const emit = defineEmits(['add'])
 					:width="rect.w"
 					:height="rect.h"
 					fill="currentColor"
-					class="text-neutral-300"
+					class="text-neutral-300 dark:text-neutral-600"
 				/>
 			</svg>
 		</button>

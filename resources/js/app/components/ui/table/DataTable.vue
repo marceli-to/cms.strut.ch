@@ -14,11 +14,11 @@ const model = defineModel()
 	<div>
 		<table class="w-full text-sm">
 			<thead>
-				<tr class="text-left border-b border-neutral-200">
+				<tr class="text-left border-b border-neutral-200 dark:border-neutral-800">
 					<th
 						v-for="col in columns"
 						:key="col.key"
-						class="py-12 text-xxs font-medium uppercase tracking-[0.08em] text-neutral-500"
+						class="py-12 text-xxs font-medium uppercase tracking-[0.08em] text-neutral-500 dark:text-neutral-400"
 						:class="[
 							col.class || '',
 							col.align === 'right' ? 'text-right' : '',
@@ -38,8 +38,8 @@ const model = defineModel()
 			>
 				<template #item="{ element: row, index }">
 					<tr
-						class="transition-colors hover:bg-neutral-100 cursor-move"
-						:class="index % 2 === 0 ? 'bg-white' : 'bg-neutral-50'"
+						class="transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-move"
+						:class="index % 2 === 0 ? 'bg-white dark:bg-neutral-950' : 'bg-neutral-50 dark:bg-neutral-900'"
 					>
 						<td
 							v-for="col in columns"
@@ -48,7 +48,7 @@ const model = defineModel()
 							:class="[
 								col.class || '',
 								col.align === 'right' ? 'text-right' : '',
-								col.primary ? 'text-neutral-900' : 'text-neutral-500 text-sm',
+								col.primary ? 'text-neutral-900 dark:text-neutral-100' : 'text-neutral-500 dark:text-neutral-400 text-sm',
 							]"
 						>
 							<slot :name="'cell-' + col.key" :row="row" :value="row[col.key]">
@@ -62,8 +62,8 @@ const model = defineModel()
 				<tr
 					v-for="(row, index) in rows"
 					:key="row.id ?? index"
-					class="transition-colors hover:bg-neutral-100"
-					:class="index % 2 === 0 ? 'bg-white' : 'bg-neutral-50'"
+					class="transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-800"
+					:class="index % 2 === 0 ? 'bg-white dark:bg-neutral-950' : 'bg-neutral-50 dark:bg-neutral-900'"
 				>
 					<td
 						v-for="col in columns"
@@ -72,7 +72,7 @@ const model = defineModel()
 						:class="[
 							col.class || '',
 							col.align === 'right' ? 'text-right' : '',
-							col.primary ? 'text-neutral-900' : 'text-neutral-500 text-sm',
+							col.primary ? 'text-neutral-900 dark:text-neutral-100' : 'text-neutral-500 dark:text-neutral-400 text-sm',
 						]"
 					>
 						<slot :name="'cell-' + col.key" :row="row" :value="row[col.key]">

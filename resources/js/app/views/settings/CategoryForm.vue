@@ -158,10 +158,10 @@ async function handleDeleteType(type) {
 		<template v-if="isEdit">
 			<div class="mt-40">
 				<div class="flex items-center justify-between mb-16">
-					<p class="text-xxs font-medium uppercase tracking-[0.08em] text-neutral-500">Typen</p>
+					<p class="text-xxs font-medium uppercase tracking-[0.08em] text-neutral-500 dark:text-neutral-400">Typen</p>
 					<button
 						type="button"
-						class="flex items-center gap-6 text-xs text-neutral-400 hover:text-neutral-800 transition-colors cursor-pointer"
+						class="flex items-center gap-6 text-xs text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors cursor-pointer"
 						@click="openAddDrawer"
 					>
 						<PhPlus :size="13" weight="light" />
@@ -183,14 +183,14 @@ async function handleDeleteType(type) {
 						<div class="flex items-center justify-end gap-12">
 							<button
 								type="button"
-								class="text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
+								class="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer"
 								@click="openEditDrawer(row)"
 							>
 								<PhPencil :size="14" weight="light" />
 							</button>
 							<button
 								type="button"
-								class="text-neutral-400 hover:text-red-600 transition-colors cursor-pointer"
+								class="text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors cursor-pointer"
 								@click="handleDeleteType(row)"
 							>
 								<PhTrash :size="14" weight="light" />
